@@ -1,0 +1,3 @@
+# FFXI-config
+FFXI configuration
+
