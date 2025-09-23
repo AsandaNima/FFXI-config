@@ -1,0 +1,176 @@
+--[[
+    This is provided purely as an example template. Only very basic sanity testing has been done.
+]]
+
+local profile = {}
+
+local fastCastValue = 0.00 -- 0% from gear
+
+local sets = {
+    Idle = {
+        Head = "Pup. Taj",
+
+        Body = "Pup. Tobe",
+        Hands = "Pup. Dastanas",
+
+        Legs = "Pup. Churidars",
+        Feet = "Pup. Babouches",
+
+    },
+    IdleALT = {},
+    Resting = {},
+    Town = {},
+    Movement = {},
+
+    DT = {},
+    MDT = { -- Shell IV provides 23% MDT
+    },
+    FireRes = {},
+    IceRes = {},
+    LightningRes = {},
+    EarthRes = {},
+    WindRes = {},
+    WaterRes = {},
+    Evasion = {},
+
+    Precast = {},
+    SIRD = { -- 102% to Cap
+    },
+    Haste = { -- Used for Utsusemi cooldown
+    },
+
+    LockSet1 = {},
+    LockSet2 = {},
+    LockSet3 = {},
+
+    TP_LowAcc = {},
+    TP_HighAcc = {},
+
+    WS = {},
+    Warcry = {},
+    Provoke = {},
+
+    DW = {
+        Ear1 = "Stealth Earring",
+    },
+    ['test'] = {
+        Main = 'Metasoma Katars',
+        Range = 'Turbo Animator',
+        Head = 'Pup. Taj',
+        Neck = 'Focus Collar',
+        Ear1 = 'Bone Earring',
+        Ear2 = 'Fang Earring',
+        Body = 'Kupo Suit',
+        Hands = 'Pup. Dastanas',
+        Ring1 = 'Sniper\'s Ring',
+        Ring2 = 'Warp Ring',
+        Back = 'Mist Silk Cape',
+        Waist = 'Virtuoso Belt',
+        Feet = 'Pup. Babouches',
+    },
+    ['testing'] = {
+        Main = 'Metasoma Katars',
+        Range = 'Turbo Animator',
+        Head = 'Pup. Taj',
+        Neck = 'Focus Collar',
+        Ear1 = 'Bone Earring',
+        Ear2 = 'Fang Earring',
+        Body = 'Pup. Tobe',
+        Hands = 'Pup. Dastanas',
+        Ring1 = 'Sniper\'s Ring',
+        Ring2 = 'Warp Ring',
+        Back = 'Mist Silk Cape',
+        Waist = 'Virtuoso Belt',
+        Legs = 'Pup. Churidars',
+        Feet = 'Pup. Babouches',
+    },
+}
+profile.Sets = sets
+
+profile.SetMacroBook = function()
+    AshitaCore:GetChatManager():QueueCommand(1, "/macro book 1")
+    AshitaCore:GetChatManager():QueueCommand(1, "/macro set 1")
+end
+
+gcmelee = gFunc.LoadFile("common\\gcmelee.lua")
+
+profile.HandleAbility = function()
+    local action = gData.GetAction()
+    if (action.Name == "Warcry") then
+        gFunc.EquipSet(sets.Warcry)
+    elseif (action.Name == "Provoke") then
+        gFunc.EquipSet(sets.Provoke)
+    end
+end
+
+profile.HandleItem = function()
+    gcinclude.DoItem()
+    -- You may add logic here
+end
+
+profile.HandlePreshot = function()
+    -- You may add logic here
+end
+
+profile.HandleMidshot = function()
+    -- You may add logic here
+end
+
+profile.HandleWeaponskill = function()
+    gFunc.EquipSet(sets.WS)
+    gcmelee.DoFenrirsEarring()
+    -- You may add logic here
+end
+
+profile.OnLoad = function()
+    gcmelee.Load()
+    profile.SetMacroBook()
+
+    gcinclude.SetAlias(T{"dw"})
+    local function createToggle()
+        gcdisplay.CreateToggle("DW", false)
+    end
+    createToggle:once(2)
+end
+
+profile.OnUnload = function()
+    gcmelee.Unload()
+    gcinclude.ClearAlias(T{"dw"})
+end
+
+profile.HandleCommand = function(args)
+    if (args[1] == "dw") then
+        gcdisplay.AdvanceToggle("DW")
+        gcinclude.Message("DW", gcdisplay.GetToggle("DW"))
+    else
+        gcmelee.DoCommands(args)
+    end
+
+    if (args[1] == "horizonmode") then
+        profile.HandleDefault()
+    end
+end
+
+profile.HandleDefault = function()
+    gcmelee.DoDefault()
+
+    local player = gData.GetPlayer()
+    if (gcdisplay.GetToggle("DW") and player.Status == "Engaged") then
+        gFunc.EquipSet(sets.DW)
+    end
+
+    gcmelee.DoDefaultOverride()
+    gFunc.EquipSet(gcinclude.BuildLockableSet(gData.GetEquipment()))
+end
+
+profile.HandlePrecast = function()
+    gcmelee.DoPrecast(fastCastValue)
+    -- You may add logic here
+end
+
+profile.HandleMidcast = function()
+    gcmelee.DoMidcast(sets)
+    -- You may add logic here
+end
+
+return profile

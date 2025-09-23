@@ -1,0 +1,19 @@
+require('common');
+
+local settings = T{ };
+settings["i"] = T{ };
+settings["i"][1] = T{ };
+settings["i"][2] = T{ };
+settings["i"][3] = T{ };
+settings["i"][4] = T{ };
+settings["k"] = T{ };
+settings["i"][1][1] = 1024;
+settings["i"][1][2] = "Gls. Chest Key";
+settings["i"][2][1] = 1025;
+settings["i"][2][2] = "Plb. Chest Key";
+settings["i"][3][1] = 1026;
+settings["i"][3][2] = "Gds. Chest Key";
+settings["i"][4][1] = 1030;
+settings["i"][4][2] = "Ordelle Chest Key";
+
+return settings;

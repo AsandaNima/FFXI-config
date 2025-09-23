@@ -1,0 +1,22 @@
+require('common');
+
+local settings = T{ };
+settings["i"] = T{ };
+settings["i"][1] = T{ };
+settings["i"][2] = T{ };
+settings["i"][3] = T{ };
+settings["i"][4] = T{ };
+settings["i"][5] = T{ };
+settings["k"] = T{ };
+settings["i"][1][1] = 857;
+settings["i"][1][2] = "Dhalmel Hide";
+settings["i"][2][1] = 4359;
+settings["i"][2][2] = "Dhalmel Meat";
+settings["i"][3][1] = 893;
+settings["i"][3][2] = "Giant Femur";
+settings["i"][4][1] = 938;
+settings["i"][4][2] = "Papaka Grass";
+settings["i"][5][1] = 816;
+settings["i"][5][2] = "Silk Thread";
+
+return settings;
