@@ -1,0 +1,10 @@
+require('common');
+
+local settings = T{ };
+settings["i"] = T{ };
+settings["i"][1] = T{ };
+settings["k"] = T{ };
+settings["i"][1][1] = 1179;
+settings["i"][1][2] = "Shihei";
+
+return settings;
