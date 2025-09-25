@@ -1,285 +1,471 @@
 local profile = {}
-
-local fastCastValue = 0.00 -- 0% from gear
-
-local gaudy_harness = false
-
--- Replace these with "" if you do not have them
-local muscle_belt = ""
+gcinclude = gFunc.LoadFile("common\\gcinclude.lua")
 
 local sets = {
-    Idle = {},
-    IdleALT = {},
-    Resting = {},
-    Town = {},
-    Movement = {},
+	Idle = {
+		Main = "Naegling",
+		Sub = "Adapa Shield",
+		Ammo = "Voluspa Tathlum",
+		Head = "Malignance Chapeau",
+		Neck = "Bathy Choker +1",
+		Ear1 = "Odnowa Earring +1",
+		Ear2 = "Etiolation Earring",
+		Body = "Gleti's Cuirass",
+		Hands = "Nyame Gauntlets",
+		Ring1 = "Defending Ring",
+		Ring2 = "Gelatinous Ring +1",
+		Back = {
+			Name = "Artio's Mantle",
+			Augment = {
+				[1] = "Pet: R.Acc.+20",
+				[2] = "Pet: R.Atk.+20",
+				[3] = 'Pet: "Regen"+10',
+				[4] = "Pet: Acc.+20",
+				[5] = "Pet: Atk.+20",
+			},
+		},
+		Waist = "Isa Belt",
+		Legs = "Gleti's Breeches",
+		Feet = "Gleti's Boots",
+	},
+	Resting = {},
+	Idle_Regen = {
+		Head = "Crepuscular Helm",
+		Neck = "Bathy Choker +1",
+		Ear1 = "Infused Earring",
+		Ring2 = "Chirich Ring +1",
+	},
+	Idle_Refresh = {
+		Head = "Jumalik Helm",
+		Ring1 = "Stikini Ring +1",
+	},
+	Town = {
+		Main = "Naegling",
+		Sub = "Adapa Shield",
+		Ammo = "Voluspa Tathlum",
+		Head = "Malignance Chapeau",
+		Neck = "Empath Necklace",
+		Ear1 = "Thrud Earring",
+		Ear2 = "Telos Earring",
+		Body = "Gleti's Cuirass",
+		Hands = "Malignance Gloves",
+		Ring1 = "Epona's Ring",
+		Ring2 = "Petrov Ring",
+		Back = {
+			Name = "Artio's Mantle",
+			Augment = {
+				[1] = "Pet: R.Acc.+20",
+				[2] = "Pet: R.Atk.+20",
+				[3] = 'Pet: "Regen"+10',
+				[4] = "Pet: Acc.+20",
+				[5] = "Pet: Atk.+20",
+			},
+		},
+		Waist = "Flume Belt +1",
+		Legs = "Gleti's Breeches",
+		Feet = "Gleti's Boots",
+	},
 
-    DT = {},
-    MDT = { -- Shell IV provides 23% MDT
-    },
-    FireRes = {},
-    IceRes = {},
-    LightningRes = {},
-    EarthRes = {},
-    WindRes = {},
-    WaterRes = {},
-    Evasion = {},
+	Dt = {
+		Ammo = "Staunch Tathlum",
+		Head = "Nyame Helm",
+		Neck = "Empath Necklace",
+		Ear1 = "Odnowa Earring +1",
+		Ear2 = "Handler's Earring +1",
+		Body = "Gleti's Cuirass",
+		Hands = "Nyame Gauntlets",
+		Ring1 = "Defending Ring",
+		Ring2 = "Gelatinous Ring +1",
+		Back = {
+			Name = "Artio's Mantle",
+			Augment = {
+				[1] = "Pet: R.Acc.+20",
+				[2] = "Pet: R.Atk.+20",
+				[3] = 'Pet: "Regen"+10',
+				[4] = "Pet: Acc.+20",
+				[5] = "Pet: Atk.+20",
+			},
+		},
+		Waist = "Gishdubar Sash",
+		Legs = "Nyame Flanchard",
+		Feet = "Nyame Sollerets",
+	},
+	Pet_Dt = {
+		Head = "Anwig Salade",
+		Neck = "Empath Necklace",
+		Ear1 = "Enmerkar Earring",
+		Ear2 = "Handler's Earring +1",
+		Body = "Taeon Tabard",
+		Hands = "Taeon Gloves",
+		Ring1 = "Defending Ring",
+		Ring2 = "Gelatinous Ring +1",
+		Back = {
+			Name = "Artio's Mantle",
+			Augment = {
+				[1] = "Pet: R.Acc.+20",
+				[2] = "Pet: R.Atk.+20",
+				[3] = 'Pet: "Regen"+10',
+				[4] = "Pet: Acc.+20",
+				[5] = "Pet: Atk.+20",
+			},
+		},
+		Waist = "Isa Belt",
+		Legs = "Taeon Tights",
+		Feet = "Gleti's Boots",
+	},
 
-    Precast = {},
-    SIRD = { -- 102% to Cap
-    },
-    Haste = { -- Used for Utsusemi cooldown
-    },
+	Tp_Default = {
+		Ammo = "Coiste Bodhar",
+		Head = "Malignance Chapeau",
+		Neck = "Anu Torque",
+		Ear1 = "Sherida Earring",
+		Ear2 = "Telos Earring",
+		Body = "Gleti's Cuirass",
+		Hands = "Malignance Gloves",
+		Ring1 = "Epona's Ring",
+		Ring2 = "Gere Ring",
+		Back = {
+			Name = "Artio's Mantle",
+			Augment = {
+				[1] = "Pet: R.Acc.+20",
+				[2] = "Pet: R.Atk.+20",
+				[3] = 'Pet: "Regen"+10',
+				[4] = "Pet: Acc.+20",
+				[5] = "Pet: Atk.+20",
+			},
+		},
+		Waist = "Sailfi Belt +1",
+		Legs = "Gleti's Breeches",
+		Feet = "Gleti's Boots",
+	},
+	Tp_Hybrid = {
+		Neck = "Empath Necklace",
+		Ear1 = "Mache Earring +1",
+		Hands = "Malignance Gloves",
+		Ring1 = "Varar Ring +1",
+		Ring2 = "C. Palug Ring",
+	},
+	Tp_Acc = {
+		Ring1 = "Cacoethic Ring +1",
+		Ring2 = "Chirich Ring +1",
+	},
+	Pet_Only_Tp = {
+		Ammo = "Voluspa Tathlum",
+		Head = "Taeon Chapeau",
+		Neck = "Shulmanu Collar",
+		Ear1 = "Enmerkar Earring",
+		Ear2 = "Domes. Earring",
+		Ring1 = "Varar Ring +1",
+		Ring2 = "C. Palug Ring",
+		Back = {
+			Name = "Artio's Mantle",
+			Augment = {
+				[1] = "Pet: R.Acc.+20",
+				[2] = "Pet: R.Atk.+20",
+				[3] = 'Pet: "Regen"+10',
+				[4] = "Pet: Acc.+20",
+				[5] = "Pet: Atk.+20",
+			},
+		},
+		Waist = "Incarnation Sash",
+		Legs = "Taeon Tights",
+		Feet = "Gleti's Boots",
+	},
 
-    LockSet1 = {},
-    LockSet2 = {},
-    LockSet3 = {},
+	Precast = {
+		Neck = "Baetyl Pendant",
+		Ear2 = "Etiolation Earring",
+		Body = "Taeon Tabard",
+		Hands = "Leyline Gloves",
+		Ring2 = "Prolix Ring",
+	},
 
-    TP_LowAcc = {
-        Head = "Empress Hairpin",
-        Neck = "Peacock Amulet",
-        Ear1 = "Optical Earring",
-        Body = "Savage Separates",
-        Hands = "Ryl.Sqr. Mufflers",
-        Ring1 = "Rajas Ring",
-        Ring2 = "Venerer ring",
-        Waist = "remove",
-        Legs = "Republic Subligar",
-        Feet = "Bounding Boots",
-    },
-    TP_HighAcc = {},
-    TP_NIN = {},
+	Enhancing = {},
+	Phalanx = {},
+	Stoneskin = {},
+	Refresh = {},
 
-    WS = {
-        Head = "Empress Hairpin",
-        Neck = "Spike Necklace",
-        Ear1 = "Optical Earring",
-        Body = "Savage Separates",
-        Hands = "Gigas Bracelets",
-        Ring1 = "Rajas Ring",
-        Ring2 = "San d'Orian ring",
-        Waist = "Brave Belt",
-        Legs = "Republic Subligar",
-        Feet = "Savage Gaiters",
-    },
+	Cure = {},
 
-    Charm = {
-        Head = "Noble's Ribbon",
-        Neck = "Bird Whistle",
-        Ring1 = "Hope Ring",
-        Ring2 = "Hope Ring",
-        Waist = "Corsette +1",
-        Feet = "Savage Gaiters",
-    },
-    Reward = {
-        Hands = "Savage Gauntlets",
-        Ring1 = "Saintly Ring",
-        Ring2 = "Saintly Ring",
-        Waist = "Friar's rope",
-    },
-    Ready_Physical = {},
-    Ready_Magic = {},
-    Call_Beast = {},
+	Enfeebling = {},
+
+	Ws_Default = {
+		Ammo = "Coiste Bodhar",
+		Head = {
+			Name = "Valorous Mask",
+			Augment = {
+				[1] = "Attack+16",
+				[2] = "Weapon skill damage +10%",
+				[3] = "Accuracy+16",
+				[4] = "Pet: Mag. Acc.+1",
+				[5] = "Pet: STR+4",
+			},
+		},
+		Neck = "Fotia Gorget",
+		Ear1 = "Thrud Earring",
+		Ear2 = "Telos Earring",
+		Body = "Gleti's Cuirass",
+		Hands = "Meg. Gloves +2",
+		Ring1 = "Beithir Ring",
+		Ring2 = "Karieyh Ring +1",
+		Waist = "Fotia Belt",
+		Legs = "Gleti's Breeches",
+		Feet = "Gleti's Boots",
+	},
+	Ws_Hybrid = {
+		Ammo = "Voluspa Tathlum",
+	},
+	Ws_Acc = {
+		Ammo = "Voluspa Tathlum",
+	},
+	Aedge_Default = {
+		Ammo = "Knobkierrie",
+		Head = {
+			Name = "Valorous Mask",
+			Augment = {
+				[1] = "Attack+16",
+				[2] = "Weapon skill damage +10%",
+				[3] = "Accuracy+16",
+				[4] = "Pet: Mag. Acc.+1",
+				[5] = "Pet: STR+4",
+			},
+		},
+		--Head = 'Nyame Helm',
+		Neck = "Baetyl Pendant",
+		Ear1 = "Thrud Earring",
+		Ear2 = "Friomisi Earring",
+		Body = "Nyame Mail",
+		Hands = "Nyame Gauntlets",
+		Ring1 = "Shiva Ring +1",
+		Ring2 = "Karieyh Ring +1",
+		Back = {
+			Name = "Ankou's Mantle",
+			Augment = { [1] = "Accuracy+20", [2] = '"Dbl.Atk."+10', [3] = "Attack+20", [4] = "DEX+20" },
+		},
+		Waist = "Eschan Stone",
+		Legs = "Nyame Flanchard",
+		Feet = "Nyame Sollerets",
+	},
+	Aedge_Hybrid = {},
+	Aedge_Acc = {},
+
+	Call = {
+		Hands = "Ankusa Gloves +1",
+		Feet = "Gleti's Boots",
+	},
+	Reward = {
+		Ammo = "Pet Food Theta",
+	},
+	Killer = {
+		Body = "Nukumi Gausape +1",
+	},
+	Spur = {
+		Feet = "Nukumi Ocreae +1",
+	},
+	Ready = {
+		Legs = "Gleti's Breeches",
+	},
+	PetReadyDefault = {
+		Ammo = "Voluspa Tathlum",
+		Head = "Nyame Helm",
+		Neck = "Shulmanu Collar",
+		Ear1 = "Enmerkar Earring",
+		Ear2 = "Domes. Earring",
+		Body = "Gleti's Cuirass",
+		Hands = "Nukumi Manoplas +1",
+		Ring1 = "Varar Ring +1",
+		Ring2 = "C. Palug Ring",
+		Waist = "Incarnation Sash",
+		Legs = "Taeon Tights",
+		Feet = "Gleti's Boots",
+	},
+	PetAttack = {},
+	PetMagicAttack = {},
+	PetMagicAccuracy = {},
+
+	TH = {
+		Ammo = "Per. Lucky Egg",
+		Waist = "Chaac Belt",
+	},
+	Movement = {},
 }
 profile.Sets = sets
 
-profile.SetMacroBook = function()
-    AshitaCore:GetChatManager():QueueCommand(1, "/macro book 14")
-    AshitaCore:GetChatManager():QueueCommand(1, "/macro set 1")
-end
-
---[[
---------------------------------
-Everything below can be ignored.
---------------------------------
-]]
-
-gcmelee = gFunc.LoadFile("common\\gcmelee.lua")
-
-local pets = T{"sheep","lizard","crab","tiger","rabbit","mandy","flytrap"}
-
-local PetTable1 = {
-    [1] = "Sheep",
-    [2] = "Lizard",
-    [3] = "Crab",
-    [4] = "Tiger",
-    [5] = "Rabbit",
-    [6] = "Mandy",
-    [7] = "Flytrap"
-}
-local PetTable2 = {
-    ["sheep"] = 1,
-    ["lizard"] = 2,
-    ["crab"] = 3,
-    ["tiger"] = 4,
-    ["rabbit"] = 5,
-    ["mandy"] = 6,
-    ["flytrap"] = 7
+profile.Packer = {
+	{ Name = "Pet Food Theta", Quantity = "all" },
+	{ Name = "Furious Broth", Quantity = "all" },
+	{ Name = "Poisonous Broth", Quantity = "all" },
+	{ Name = "Livid Broth", Quantity = "all" },
+	{ Name = "Crackling Broth", Quantity = "all" },
+	{ Name = "Dire Broth", Quantity = "all" },
 }
 
-local PetMagicAttack = T{"Gloom Spray","Fireball","Acid Spray","Molting Plumage","Cursed Sphere","Nectarous Deluge","Charged Whisker","Nepenthic Plunge"}
-local PetMagicAccuracy = T{"Toxic Spit","Acid Spray","Leaf Dagger","Venom Spray","Venom","Dark Spore","Sandblast","Dust Cloud","Stink Bomb","Slug Family","Intimidate","Gloeosuccus","Spider Web","Filamented Hold","Choke Breath","Blaster","Snow Cloud","Roar","Palsy Pollen","Spore","Brain Crush","Choke Breath","Silence Gas","Chaotic Eye","Sheep Song","Soporific","Predatory Glare","Sudden Lunge","Numbing Noise","Jettatura","Bubble Shower","Spoil","Scream","Noisome Powder","Acid Mist","Rhinowrecker","Swooping Frenzy","Venom Shower","Corrosive Ooze","Spiral Spin","Infrasonics","Hi-Freq Field","Purulent Ooze","Foul Waters","Sandpit","Infected Leech","Pestilent Plume"}
+local function HandlePetAction(PetAction)
+	gFunc.EquipSet(sets.PetReadyDefault)
 
-profile.HandleAbility = function()
-    local player = gData.GetPlayer()
-    local action = gData.GetAction()
-
-    if (action.Name == "Charm") then
-        gFunc.EquipSet(sets.Charm)
-    elseif (action.Name == "Reward") then
-        gFunc.EquipSet(sets.Reward)
-        if (player.MainJobSync >= 72) then
-            gFunc.Equip("Ammo", "Pet Food Zeta")
-        elseif (player.MainJobSync >= 60) then
-            gFunc.Equip("Ammo", "Pet Fd. Epsilon")
-        elseif (player.MainJobSync >= 48) then
-            gFunc.Equip("Ammo", "Pet Food Delta")
-        elseif (player.MainJobSync >= 36) then
-            gFunc.Equip("Ammo", "Pet Fd. Gamma")
-        elseif (player.MainJobSync >= 24) then
-            gFunc.Equip("Ammo", "Pet Food Beta")
-        else
-            gFunc.Equip("Ammo", "Pet Food Alpha")
-        end
-    elseif (action.Name == "Call Beast") then
-        gFunc.EquipSet(sets.Call_Beast)
-        local pet = gcdisplay.GetCycle("Pet")
-        if (pet == "Sheep") then
-            if (player.MainJobSync >= 43) then
-                gFunc.Equip("Ammo", "S. Herbal Broth")
-            elseif (player.MainJobSync >= 23) then
-                gFunc.Equip("Ammo", "Herbal Broth")
-            else
-                print(chat.header("Ashitacast"):append(chat.message("Level too low...")))
-            end
-        elseif (pet == "Lizard") then
-            if (player.MainJobSync >= 53) then
-                gFunc.Equip("Ammo", "C. Carrion Broth")
-            elseif (player.MainJobSync >= 33) then
-                gFunc.Equip("Ammo", "Carrion Broth")
-            else
-                print(chat.header("Ashitacast"):append(chat.message("Level too low...")))
-            end
-        elseif (pet == "Crab") then
-            if (player.MainJobSync >= 23) then
-                gFunc.Equip("Ammo", "Fish Oil Broth")
-            else
-                print(chat.header("Ashitacast"):append(chat.message("Level too low...")))
-            end
-        elseif (pet == "Tiger") then
-            if (player.MainJobSync >= 51) then
-                gFunc.Equip("Ammo", "W. Meat Broth")
-            elseif (player.MainJobSync >= 28) then
-                gFunc.Equip("Ammo", "Meat Broth")
-            else
-                print(chat.header("Ashitacast"):append(chat.message("Level too low...")))
-            end
-        elseif (pet == "Rabbit") then
-            if (player.MainJobSync >= 43) then
-                gFunc.Equip("Ammo", "F. Carrot Broth")
-            else
-                print(chat.header("Ashitacast"):append(chat.message("Level too low...")))
-            end
-        elseif (pet == "Mandy") then
-            if (player.MainJobSync >= 23) then
-                gFunc.Equip("Ammo", "Alchemist Water")
-            else
-                print(chat.header("Ashitacast"):append(chat.message("Level too low...")))
-            end
-        elseif (pet == "Flytrap") then
-            if (player.MainJobSync >= 53) then
-                gFunc.Equip("Ammo", "N. Grass. Broth")
-            elseif (player.MainJobSync >= 28) then
-                gFunc.Equip("Ammo", "Grasshopper Broth")
-            else
-                print(chat.header("Ashitacast"):append(chat.message("Level too low...")))
-            end
-        end
-    end
-end
-
-profile.HandleItem = function()
-    gcinclude.DoItem()
-end
-
-profile.HandlePreshot = function()
-    -- You may add logic here
-end
-
-profile.HandleMidshot = function()
-    -- You may add logic here
-end
-
-profile.HandleWeaponskill = function()
-    gFunc.EquipSet(sets.WS)
-    gcmelee.DoFenrirsEarring()
+	if gcinclude.BstPetAttack:contains(PetAction.Name) then
+		gFunc.EquipSet(sets.PetAttack)
+	elseif gcinclude.BstPetMagicAttack:contains(PetAction.Name) then
+		gFunc.EquipSet(sets.PetMagicAttack)
+	elseif gcinclude.BstPetMagicAccuracy:contains(PetAction.Name) then
+		gFunc.EquipSet(sets.PetMagicAccuracy)
+	end
 end
 
 profile.OnLoad = function()
-    gcmelee.Load()
-    profile.SetMacroBook()
+	gSettings.AllowAddSet = true
+	gcinclude.Initialize()
 
-    gcinclude.SetAlias(pets)
-    local function createCycle()
-        gcdisplay.CreateCycle("Pet", PetTable1)
-    end
-    createCycle:once(2)
+	--[[ Set you job macro defaults here]]
+	AshitaCore:GetChatManager():QueueCommand(1, "/macro book 9")
+	AshitaCore:GetChatManager():QueueCommand(1, "/macro set 10")
+
+	gcinclude.settings.RefreshGearMPP = 50
 end
 
 profile.OnUnload = function()
-    gcmelee.Unload()
-    gcinclude.ClearAlias(pets)
+	gcinclude.Unload()
 end
 
 profile.HandleCommand = function(args)
-    if (pets:contains(args[1])) then
-        gcdisplay.SetCycleIndex("Pet", PetTable2[args[1]])
-        gcinclude.Message("Pet", gcdisplay.GetCycle("Pet"))
-    else
-        gcmelee.DoCommands(args)
-    end
-
-    if (args[1] == "horizonmode") then
-        profile.HandleDefault()
-    end
+	gcinclude.HandleCommands(args)
 end
 
 profile.HandleDefault = function()
-    gcmelee.DoDefault()
+	local pet = gData.GetPet()
+	local petAction = gData.GetPetAction()
+	if petAction ~= nil then
+		HandlePetAction(petAction)
+		return
+	end
 
-    local player = gData.GetPlayer()
-    if (player.HPP <= 50 and muscle_belt ~= "") then
-        gFunc.Equip("Waist", muscle_belt)
-    end
-    if (player.SubJob == "NIN" and player.Status == "Engaged") then
-        gFunc.EquipSet("TP_NIN")
-    end
+	local player = gData.GetPlayer()
+	if player.Status == "Engaged" then
+		gFunc.EquipSet("Tp_" .. gcdisplay.GetCycle("MeleeSet"))
+		if gcdisplay.GetToggle("TH") == true then
+			gFunc.EquipSet(sets.TH)
+		end
+	elseif (pet ~= nil) and (player.Status == "Engaged") and (pet.Status == "Engaged") then
+		gFunc.EquipSet(sets.Tp_Hybrid)
+		if gcdisplay.GetToggle("TH") == true then
+			gFunc.EquipSet(sets.TH)
+		end
+	elseif pet ~= nil and pet.Status == "Engaged" then
+		gFunc.EquipSet(sets.Pet_Only_Tp)
+	elseif player.Status == "Resting" then
+		gFunc.EquipSet(sets.Resting)
+	else
+		gFunc.EquipSet(sets.Idle)
+	end
 
-    gcmelee.DoDefaultOverride()
+	if player.IsMoving == true then
+		gFunc.EquipSet(sets.Movement)
+	end
 
-    if (player.MP < 50 and (player.SubJob == "WHM" or player.SubJob == "BLM" or player.SubJob == "RDM")) then
-        if (gaudy_harness) then
-            gFunc.Equip("Body", "Gaudy Harness")
-        end
-    end
+	gcinclude.CheckDefault()
+	if gcdisplay.GetToggle("DTset") == true then
+		gFunc.EquipSet(sets.Dt)
+		if (pet ~= nil) and (pet.HPP < 60) then
+			gFunc.EquipSet(sets.Pet_Dt)
+		end
+	end
+	if gcdisplay.GetToggle("Kite") == true then
+		gFunc.EquipSet(sets.Movement)
+	end
+	if pet ~= nil then
+		if (player.Status == "Engaged") and (pet.Status ~= "Engaged") then
+			AshitaCore:GetChatManager():QueueCommand(1, '/ja "Fight" <t>')
+		end
+	end
+end
 
-    local petAction = gData.GetPetAction()
-    if (petAction ~= nil) then
-        gFunc.EquipSet(sets.Ready_Physical)
-        if (PetMagicAttack:contains(petAction) or PetMagicAccuracy:contains(petAction)) then
-            gFunc.EquipSet(sets.Ready_Magic)
-        end
-    end
+profile.HandleAbility = function()
+	local ability = gData.GetAction()
+	if string.match(ability.Name, "Call Beast") or string.match(ability.Name, "Bestial Loyalty") then
+		gFunc.EquipSet(sets.Call)
+	elseif string.match(ability.Name, "Reward") then
+		gFunc.EquipSet(sets.Reward)
+	elseif string.match(ability.Type, "Killer Instinct") then
+		gFunc.EquipSet(sets.Killer)
+	elseif string.match(ability.Type, "Spur") then
+		gFunc.EquipSet(sets.Spur)
+	elseif string.match(ability.Type, "Ready") then
+		gFunc.EquipSet(sets.Ready)
+	end
 
-    gFunc.EquipSet(gcinclude.BuildLockableSet(gData.GetEquipment()))
+	gcinclude.CheckCancels()
+end
+
+profile.HandleItem = function()
+	local item = gData.GetAction()
+
+	if string.match(item.Name, "Holy Water") then
+		gFunc.EquipSet(gcinclude.sets.Holy_Water)
+	end
 end
 
 profile.HandlePrecast = function()
-    gcmelee.DoPrecast(fastCastValue)
+	local spell = gData.GetAction()
+	gFunc.EquipSet(sets.Precast)
+
+	gcinclude.CheckCancels()
 end
 
 profile.HandleMidcast = function()
-    gcmelee.DoMidcast(sets)
+	local player = gData.GetPlayer()
+	local spell = gData.GetAction()
+
+	if spell.Skill == "Enhancing Magic" then
+		gFunc.EquipSet(sets.Enhancing)
+
+		if string.match(spell.Name, "Phalanx") then
+			gFunc.EquipSet(sets.Phalanx)
+		elseif string.match(spell.Name, "Stoneskin") then
+			gFunc.EquipSet(sets.Stoneskin)
+		elseif string.contains(spell.Name, "Refresh") then
+			gFunc.EquipSet(sets.Refresh)
+		end
+	elseif spell.Skill == "Healing Magic" then
+		gFunc.EquipSet(sets.Cure)
+	elseif spell.Skill == "Enfeebling Magic" then
+		gFunc.EquipSet(sets.Enfeebling)
+	end
+	if gcdisplay.GetToggle("TH") == true then
+		gFunc.EquipSet(sets.TH)
+	end
+end
+
+profile.HandlePreshot = function()
+	gFunc.EquipSet(sets.Preshot)
+end
+
+profile.HandleMidshot = function()
+	gFunc.EquipSet(sets.Midshot)
+	if gcdisplay.GetToggle("TH") == true then
+		gFunc.EquipSet(sets.TH)
+	end
+end
+
+profile.HandleWeaponskill = function()
+	local canWS = gcinclude.CheckWsBailout()
+	if canWS == false then
+		gFunc.CancelAction()
+		return
+	else
+		local ws = gData.GetAction()
+
+		gFunc.EquipSet(sets.Ws_Default)
+		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+			gFunc.EquipSet("Ws_" .. gcdisplay.GetCycle("MeleeSet"))
+		end
+
+		if string.match(ws.Name, "Aeolian Edge") then
+			gFunc.EquipSet(sets.Aedge_Default)
+			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+				gFunc.EquipSet("Aedge_" .. gcdisplay.GetCycle("MeleeSet"))
+			end
+		end
+	end
 end
 
 return profile
