@@ -22,12 +22,8 @@ local sets = {
 		--         Body = "Seer's Tunic",
 		Legs = "Baron's Slops",
 	},
-	Idle_Regen = {
-		Head = "Garrison Sallet +1",
-	},
-	Idle_Refresh = {
-		Body = "Garrison Tunica +1",
-	},
+	Idle_Regen = {},
+	Idle_Refresh = {},
 	Town = {},
 
 	Dt = {},

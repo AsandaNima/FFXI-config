@@ -12,21 +12,7 @@ local sets = {
 	Idle_Refresh_Priority = {},
 	Town = {},
 
-	Dt_Priority = {
-		--         Ammo = 'Staunch Tathlum',
-		--         Head = 'Nyame Helm',
-		--         Neck = { Name = 'Loricate Torque +1', AugPath='A' },
-		--         Ear1 = { Name = 'Odnowa Earring +1', AugPath='A' },
-		--         Ear2 = 'Etiolation Earring',
-		--         Body = 'Nyame Mail',
-		--         Hands = 'Nyame Gauntlets',
-		--         Ring1 = 'Defending Ring',
-		--         Ring2 = { Name = 'Gelatinous Ring +1', AugPath='A' },
-		--         Back = 'Solemnity Cape',
-		--         Waist = 'Flume Belt +1',
-		--         Legs = 'Nyame Flanchard',
-		--         Feet = 'Nyame Sollerets',
-	},
+	Dt_Priority = {},
 
 	Tp_Default_Priority = {
 		Head = { "Tlahtlamah Glasses" },
@@ -75,19 +61,6 @@ local sets = {
 	TH = {},
 	Movement = {
 		Legs = "Carmine Cuisses +1",
-	},
-	["upgrade"] = {
-		Main = "Harpoon",
-		Head = "Tlahtlamah Glasses",
-		Neck = { Name = "Armiger's Lace", Augment = { [1] = "Accuracy+1", [2] = "HP+2" } },
-		Ear1 = { Name = "Optical Earring", Augment = { [1] = "DEX+1", [2] = "HP+2" } },
-		Body = { Name = "Leather Vest", Augment = { [1] = "VIT+1", [2] = "INT+1" } },
-		Hands = "Mithran Gauntlets",
-		Ring1 = "Bastokan Ring",
-		Ring2 = "San d'Orian Ring",
-		Waist = { Name = "Leather Belt", Augment = { [1] = "AGI+1", [2] = "HP+10" } },
-		Legs = "Mithran Loincloth",
-		Feet = "Leaping Boots",
 	},
 }
 profile.Sets = sets

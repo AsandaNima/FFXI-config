@@ -22,13 +22,7 @@ local sets = {
 		--         Feet = 'Gleti\'s Boots',
 	},
 	Resting = {},
-	Idle_Regen = {
-		Head = "Garrison Sallet +1",
-		--         Neck = 'Bathy Choker +1',
-		--         Ear1 = 'Infused Earring',
-		--         Ring2 = 'Chirich Ring +1',
-		--         Feet = 'Turms Leggings',
-	},
+	Idle_Regen = {},
 	Idle_Refresh = {},
 	Town = {
 		--         Main = 'Tauret',

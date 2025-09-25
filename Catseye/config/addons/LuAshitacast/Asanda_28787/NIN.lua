@@ -8,9 +8,7 @@ local Settings = {
 local sets = {
 	Idle = {},
 	Resting = {},
-	Idle_Regen = {
-		Head = "Garrison Sallet +1",
-	},
+	Idle_Regen = {},
 	Idle_Refresh = {},
 	Town = {},
 

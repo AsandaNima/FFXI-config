@@ -697,25 +697,22 @@ function gcinclude.SetVariables()
 	local player = gData.GetPlayer()
 
 	-- set defense mode
-	gcdisplay.CreateCycle(
-		"craft",
-		{
-			[1] = "none",
-			[2] = "alchemy",
-			[3] = "bonecraft",
-			[4] = "clothcraft",
-			[5] = "cooking",
-			[6] = "goldsmith",
-			[7] = "leathercraft",
-			[8] = "smithing",
-			[9] = "woodworking",
-			[10] = "fishing",
-			[11] = "mining",
-			[12] = "logging",
-			[13] = "harvesting",
-			[14] = "excavation",
-		}
-	)
+	gcdisplay.CreateCycle("craft", {
+		[1] = "none",
+		[2] = "alchemy",
+		[3] = "bonecraft",
+		[4] = "clothcraft",
+		[5] = "cooking",
+		[6] = "goldsmith",
+		[7] = "leathercraft",
+		[8] = "smithing",
+		[9] = "woodworking",
+		[10] = "fishing",
+		[11] = "mining",
+		[12] = "logging",
+		[13] = "harvesting",
+		[14] = "excavation",
+	})
 
 	-- 	gcdisplay.CreateToggle('DTset', false);
 	-- 	gcdisplay.CreateToggle('Kite', false);
@@ -1066,9 +1063,15 @@ function gcinclude.SetRegenRefreshGear()
 				gFunc.Equip("Head", "Garrison Sallet +1")
 			end
 			gFunc.EquipSet("Idle_Regen")
+			if player.MainJobSync <= 50 then
+				gFunc.Equip("Head", "Garrison Sallet +1")
+			end
 		end
 		if player.MPP < gcinclude.settings.RefreshGearMPP then
 			gFunc.EquipSet("Idle_Refresh")
+			if player.MainJobSync <= 50 then
+				gFunc.Equip("Body", "Garrison Tunica +1")
+			end
 		end
 	end
 	if player.HPP < gcinclude.settings.DTGearHPP then

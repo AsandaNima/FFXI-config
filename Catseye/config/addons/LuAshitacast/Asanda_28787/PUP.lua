@@ -82,6 +82,7 @@ local sets = {
 		Ear1 = "Loquac. Earring",
 		Head = "Thurandaut Chapeau",
 		Hands = "Thurandaut Gloves",
+		Waist = { "Ninurta's Sash" },
 	},
 
 	Enhancing = {},

@@ -11,7 +11,8 @@ local sets = {
 		Head = { "Gambler's Chapeau" },
 		Ear1 = { "Pigeon Earring" },
 		Ear2 = { "Pigeon Earring" },
-
+		Ring1 = { "Serket Ring" },
+		Ring2 = { "Mana Ring" },
 		Hands = { "Savage Gauntlets", "Garrison gloves +1" },
 		Legs = { "Savage Loincloth", "Seer's Slacks" },
 		Feet = { "Sandals" },
@@ -22,12 +23,8 @@ local sets = {
 		Body = "Seer's Tunic",
 		Legs = "Baron's Slops",
 	},
-	Idle_Regen = {
-		Head = "Garrison Sallet +1",
-	},
-	Idle_Refresh = {
-		Body = "Garrison Tunica +1",
-	},
+	Idle_Regen = {},
+	Idle_Refresh = {},
 	Town = {},
 
 	Dt = {},
