@@ -1,313 +1,241 @@
-local profile = {};
-gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
+local profile = {}
+gcinclude = gFunc.LoadFile("common\\gcinclude.lua")
 
 local Settings = {
-    CurrentLevel = 0,
+	CurrentLevel = 0,
 }
 
 local sets = {
-    Idle = {
-        Ammo = 'Staunch Tathlum',
-        Head = 'Malignance Chapeau',
-        Neck = 'Bathy Choker +1',
-        Ear1 = {"Pigeon Earring"},
-        Ear2 = {"Pigeon Earring"},
-        Body = 'Hiza. Haramaki +2',
-        Hands = 'Malignance Gloves',
-        Ring1 = 'Karieyh Ring +1',
-        Ring2 = 'Chirich Ring +1',
-        Back = 'Solemnity Cape',
-        Waist = 'Moonbow Belt',
-        Legs = 'Mpaca\'s Hose',
-        Feet = 'Mpaca\'s Boots',
-    },
-    Resting = {},
-    Idle_Regen = {
-        Neck = 'Bathy Choker +1',
-        Ear1 = 'Infused Earring',
-        Body = 'Hiza. Haramaki +2',
-        Hands = 'Rao Kote',
-        Ring2 = 'Chirich Ring +1',
-    },
-    Idle_Refresh = {},
-    Town = {
-        Main = 'Sakpata\'s Fists',
-        Ammo = 'Staunch Tathlum',
-        Head = 'Anchorite\'s Crown',
-        Body = 'Bhikku Cyclas +2',
-        Legs = 'Mpaca\'s Hose',
-    },
+	Idle = {},
+	Resting = {},
+	Idle_Regen = {},
+	Idle_Refresh = {},
+	Town = {},
 
-    Dt_Priority = {
-        Ammo = 'Staunch Tathlum',
-        Head = 'Nyame Helm',
-        Neck = { Name = 'Loricate Torque +1', AugPath='A' },
-        Ear1 = { Name = 'Odnowa Earring +1', AugPath='A' },
-        Ear2 = 'Etiolation Earring',
-        Body = 'Malignance Tabard',
-        Hands = 'Nyame Gauntlets',
-        Ring1 = 'Defending Ring',
-        Ring2 = { Name = 'Gelatinous Ring +1', AugPath='A' },
-        Waist = 'Flume Belt +1',
-        Legs = 'Nyame Flanchard',
-        Feet = 'Nyame Sollerets',
-    },
+	Dt_Priority = {},
 
-    Tp_Default_Priority = {
-        Head = {"Empress Hairpin", "Garrison Sallet +1"},
-        Neck = {"Peacock Charm","Spike Necklace", "Pile Chain"},
-        Ear1 = {"Brutal earring", "Outlaw's Earring","Pigeon Earring", "Optical Earring"},
-        Ear2 = {"Wilderness Earring","Pigeon Earring"},
+	Tp_Default_Priority = {
+		Head = { "Empress Hairpin", "Garrison Sallet +1" },
+		Neck = { "Peacock Charm", "Spike Necklace", "Pile Chain" },
+		Ear1 = { "Brutal earring", "Outlaw's Earring", "Pigeon Earring", "Optical Earring" },
+		Ear2 = { "Wilderness Earring", "Pigeon Earring" },
 
-        Body = {"Garrison Tunica +1", "Rambler's Cloak", "Mithran Separates"},
-        Hands = {"Battle Gloves", "Mithran Gauntlets"},
-        Ring1 = {"Rajas Ring", "Archer's Ring", "Bastokan Ring"},
-        Ring2 = {"Ulthalam's Ring", "Archer's Ring","San d'Orian Ring"},
+		Body = { "Garrison Tunica +1", "Rambler's Cloak", "Mithran Separates" },
+		Hands = { "Battle Gloves", "Mithran Gauntlets" },
+		Ring1 = { "Rajas Ring", "Archer's Ring", "Bastokan Ring" },
+		Ring2 = { "Ulthalam's Ring", "Archer's Ring", "San d'Orian Ring" },
 
+		Back = { "Exile's Cloak", "Ram Mantle", "Traveler's Mantle" },
+		Waist = { "Ninurta's Sash", "Virtuoso Belt", "Tilt Belt", "Purple Belt", "Lizard Belt", "Leather Belt" },
+		Legs = { "Shinobi Hakama", "Garrison Hose +1", "Mithran Loincloth" },
+		Feet = { "Savage Gaiters", "Garrison Boots +1", "Mithran Gaiters" },
+	},
+	Tp_Hybrid_Priority = {},
+	Tp_Acc_Priority = {},
 
-        Back = {"Exile's Cloak", "Ram Mantle", "Traveler's Mantle"},
-        Waist = {"Ninurta's Sash", "Virtuoso Belt", "Tilt Belt", "Purple Belt", "Lizard Belt", "Leather Belt"},
-        Legs = {"Garrison Hose +1","Mithran Loincloth"},
-        Feet = {"Savage Gaiters", "Garrison Boots +1", "Mithran Gaiters"},
-    },
-    Tp_Hybrid_Priority = {
-        Head = 'Mpaca\'s Cap',
-        Neck = 'Sanctity Necklace',
-        Body = 'Mpaca\'s Doublet',
-        Hands = 'Mpaca\'s Gloves',
-        Legs = 'Mpaca\'s Hose',
-        Feet = 'Mpaca\'s Boots',
-    },
-    Tp_Acc_Priority = {
-        Ear1 = 'Mache Earring +1',
-        Hands = 'Tatena. Gote +1',
-        Ring1 = 'Cacoethic Ring +1',
-        Ring2 = 'Chirich Ring +1',
-        Feet = 'Tatena. Sune. +1',
-    },
+	Precast = {},
 
+	Preshot = {},
+	Midshot = {},
 
-    Precast = {
-        Ammo = 'Staunch Tathlum',
-        Neck = 'Baetyl Pendant',
-        Ear1 = 'Etiolation Earring',
-        Ring2 = 'Prolix Ring',
-    },
+	Ws_Default_Priority = {
+		Neck = { "Fotia Gorget", "Spike Necklace" },
+		Ear1 = "Ethereal Earring", -- +5attk
+		Ear2 = "Aesir Ear Pendant", -- +7attk
 
-    Preshot = {
-    },
-    Midshot = {
-        Ear1 = 'Telos Earring',
-        Ear2 = 'Crep. Earring',
-    },
+		Body = { "Savage Separates" },
+		Ring1 = "Rajas Ring", -- +5dex +5str +5tp +5subtle
+		Ring2 = "Archer's Ring",
 
-    Ws_Default_Priority = {
-        Neck = {"Fotia Gorget", "Spike Necklace"},
-        Ear1 = "Ethereal Earring",-- +5attk
-        Ear2 = "Aesir Ear Pendant",-- +7attk
+		Back = { "Pantin Cape", "Exile's Cloak" },
+		Legs = { "Shinobi Hakama", "Garrison Hose +1" },
+		Waist = "Virtuoso Belt",
+	},
+	Ws_Hybrid = {},
+	Ws_Acc = {},
 
-        Body = {"Savage Separates"},
-        Ring1 = "Rajas Ring",-- +5dex +5str +5tp +5subtle
-        Ring2 = 'Archer\'s Ring',
+	Victory_Default = {},
+	Victory_Imp = {},
+	Victory_Hybrid = {},
+	Victory_Acc = {},
 
+	Shijin_Default = {},
+	Shijin_Hybrid = {},
+	Shijin_Acc = {},
 
-        Back = {"Pantin Cape", "Exile's Cloak"},
-        Waist = "Virtuoso Belt",
-    },
-    Ws_Hybrid = {
-    },
-    Ws_Acc = {
-    },
+	Impetus = {},
+	Focus = {},
+	Dodge = {},
+	Chakra = {},
+	FootworkJA = {},
+	Footwork = {},
+	HundredFists = {},
+	FormlessStrikes = {},
+	Counterstance = {},
 
-    Victory_Default = {
-        Head = { Name = 'Adhemar Bonnet +1', AugPath='B' },
-        Ear1 = 'Sherida Earring',
-        Hands = 'Ryuo Tekko',
-        Back = { Name = 'Segomo\'s Mantle', Augment = { [1] = 'STR+20', [2] = 'Crit.hit rate+10', [3] = 'Attack+20', [4] = 'Accuracy+20' } },
-        Legs = 'Mpaca\'s Hose',
-    },
-    Victory_Imp = {
-        Ammo = 'Coiste Bodhar',
-        Ear1 = 'Sherida Earring',
-        Ear2 = 'Schere Earring',
-        Body = 'Bhikku Cyclas +2',
-        Back = { Name = 'Segomo\'s Mantle', Augment = { [1] = 'Accuracy+20', [2] = '"Dbl.Atk."+10', [3] = 'Attack+20', [4] = 'DEX+20' } },
-    },
-    Victory_Hybrid = {},
-    Victory_Acc = {},
-
-    Shijin_Default = {
-    },
-    Shijin_Hybrid = {},
-    Shijin_Acc = {},
-
-    Impetus = {--over rides your TP set if impetus is up
-        Body = 'Bhikku Cyclas +2',
-    },
-    Focus = {
-        Head = 'Anchor. Crown +1',
-    },
-    Dodge = {
-        Feet = 'Anch. Gaiters',
-    },
-    Chakra = {
-        Body = 'Anch. Cyclas +1',
-        Hands = 'Hes. Gloves',
-    },
-    FootworkJA = {--this is used on JA activation
-        Feet = 'Bhikku Gaiters +1',
-    },
-    Footwork = {--this will override your TP while footwork is active
-        Feet = 'Bhikku Gaiters +1',
-    },
-    HundredFists = {
-        Legs = 'Hes. Hose +3',
-    },
-    FormlessStrikes = {
-        Body = 'Hes. Cyclas',
-    },
-    Counterstance = {--these feet are also for Mantra
-        Feet = 'Hes. Gaiters',
-    },
-
-    TH = {
-        Ammo = 'Per. Lucky Egg',
-        Waist = 'Chaac Belt',
-        Feet = { Name = 'Herculean Boots', Augment = { [1] = 'Potency of "Cure" effect received+5%', [2] = 'Mag. Acc.+19', [3] = 'Accuracy+21', [4] = '"Mag. Atk. Bns."+19', [5] = '"Treasure Hunter"+2' } },
-    },
-    Movement = {
-        Feet = 'Herald\'s Gaiters',
-    },
-};
-profile.Sets = sets;
+	TH = {},
+	Movement = {},
+}
+profile.Sets = sets
 
 profile.Packer = {
-    {Name = 'Red Curry Bun', Quantity = 'all'},
-};
+	{ Name = "Red Curry Bun", Quantity = "all" },
+}
 
 profile.OnLoad = function()
-gSettings.AllowAddSet = true;
-gcinclude.Initialize();
+	gSettings.AllowAddSet = true
+	gcinclude.Initialize()
 
-AshitaCore:GetChatManager():QueueCommand(1, '/macro book 1');
-AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
+	AshitaCore:GetChatManager():QueueCommand(1, "/macro book 1")
+	AshitaCore:GetChatManager():QueueCommand(1, "/macro set 1")
 end
 
 profile.OnUnload = function()
-gcinclude.Unload();
+	gcinclude.Unload()
 end
 
 profile.HandleCommand = function(args)
-gcinclude.HandleCommands(args);
+	gcinclude.HandleCommands(args)
 end
 
 profile.HandleDefault = function()
-gFunc.EquipSet(sets.Idle);
-local impetus = gData.GetBuffCount('Impetus');
-local footwork = gData.GetBuffCount('Footwork');
+	gFunc.EquipSet(sets.Idle)
+	local impetus = gData.GetBuffCount("Impetus")
+	local footwork = gData.GetBuffCount("Footwork")
 
--- handle levelsync
-local player = gData.GetPlayer()
+	-- handle levelsync
+	local player = gData.GetPlayer()
 
-local myLevel = player.MainJobSync;
-if (myLevel ~= Settings.CurrentLevel) then
-    gFunc.EvaluateLevels(profile.Sets, myLevel);
-Settings.CurrentLevel = myLevel;
-gcinclude.settings.CurrentLevel = myLevel; -- set CurrentLevel in gcinclude
+	local myLevel = player.MainJobSync
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+		gcinclude.settings.CurrentLevel = myLevel -- set CurrentLevel in gcinclude
+	end
+
+	if player.Status == "Engaged" then
+		gFunc.EquipSet(sets.Tp_Default)
+		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+			gFunc.EquipSet("Tp_" .. gcdisplay.GetCycle("MeleeSet"))
+		end
+		if impetus >= 1 then
+			gFunc.EquipSet(sets.Impetus)
+		end
+		if footwork >= 1 then
+			gFunc.EquipSet(sets.Footwork)
+		end
+		if gcdisplay.GetToggle("TH") == true then
+			gFunc.EquipSet(sets.TH)
+		end
+	elseif player.Status == "Resting" then
+		gFunc.EquipSet(sets.Resting)
+	elseif player.IsMoving == true then
+		gFunc.EquipSet(sets.Movement)
+	end
+
+	gcinclude.CheckDefault()
+	if gcdisplay.GetToggle("DTset") == true then
+		gFunc.EquipSet(sets.Dt)
+	end
+	if gcdisplay.GetToggle("Kite") == true then
+		gFunc.EquipSet(sets.Movement)
+	end
 end
-
-if (player.Status == 'Engaged') then
-    gFunc.EquipSet(sets.Tp_Default);
-if (gcdisplay.GetCycle('MeleeSet') ~= 'Default') then
-    gFunc.EquipSet('Tp_' .. gcdisplay.GetCycle('MeleeSet')) end
-    if (impetus >= 1) then gFunc.EquipSet(sets.Impetus) end
-        if (footwork >= 1) then gFunc.EquipSet(sets.Footwork) end
-            if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(sets.TH) end
-                elseif (player.Status == 'Resting') then
-                    gFunc.EquipSet(sets.Resting);
-                elseif (player.IsMoving == true) then
-                    gFunc.EquipSet(sets.Movement);
-                end
-
-                gcinclude.CheckDefault ();
-            if (gcdisplay.GetToggle('DTset') == true) then gFunc.EquipSet(sets.Dt) end;
-            if (gcdisplay.GetToggle('Kite') == true) then gFunc.EquipSet(sets.Movement) end;
-            end
 
 profile.HandleAbility = function()
+	local ability = gData.GetAction()
 
-local ability = gData.GetAction();
+	if string.match(ability.Name, "Focus") then
+		gFunc.EquipSet(sets.Focus)
+	elseif string.match(ability.Name, "Dodge") then
+		gFunc.EquipSet(sets.Dodge)
+	elseif string.match(ability.Name, "Hundred Fists") then
+		gFunc.EquipSet(sets.HundredFists)
+	elseif string.match(ability.Name, "Chakra") then
+		gFunc.EquipSet(sets.Chakra)
+	elseif string.match(ability.Name, "Footwork") then
+		gFunc.EquipSet(sets.FootworkJA)
+	elseif string.match(ability.Name, "Counterstance") or string.match(ability.Name, "Mantra") then
+		gFunc.EquipSet(sets.Counterstance)
+	elseif string.contains(ability.Name, "Formless Strikes") then
+		gFunc.EquipSet(sets.FormlessStrikes)
+	end
 
-            if string.match(ability.Name, 'Focus') then gFunc.EquipSet(sets.Focus);
-            elseif string.match(ability.Name, 'Dodge') then gFunc.EquipSet(sets.Dodge);
-            elseif string.match(ability.Name, 'Hundred Fists') then gFunc.EquipSet(sets.HundredFists);
-            elseif string.match(ability.Name, 'Chakra') then gFunc.EquipSet(sets.Chakra);
-            elseif string.match(ability.Name, 'Footwork') then gFunc.EquipSet(sets.FootworkJA);
-            elseif string.match(ability.Name, 'Counterstance') or string.match(ability.Name, 'Mantra') then gFunc.EquipSet(sets.Counterstance);
-            elseif string.contains(ability.Name, 'Formless Strikes') then gFunc.EquipSet(sets.FormlessStrikes) end
-
-                gcinclude.CheckCancels();
-            end
+	gcinclude.CheckCancels()
+end
 
 profile.HandleItem = function()
-            local item = gData.GetAction();
+	local item = gData.GetAction()
 
-            if string.match(item.Name, 'Holy Water') then gFunc.EquipSet(gcinclude.sets.Holy_Water) end
-                end
+	if string.match(item.Name, "Holy Water") then
+		gFunc.EquipSet(gcinclude.sets.Holy_Water)
+	end
+end
 
 profile.HandlePrecast = function()
-                local spell = gData.GetAction();
-            gFunc.EquipSet(sets.Precast);
+	local spell = gData.GetAction()
+	gFunc.EquipSet(sets.Precast)
 
-            gcinclude.CheckCancels();
-            end
+	gcinclude.CheckCancels()
+end
 
 profile.HandleMidcast = function()
-            local spell = gData.GetAction();
-            if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(sets.TH) end
-                end
+	local spell = gData.GetAction()
+	if gcdisplay.GetToggle("TH") == true then
+		gFunc.EquipSet(sets.TH)
+	end
+end
 
 profile.HandlePreshot = function()
-                gFunc.EquipSet(sets.Preshot);
-            end
+	gFunc.EquipSet(sets.Preshot)
+end
 
 profile.HandleMidshot = function()
-            gFunc.EquipSet(sets.Midshot);
-            if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(sets.TH) end
-                end
+	gFunc.EquipSet(sets.Midshot)
+	if gcdisplay.GetToggle("TH") == true then
+		gFunc.EquipSet(sets.TH)
+	end
+end
 
 profile.HandleWeaponskill = function()
--- handle levelsync
-local player = gData.GetPlayer()
+	-- handle levelsync
+	local player = gData.GetPlayer()
 
-local myLevel = player.MainJobSync;
-if (myLevel ~= Settings.CurrentLevel) then
-    gFunc.EvaluateLevels(profile.Sets, myLevel);
-Settings.CurrentLevel = myLevel;
-gcinclude.settings.CurrentLevel = myLevel; -- set CurrentLevel in gcinclude
+	local myLevel = player.MainJobSync
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+		gcinclude.settings.CurrentLevel = myLevel -- set CurrentLevel in gcinclude
+	end
+
+	local canWS = gcinclude.CheckWsBailout()
+	if canWS == false then
+		gFunc.CancelAction()
+		return
+	else
+		local ws = gData.GetAction()
+		local impetus = gData.GetBuffCount("Impetus")
+
+		gFunc.EquipSet(sets.Ws_Default)
+		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+			gFunc.EquipSet("Ws_" .. gcdisplay.GetCycle("MeleeSet"))
+		end
+
+		if string.match(ws.Name, "Victory Smite") then
+			gFunc.EquipSet(sets.Victory_Default)
+			if impetus > 0 then
+				gFunc.EquipSet("Victory_Imp")
+			end
+			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+				gFunc.EquipSet("Victory_" .. gcdisplay.GetCycle("MeleeSet"))
+			end
+		elseif string.match(ws.Name, "Shijin Spiral") then
+			gFunc.EquipSet(sets.Shijin_Default)
+			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+				gFunc.EquipSet("Shijin_" .. gcdisplay.GetCycle("MeleeSet"))
+			end
+		end
+	end
 end
 
-local canWS = gcinclude.CheckWsBailout();
-if (canWS == false) then gFunc.CancelAction() return;
-else
-local ws = gData.GetAction();
-local impetus = gData.GetBuffCount('Impetus');
-
-gFunc.EquipSet(sets.Ws_Default)
-if (gcdisplay.GetCycle('MeleeSet') ~= 'Default') then
-gFunc.EquipSet('Ws_' .. gcdisplay.GetCycle('MeleeSet')) end
-
-if string.match(ws.Name, 'Victory Smite') then
-gFunc.EquipSet(sets.Victory_Default)
-if impetus > 0 then gFunc.EquipSet('Victory_Imp'); end
-if (gcdisplay.GetCycle('MeleeSet') ~= 'Default') then
-gFunc.EquipSet('Victory_' .. gcdisplay.GetCycle('MeleeSet')); end
-elseif string.match(ws.Name, 'Shijin Spiral') then
-gFunc.EquipSet(sets.Shijin_Default)
-if (gcdisplay.GetCycle('MeleeSet') ~= 'Default') then
-gFunc.EquipSet('Shijin_' .. gcdisplay.GetCycle('MeleeSet')); end
-end
-end
-end
-
-return profile;
+return profile

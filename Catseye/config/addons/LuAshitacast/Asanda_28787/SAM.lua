@@ -1,210 +1,241 @@
 local profile = {}
-
-local fastCastValue = 0.00 -- 0% from gear
-
--- Replace these with "" if you do not have them
-local myochin_kabuto = "Myochin Kabuto"
-local saotome_kote = "Saotome Kote"
-local saotome_haidate = "Saotome Haidate"
+gcinclude = gFunc.LoadFile("common\\gcinclude.lua")
 
 local sets = {
-    Idle = {
---        Body = "Shm. Hara-Ate",
---        Legs = "Shm. Haidate",
-    },
-    IdleALT = {},
-    Resting = {},
-    Town = {},
-    Movement = {},
+	Idle = {},
+	Resting = {},
+	Idle_Regen = {},
+	Idle_Refresh = {},
+	Town = {},
 
-    DT = {},
-    MDT = { -- Shell IV provides 23% MDT
-    },
-    FireRes = {},
-    IceRes = {},
-    LightningRes = {},
-    EarthRes = {},
-    WindRes = {},
-    WaterRes = {},
-    Evasion = {},
+	Dt = {},
 
-    Precast = {},
-    SIRD = { -- 102% to Cap
-    },
-    Haste = { -- Used for Utsusemi cooldown
-        Waist = "Swift Belt",
-    },
+	Tp_Default = {},
+	Tp_Hybrid = {},
+	Tp_Acc = {},
+	Tp_Proc = {},
 
-    LockSet1 = {},
-    LockSet2 = {},
-    LockSet3 = {},
+	Precast = {},
 
-    TP_LowAcc = {
-        Head = 'Destrier Beret',
-        Neck = 'Focus Collar',
-        Ear1 = { Name = 'Optical Earring', Augment = { [1] = 'DEX+1', [2] = 'HP+2' } },
-        Body = 'Chocobo Shirt',
-        Hands = 'Shade Mittens',
-        Ring1 = 'Windurstian Ring',
-        Ring2 = 'Warp Ring',
-        Legs = 'Shade Tights',
-        Feet = 'Bounding Boots',
-    },
-    TP_HighAcc = {
-        Head = "Empress Hairpin",
-        Neck = "Peacock Amulet",
-        Ear1 = "Minuet Earring",
-        Ear2 = "Beetle Earring",
-        Body = "Shm. Hara-Ate",
-        Hands = "Myochin Kote",
-        --Hands = "Ryl.Sqr. Mufflers",
-        Ring1 = "Rajas Ring",
-        Ring2 = "Toreador's ring",
-        Back = "Amemet Mantle",
-        Waist = "Life Belt",
-        Legs = "Shm. Haidate",
-        Feet = "Bounding Boots",
-    },
+	Cure = {},
 
-    WS = {
-        Head = "Myochin Kabuto",
-        Neck = "Spike Necklace",
-        Ear1 = "Minuet Earring",
-        Ear2 = "Beetle Earring",
-        Body = "Savage Separates",
-        Hands = "Enkelados's Brc.",
-        Ring1 = "Rajas Ring",
-        Ring2 = "Toreador's ring",
-        Back = "Amemet Mantle",
-        Waist = "Ryl.Kgt. Belt",
-        Legs = "Myochin Haidate",
-        Feet = "Savage Gaiters",
-    },
-    WS_Penta = {
-        Head = "Myochin Kabuto",
-        Neck = "Peacock Amulet",
-        Ear1 = "Minuet Earring",
-        Ear2 = "Beetle Earring",
-        Body = "Scorpion Harness",
-        Hands = "Enkelados's Brc.",
-        Ring1 = "Rajas Ring",
-        Ring2 = "San d'Orian ring",
-        Back = "Amemet Mantle",
-        Waist = "Life Belt",
-        Legs = "Myochin Haidate",
-        Feet = "Savage Gaiters",
-    },
+	Enhancing = {},
 
-    WS_Kaiten = {},
-    ['leveling'] = {
-        Main = { Name = 'Katayama', Augment = { [1] = '"Zanshin"+2', [2] = 'DMG:+5' } },
-        Head = 'Destrier Beret',
-        Neck = 'Focus Collar',
-        Ear1 = { Name = 'Optical Earring', Augment = { [1] = 'DEX+1', [2] = 'HP+2' } },
-        Body = 'Chocobo Shirt',
-        Hands = 'Shade Mittens',
-        Ring1 = 'Windurstian Ring',
-        Ring2 = 'Warp Ring',
-        Legs = 'Shade Tights',
-        Feet = 'Bounding Boots',
-    },
+	Preshot = {},
+	Midshot = {},
+
+	Ws_Default = {
+		Head = { "Empress Hairpin", "Garrison Sallet +1" },
+		Neck = { "Peacock Charm", "Spike Necklace", "Pile Chain" },
+		Ear1 = { "Brutal earring", "Outlaw's Earring", "Pigeon Earring", "Optical Earring" },
+		Ear2 = { "Wilderness Earring", "Pigeon Earring" },
+
+		Body = { "Garrison Tunica +1", "Rambler's Cloak", "Mithran Separates" },
+		Hands = { "Battle Gloves", "Mithran Gauntlets" },
+		Ring1 = { "Rajas Ring", "Archer's Ring", "Bastokan Ring" },
+		Ring2 = { "Ulthalam's Ring", "Archer's Ring", "San d'Orian Ring" },
+
+		Back = { "Exile's Cloak", "Ram Mantle", "Traveler's Mantle" },
+		Waist = { "Ninurta's Sash", "Virtuoso Belt", "Tilt Belt", "Purple Belt", "Lizard Belt", "Leather Belt" },
+		Legs = { "Shinobi Hakama", "Garrison Hose +1", "Mithran Loincloth" },
+		Feet = { "Savage Gaiters", "Garrison Boots +1", "Mithran Gaiters" },
+	},
+	Ws_Hybrid = {},
+	Ws_Acc = {},
+	Ws_Proc = {},
+
+	Savage_Default = {},
+	Savage_Hybrid = {},
+	Savage_Acc = {},
+
+	Jinpu_Default = {},
+	Jinpu_Hybrid = {},
+	Jinpu_Acc = {},
+
+	Ageha_Default = {},
+	Ageha_Hybrid = {},
+	Ageha_Acc = {},
+
+	Stardiver_Default = {},
+	Stardiver_Hybrid = {},
+	Stardiver_Acc = {},
+
+	Hasso = {},
+	ThirdEye = {},
+	Seigan = {},
+	Sekkanoki = {},
+	Sengikori = {},
+	Meditate = {},
+	Meikyo = {},
+	Enmity = {},
+
+	TH = {},
+	Movement = {},
 }
 profile.Sets = sets
 
-profile.SetMacroBook = function()
-    AshitaCore:GetChatManager():QueueCommand(1, "/macro book 11")
-    AshitaCore:GetChatManager():QueueCommand(1, "/macro set 1")
-end
-
---[[
---------------------------------
-Everything below can be ignored.
---------------------------------
-]]
-
-gcmelee = gFunc.LoadFile("common\\gcmelee.lua")
-
-profile.HandleAbility = function()
-    local action = gData.GetAction()
-    if (action.Name == "Meditate") then
-        if (myochin_kabuto ~= "") then
-            gFunc.Equip("Head", myochin_kabuto)
-        end
-        if (saotome_kote ~= "") then
-            gFunc.Equip("Hands", saotome_kote)
-        end
-    elseif (action.Name == "Warding Cercle") then
-        if (myochin_kabuto ~= "") then
-            gFunc.Equip("Head", myochin_kabuto)
-        end
-    end
-end
-
-profile.HandleItem = function()
-    gcinclude.DoItem()
-end
-
-profile.HandlePreshot = function()
-    -- You may add logic here
-end
-
-profile.HandleMidshot = function()
-    -- You may add logic here
-end
-
-profile.HandleWeaponskill = function()
-    gFunc.EquipSet(sets.WS)
-
-    local action = gData.GetAction()
-    if (action.Name == "Tachi: Kaiten") then
-        gFunc.EquipSet(sets.WS_Kaiten)
-    end
-    if (action.Name == "Penta Thrust") then
-        gFunc.EquipSet(sets.WS_Penta)
-    end
-
-
-    gcmelee.DoFenrirsEarring()
-end
+profile.Packer = {
+	{ Name = "Red Curry Bun", Quantity = "all" },
+}
 
 profile.OnLoad = function()
-    gcmelee.Load()
-    profile.SetMacroBook()
+	gSettings.AllowAddSet = true
+	gcinclude.Initialize()
+
+	AshitaCore:GetChatManager():QueueCommand(1, "/macro book 4")
+	AshitaCore:GetChatManager():QueueCommand(1, "/macro set 8")
 end
 
 profile.OnUnload = function()
-    gcmelee.Unload()
+	gcinclude.Unload()
 end
 
 profile.HandleCommand = function(args)
-    gcmelee.DoCommands(args)
-
-    if (args[1] == "horizonmode") then
-        profile.HandleDefault()
-    end
+	gcinclude.HandleCommands(args)
 end
 
 profile.HandleDefault = function()
-    local third_eye = gData.GetBuffCount("Third Eye");
+	gFunc.EquipSet(sets.Idle)
+	local hasso = gData.GetBuffCount("Hasso")
+	local thirdeye = gData.GetBuffCount("Third Eye")
+	local seigan = gData.GetBuffCount("Seigan")
+	local player = gData.GetPlayer()
 
-    gcmelee.DoDefault()
-    gcmelee.DoDefaultOverride()
-    gFunc.EquipSet(gcinclude.BuildLockableSet(gData.GetEquipment()))
+	if player.Status == "Engaged" then
+		gFunc.EquipSet(sets.Tp_Default)
+		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+			gFunc.EquipSet("Tp_" .. gcdisplay.GetCycle("MeleeSet"))
+		end
+		if hasso >= 1 then
+			gFunc.EquipSet(sets.Hasso)
+		end
+		if (thirdeye >= 1) and (seigan >= 1) then
+			gFunc.EquipSet(sets.ThirdEye)
+		elseif seigan >= 1 then
+			gFunc.EquipSet(sets.Seigan)
+		end
+		if gcdisplay.GetToggle("TH") == true then
+			gFunc.EquipSet(sets.TH)
+		end
+		if gcdisplay.GetToggle("PROC") == true then
+			gFunc.EquipSet(sets.Tp_Proc)
+		end
+	elseif player.Status == "Resting" then
+		gFunc.EquipSet(sets.Resting)
+	elseif player.IsMoving == true then
+		gFunc.EquipSet(sets.Movement)
+	end
 
-    -- keep saotome haidate, if third eye buff is active
-    if (third_eye == 1) then
-        if (saotome_haidate ~= "") then
-            gFunc.Equip("Legs", saotome_haidate)
-        end
-    end
+	gcinclude.CheckDefault()
+	if gcdisplay.GetToggle("DTset") == true then
+		gFunc.EquipSet(sets.Dt)
+	end
+	if gcdisplay.GetToggle("Kite") == true then
+		gFunc.EquipSet(sets.Movement)
+	end
+end
+
+profile.HandleAbility = function()
+	local ability = gData.GetAction()
+
+	if string.match(ability.Name, "Provoke") then
+		gFunc.EquipSet(sets.Enmity)
+	elseif string.match(ability.Name, "Meditate") then
+		gFunc.EquipSet(sets.Meditate)
+	elseif string.match(ability.Name, "Third Eye") then
+		gFunc.EquipSet(sets.ThirdEye)
+	elseif string.match(ability.Name, "Sengikori") then
+		gFunc.EquipSet(sets.Sengikori)
+	elseif string.contains(ability.Name, "Meikyo") then
+		gFunc.EquipSet(sets.Meikyo)
+	end
+
+	gcinclude.CheckCancels()
+end
+
+profile.HandleItem = function()
+	local item = gData.GetAction()
+
+	if string.match(item.Name, "Holy Water") then
+		gFunc.EquipSet(gcinclude.sets.Holy_Water)
+	end
 end
 
 profile.HandlePrecast = function()
-    gcmelee.DoPrecast(fastCastValue)
+	local spell = gData.GetAction()
+	gFunc.EquipSet(sets.Precast)
+
+	gcinclude.CheckCancels()
 end
 
 profile.HandleMidcast = function()
-    gcmelee.DoMidcast(sets)
+	local spell = gData.GetAction()
+
+	if spell.Skill == "Enhancing Magic" then
+		gFunc.EquipSet(sets.Enhancing)
+	elseif spell.Skill == "Healing Magic" then
+		gFunc.EquipSet(sets.Cure)
+	end
+	if gcdisplay.GetToggle("TH") == true then
+		gFunc.EquipSet(sets.TH)
+	end
 end
 
-return profile
+profile.HandlePreshot = function()
+	gFunc.EquipSet(sets.Preshot)
+end
+
+profile.HandleMidshot = function()
+	gFunc.EquipSet(sets.Midshot)
+	if gcdisplay.GetToggle("TH") == true then
+		gFunc.EquipSet(sets.TH)
+	end
+end
+
+profile.HandleWeaponskill = function()
+	local meikyo = gData.GetBuffCount("Meikyo Shisui")
+	local sekkanoki = gData.GetBuffCount("Sekkanoki")
+	local canWS = gcinclude.CheckWsBailout()
+	if canWS == false then
+		gFunc.CancelAction()
+		return
+	elseif gcdisplay.GetToggle("PROC") == true then
+		gFunc.EquipSet(sets.Ws_Proc)
+	else
+		local ws = gData.GetAction()
+
+		gFunc.EquipSet(sets.Ws_Default)
+		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+			gFunc.EquipSet("Ws_" .. gcdisplay.GetCycle("MeleeSet"))
+		end
+
+		if string.match(ws.Name, "Savage Blade") then
+			gFunc.EquipSet(sets.Savage_Default)
+			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+				gFunc.EquipSet("Savage_" .. gcdisplay.GetCycle("MeleeSet"))
+			end
+		elseif string.match(ws.Name, "Tachi: Jinpu") then
+			gFunc.EquipSet(sets.Jinpu_Default)
+			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+				gFunc.EquipSet("Jinpu_" .. gcdisplay.GetCycle("MeleeSet"))
+			end
+		elseif string.match(ws.Name, "Tachi: Ageha") then
+			gFunc.EquipSet(sets.Ageha_Default)
+			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+				gFunc.EquipSet("Ageha_" .. gcdisplay.GetCycle("MeleeSet"))
+			end
+		elseif string.match(ws.Name, "Stardiver") then
+			gFunc.EquipSet(sets.Stardiver_Default)
+			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+				gFunc.EquipSet("Stardiver_" .. gcdisplay.GetCycle("MeleeSet"))
+			end
+		end
+
+		if meikyo >= 1 then
+			gFunc.EquipSet(sets.Meikyo)
+		end
+		if sekkanoki >= 1 then
+			gFunc.EquipSet(sets.Sekkanoki)
+		end
+	end
+end
