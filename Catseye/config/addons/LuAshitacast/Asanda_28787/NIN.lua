@@ -1,35 +1,5 @@
 local profile = {}
-
-local fastCastValue = 0.00 -- 0% from gear
-
-local shinobi_ring = false
-local shinobi_ring_slot = "Ring2"
-
-local koga_tekko = true
-local koga_tekko_plus_one = false
-
-local uggalepih_pendant = true
-
-local NinDebuffs = T({ "Kurayami: Ni", "Hojo: Ni", "Jubaku: Ichi", "Dokumori: Ichi" })
-local DrkDebuffs = T({ "Bind", "Sleep", "Poison" })
-local NinElemental = T({ "Hyoton: Ni", "Katon: Ni", "Huton: Ni", "Doton: Ni", "Raiton: Ni", "Suiton: Ni" })
-
--- Leave as "" if you do not have the staff.
-local fire_staff = "Vulcan's Staff"
-local earth_staff = "Earth Staff"
-local water_staff = "Water Staff"
-local wind_staff = "Auster's Staff"
-local ice_staff = "Aquilo's Staff"
-local thunder_staff = "Thunder Staff"
-
-local ElementalStaffTable = {
-	["Fire"] = fire_staff,
-	["Earth"] = earth_staff,
-	["Water"] = water_staff,
-	["Wind"] = wind_staff,
-	["Ice"] = ice_staff,
-	["Thunder"] = thunder_staff,
-}
+gcinclude = gFunc.LoadFile("common\\gcinclude.lua")
 
 local Settings = {
 	CurrentLevel = 0,
@@ -37,39 +7,16 @@ local Settings = {
 
 local sets = {
 	Idle = {},
+	Resting = {},
 	Idle_Regen = {
 		Head = "Garrison Sallet +1",
 	},
 	Idle_Refresh = {},
-	Resting = {},
 	Town = {},
-	Movement = {},
 
-	DT = {},
-	MDT = { -- Shell IV provides 23% MDT
-	},
-	FireRes = {},
-	IceRes = {},
-	LightningRes = {},
-	EarthRes = {},
-	WindRes = {},
-	WaterRes = {},
-	Evasion = {},
+	Dt = {},
 
-	Precast = {},
-	SIRD = { -- 102% to Cap
-	},
-	Haste = { -- Used for Utsusemi cooldown
-	},
-
-	Hate = {},
-	NinDebuff = {},
-	NinElemental = {},
-
-	LockSet1 = {},
-	LockSet2 = {},
-	LockSet3 = {},
-	TP_Priority = {
+	Tp_Default = {
 		Head = { "Empress hairpin", "Garrison Sallet +1", "Cmp. Eye Circlet" },
 		Neck = { "Peacock Charm", "Pile Chain" },
 		Ear1 = { "Optical Earring" },
@@ -85,21 +32,75 @@ local sets = {
 		Legs = { "Garrison Hose", "Phl. Trousers", "Mithran Loincloth" },
 		Feet = { "Leaping Boots", "Mithran Gaiters" },
 	},
-	TP_HighAcc_Priority = {},
-	WS = {},
+	Tp_Hybrid = {},
+	Tp_Acc = {},
+	Tp_Proc = {},
+
+	Precast = {},
+
+	Utsu = {},
+	Nuke = {},
+	Macc = {},
+
+	Preshot = {},
+	Midshot = {},
+
+	Ws_Default = {},
+	Ws_Hybrid = {},
+	Ws_Acc = {},
+	Ws_Proc = {},
+
+	Hi_Default = {},
+	Hi_Hybrid = {},
+	Hi_Acc = {},
+
+	Metsu_Default = {},
+	Metsu_Hybrid = {},
+	Metsu_Acc = {},
+
+	Shun_Default = {},
+	Shun_Hybrid = {},
+	Shun_Acc = {},
+
+	Chi_Default = {},
+	Chi_Hybrid = {},
+	Chi_Acc = {},
+
+	Enmity = {},
+
+	Futae = {},
+	Yonin = {},
+	Innin = {},
+	Migawari = {},
+	Mijin = {},
+	TH = {},
+	Movement = {},
+	Movement_Night = {},
+	Extra1 = {},
+	Extra2 = {},
+	Extra3 = {},
 }
 profile.Sets = sets
 
-gcdisplay = gFunc.LoadFile("common\\gcdisplay.lua")
-gcinclude = gFunc.LoadFile("common\\gcinclude.lua")
+profile.Packer = {
+	{ Name = "Toolbag (Ino)", Quantity = "all" },
+	{ Name = "Toolbag (Shika)", Quantity = "all" },
+	{ Name = "Toolbag (Cho)", Quantity = "all" },
+	{ Name = "Toolbag (Shihe)", Quantity = "all" },
+	{ Name = "Shihei", Quantity = "all" },
+	{ Name = "Inoshishinofuda", Quantity = "all" },
+	{ Name = "Chonofuda", Quantity = "all" },
+	{ Name = "Shikanofuda", Quantity = "all" },
+	{ Name = "Forbidden Key", Quantity = "all" },
+	{ Name = "Date Shuriken", Quantity = "all" },
+}
 
 profile.OnLoad = function()
 	gSettings.AllowAddSet = true
+	gcinclude.Initialize()
 
 	AshitaCore:GetChatManager():QueueCommand(1, "/macro book 10")
 	AshitaCore:GetChatManager():QueueCommand(1, "/macro set 1")
-
-	gcinclude.Initialize()
 end
 
 profile.OnUnload = function()
@@ -110,83 +111,156 @@ profile.HandleCommand = function(args)
 	gcinclude.HandleCommands(args)
 end
 
-profile.HandleAbility = function()
-	gFunc.EquipSet(sets.Hate)
+profile.HandleDefault = function()
+	gFunc.EquipSet(sets.Idle)
+	local game = gData.GetEnvironment()
+	local player = gData.GetPlayer()
+	local yonin = gData.GetBuffCount("Yonin")
+	local innin = gData.GetBuffCount("Innin")
+	local migawari = gData.GetBuffCount("Migawari")
+
+	if player.Status == "Engaged" then
+		gFunc.EquipSet(sets.Tp_Default)
+		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+			gFunc.EquipSet("Tp_" .. gcdisplay.GetCycle("MeleeSet"))
+		end
+		if yonin > 0 then
+			gFunc.EquipSet(sets.Yonin)
+		elseif innin > 0 then
+			gFunc.EquipSet(sets.Innin)
+		end
+		if gcdisplay.GetToggle("TH") == true then
+			gFunc.EquipSet(sets.TH)
+		end
+		if gcdisplay.GetToggle("PROC") == true then
+			gFunc.EquipSet(sets.Tp_Proc)
+		end
+	elseif player.Status == "Resting" then
+		gFunc.EquipSet(sets.Resting)
+	elseif player.IsMoving == true then
+		if (game.Time < 6.00) or (game.Time > 18.00) then
+			gFunc.EquipSet(sets.Movement_Night)
+		else
+			gFunc.EquipSet(sets.Movement)
+		end
+	end
+
+	gcinclude.CheckDefault()
+	if gcdisplay.GetToggle("DTset") == true then
+		gFunc.EquipSet(sets.Dt)
+	end
+	if migawari > 0 then
+		gFunc.EquipSet(sets.Migawari)
+	end
+	if gcdisplay.GetToggle("Kite") == true then
+		if (game.Time < 6.00) or (game.Time > 18.00) then
+			gFunc.EquipSet(sets.Movement_Night)
+		else
+			gFunc.EquipSet(sets.Movement)
+		end
+	end
 end
 
-profile.HandleItem = function() end
+profile.HandleAbility = function()
+	local ability = gData.GetAction()
+
+	if string.match(ability.Name, "Provoke") then
+		gFunc.EquipSet(sets.Enmity)
+	elseif string.match(ability.Name, "Mijin Gakure") then
+		gFunc.EquipSet(sets.Mijin)
+	end
+
+	gcinclude.CheckCancels()
+end
+
+profile.HandleItem = function()
+	local item = gData.GetAction()
+
+	if string.match(item.Name, "Holy Water") then
+		gFunc.EquipSet(gcinclude.sets.Holy_Water)
+	end
+end
+
+profile.HandlePrecast = function()
+	local spell = gData.GetAction()
+	gcinclude.DoShadows(spell)
+
+	gFunc.EquipSet(sets.Precast)
+	gcinclude.CheckCancels()
+end
+
+profile.HandleMidcast = function()
+	local spell = gData.GetAction()
+	local futae = gData.GetBuffCount("Futae")
+
+	if spell.Skill == "Ninjutsu" then
+		if string.contains(spell.Name, "Utsusemi") then
+			gFunc.EquipSet(sets.Utsu)
+		elseif gcinclude.NinNukes:contains(spell.Name) then
+			gFunc.EquipSet(sets.Nuke)
+			if futae > 0 then
+				gFunc.EquipSet(sets.futae)
+			end
+		else
+			gFunc.EquipSet(sets.Macc)
+		end
+	end
+
+	if gcdisplay.GetToggle("TH") == true then
+		gFunc.EquipSet(sets.TH)
+	end
+end
 
 profile.HandlePreshot = function()
-	-- You may add logic here
+	gFunc.EquipSet(sets.Preshot)
 end
 
 profile.HandleMidshot = function()
-	-- You may add logic here
+	gFunc.EquipSet(sets.Midshot)
+	if gcdisplay.GetToggle("TH") == true then
+		gFunc.EquipSet(sets.TH)
+	end
 end
 
 profile.HandleWeaponskill = function()
-	gFunc.EquipSet(sets.WS)
+	local canWS = gcinclude.CheckWsBailout()
+	if canWS == false then
+		gFunc.CancelAction()
+		return
+	elseif gcdisplay.GetToggle("PROC") == true then
+		gFunc.EquipSet(sets.Ws_Proc)
+	else
+		local ws = gData.GetAction()
 
-	local environment = gData.GetEnvironment()
-	if koga_tekko and (environment.Time < 6 or environment.Time >= 18) then
-		gFunc.Equip("Hands", "Koga Tekko")
-	end
-	if koga_tekko_plus_one and (environment.Time < 7 or environment.Time >= 17) then
-		gFunc.Equip("Hands", "Kog. Tekko +1")
-	end
-end
-
-profile.HandleDefault = function()
-	local environment = gData.GetEnvironment()
-	-- handle levelsync
-	local player = gData.GetPlayer()
-	local myLevel = player.MainJobSync
-
-	if myLevel ~= Settings.CurrentLevel then
-		gFunc.EvaluateLevels(profile.Sets, myLevel)
-		Settings.CurrentLevel = myLevel
-	end
-
-	if player.Status == "Engaged" then
-		if shinobi_ring and player.HPP <= 75 and player.TP <= 1000 then
-			gFunc.Equip(shinobi_ring_slot, "Shinobi Ring")
+		gFunc.EquipSet(sets.Ws_Default)
+		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+			gFunc.EquipSet("Ws_" .. gcdisplay.GetCycle("MeleeSet"))
 		end
-		if koga_tekko and (environment.Time < 6 or environment.Time >= 18) then
-			gFunc.Equip("Hands", "Koga Tekko")
-		end
-		if koga_tekko_plus_one and (environment.Time < 7 or environment.Time >= 17) then
-			gFunc.Equip("Hands", "Kog. Tekko +1")
-		end
-	end
 
-	gFunc.EquipSet(sets.TP)
-
-	gcinclude.CheckDefault()
-end
-
-profile.HandlePrecast = function(
-) end
-
-profile.HandleMidcast = function()
-	local action = gData.GetAction()
-	if action.Skill == "Ninjutsu" then
-		if NinDebuffs:contains(action.Name) then
-			gFunc.EquipSet(sets.NinDebuff)
-		elseif NinElemental:contains(action.Name) then
-			gFunc.EquipSet(sets.NinElemental)
-			if (action.MppAftercast < 51) and uggalepih_pendant then
-				gFunc.Equip("Neck", "Uggalepih Pendant")
+		if string.match(ws.Name, "Blade: Hi") then
+			gFunc.EquipSet(sets.Hi_Default)
+			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+				gFunc.EquipSet("Hi_" .. gcdisplay.GetCycle("MeleeSet"))
 			end
-			local staff = ElementalStaffTable[action.Element]
-			if staff ~= "" then
-				gFunc.Equip("Main", staff)
+		elseif string.match(ws.Name, "Blade: Metsu") then
+			gFunc.EquipSet(sets.Metsu_Default)
+			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+				gFunc.EquipSet("Metsu_" .. gcdisplay.GetCycle("MeleeSet"))
+			end
+		elseif string.match(ws.Name, "Blade: Shun") then
+			gFunc.EquipSet(sets.Shun_Default)
+			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+				gFunc.EquipSet("Shun_" .. gcdisplay.GetCycle("MeleeSet"))
+			end
+		elseif
+			string.match(ws.Name, "Blade: Chi")
+			or string.match(ws.Name, "Blade: Teki")
+			or string.match(ws.Name, "Blade: To")
+		then
+			gFunc.EquipSet(sets.Chi_Default)
+			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+				gFunc.EquipSet("Chi_" .. gcdisplay.GetCycle("MeleeSet"))
 			end
 		end
-	elseif action.Skill == "Enfeebling Magic" then
-		if DrkDebuffs:contains(action.Name) then
-			gFunc.EquipSet(sets.Hate)
-		end
 	end
 end
-
-return profile
