@@ -24,16 +24,22 @@ local sets = {
 	Pet_Dt_Priority = {},
 
 	Pet_Only_Tp_Default_Priority = {
+		Head = { "Entrancing Ribbon" },
+		Legs = { "Herder's Subligar" },
 		Ear2 = "Wilderness Earring",
 	},
 	Pet_Only_Tp_Hybrid_Priority = {},
-	Pet_Only_Tp_Acc_Priority = {},
+	Pet_Only_Tp_Acc_Priority = {
+		Head = { "Entrancing Ribbon" },
+		Legs = { "Herder's Subligar" },
+		Ear2 = "Wilderness Earring",
+	},
 	-- These profile.Sets will be for when both you and your pet are engaged
 	Tp_Default_Priority = {
 		Range = { "Turbo Animator", "Animator" },
 		Ammo = { "Automat. Oil +2", "Automat. Oil +1", "Automation Oil" },
 
-		Head = { "Thurandaut Chapeau", "Garrison Sallet +1" },
+		Head = { "Thurandaut Chapeau", "Entrancing Ribbon", "Garrison Sallet +1" },
 		Neck = { "Peacock Charm", "Pile Chain" },
 		Ear1 = { "Brutal earring", "Outlaw's Earring", "Pigeon Earring", "Optical Earring" },
 		Ear2 = { "Wilderness Earring", "Pigeon Earring" },
@@ -45,7 +51,7 @@ local sets = {
 
 		Back = { "Pantin Cape", "Exile's Cloak", "Ram Mantle", "Traveler's Mantle" },
 		Waist = { "Ninurta's Sash", "Virtuoso Belt", "Tilt Belt", "Lizard Belt", "Leather Belt" },
-		Legs = { "Thurandaut Tights", "Seer's Slacks", "Garrison Hose +1", "Mithran Loincloth" },
+		Legs = { "Thurandaut Tights", "Herder's Subligar", "Garrison Hose +1", "Mithran Loincloth" },
 		Feet = { "Thurandaut Boots", "Savage Gaiters", "Garrison Boots +1", "Mithran Gaiters" },
 	},
 	Tp_Hybrid_Priority = {},
@@ -57,10 +63,12 @@ local sets = {
 	Tank_Priority = {
 		Body = "Thurandaut Tabard",
 		Hands = { "Thurandaut Gloves", "Seer's Mitts" },
+		Legs = { "Herder's Subligar" },
 		Ear2 = { "Wilderness Earring" },
 	},
 	Melee_Priority = {
 		Hands = { "Thurandaut Gloves", "Seer's Mitts" },
+		Legs = { "Herder's Subligar" },
 		Ear2 = { "Wilderness Earring" },
 		Back = { "Pantin Cape" },
 	},
@@ -119,7 +127,7 @@ local sets = {
 
 		Body = "Thurandaut Tabard", -- +10
 		Hands = "Pantin Destanas", -- +2
-		Ring1 = "Rajas Ring", -- +5
+		Ring1 = "Rajas Ring",  -- +5
 		Ring2 = "Bastokan Ring", -- +1
 
 		Back = "Pantin Cape",
@@ -130,10 +138,14 @@ local sets = {
 	Shijin_Acc = {},
 
 	Pet_WS_Priority = {
+		Head = { "Entrancing Ribbon" },
 		Ear2 = "Wilderness Earring",
+		Legs = { "Herder's Subligar" },
 		Back = "Pantin Cape",
 	},
-	Pet_RNGWS_Priority = {},
+	Pet_RNGWS_Priority = {
+		Legs = "Seer's Slacks",
+	},
 
 	Repair_Priority = {
 		Ammo = { "Automat. Oil +2", "Automat. Oil +1", "Automation Oil" },
@@ -153,7 +165,7 @@ profile.Sets = sets
 
 profile.Packer = {
 	{ Name = "Automat. Oil +3", Quantity = "all" },
-	{ Name = "Bean Daifuku", Quantity = "all" },
+	{ Name = "Bean Daifuku",    Quantity = "all" },
 }
 
 profile.OnLoad = function()
@@ -165,10 +177,13 @@ profile.OnLoad = function()
 	AshitaCore:GetChatManager():QueueCommand(1, "/macro set 1")
 	AshitaCore:GetChatManager():QueueCommand(1, "/equipset 008")
 
+	AshitaCore:GetChatManager():QueueCommand(-1, "/bind F9 /pupmode")
+
 	gcinclude.settings.RefreshGearMPP = 30
 end
 
 profile.OnUnload = function()
+	AshitaCore:GetChatManager():QueueCommand(-1, "/unbind F9")
 	gcinclude.Unload()
 end
 
@@ -188,7 +203,9 @@ profile.HandleDefault = function()
 	local pet = gData.GetPet()
 	local OD = gData.GetBuffCount("Overdrive")
 
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 	if pet ~= nil then
 		gFunc.EquipSet(sets.Idle_Pet)
 	end

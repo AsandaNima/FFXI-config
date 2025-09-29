@@ -95,7 +95,9 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 	local hasso = gData.GetBuffCount("Hasso")
 	local thirdeye = gData.GetBuffCount("Third Eye")
 	local seigan = gData.GetBuffCount("Seigan")

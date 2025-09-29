@@ -137,13 +137,13 @@ local sets = {
 		Ring2 = "Chirich Ring +1",
 	},
 
-	Precast = { --64
+	Precast = {                --64
 		Ammo = "Sapience Orb", --2
 		Head = "Haruspex Hat", --8
 		Neck = "Baetyl Pendant", --4
 		Ear1 = "Odnowa Earring +1",
 		Ear2 = "Etiolation Earring", --1
-		Body = "Pinga Tunic", --13
+		Body = "Pinga Tunic",  --13
 		Hands = "Leyline Gloves", --6
 		Ring1 = "Prolix Ring", --2
 		Ring2 = "Kishar Ring", --4
@@ -156,9 +156,9 @@ local sets = {
 				[4] = "AGI+20",
 				[5] = "Evasion+25",
 			},
-		}, ---10
+		},                     ---10
 		Waist = "Rumination Sash",
-		Legs = "Pinga Pants", --11
+		Legs = "Pinga Pants",  --11
 		Feet = "Carmine Greaves +1", --7
 	},
 	Blu_Precast = {
@@ -168,7 +168,7 @@ local sets = {
 		Waist = "Siegel Sash",
 	},
 
-	Cure = { --I cap is 50, II cap is 30
+	Cure = {                 --I cap is 50, II cap is 30
 		Ammo = "Staunch Tathlum",
 		Head = "Pinga Crown", --8
 		Neck = "Incanter's Torque",
@@ -183,7 +183,7 @@ local sets = {
 		Legs = "Pinga Pants", --11
 		Feet = "Medium's Sabots", --10 atm
 	},
-	WhiteWind = { --HP+ go!
+	WhiteWind = {           --HP+ go!
 		Ammo = "Staunch Tathlum",
 		Head = "Pinga Crown", --8
 		Neck = "Unmoving Collar +1",
@@ -538,7 +538,9 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 
 	local zone = gData.GetEnvironment()
 	local player = gData.GetPlayer()

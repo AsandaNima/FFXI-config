@@ -106,7 +106,7 @@ local sets = {
 	Refresh = {},
 	Self_Refresh = {},
 
-	Pet_Dt = {}, -- dummy set, to satisfy the logic,
+	Pet_Dt = {},       -- dummy set, to satisfy the logic,
 
 	Geomancy_Priority = { --900 skill, then indi duration, then CMP
 		--         Main = 'Idris',
@@ -189,7 +189,7 @@ local sets = {
 	Cataclysm_Acc = {},
 
 	Sublimation = {},
-	Power = { --rapture/ebullience
+	Power = {  --rapture/ebullience
 	},
 	Klimaform = { --klimaform dmg boost
 		Main = { "Iridal Staff" },
@@ -227,7 +227,9 @@ profile.HandleDefault = function()
 	local player = gData.GetPlayer()
 	local pet = gData.GetPet()
 
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 
 	if player.Status == "Engaged" then
 		gFunc.EquipSet(sets.Tp_Default)

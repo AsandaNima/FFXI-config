@@ -187,17 +187,17 @@ gcinclude.settings = {
 	You can also set any of these on a per job basis in the job file in the OnLoad function. See my COR job file to see how this is done
 	but as an example you can just put 'gcinclude.settings.RefreshGearMPP = 50;' in your job files OnLoad function to modify for that job only
 	]]
-	Messages = false, --set to true if you want chat log messages to appear on any /gc command used such as DT, TH, or KITE gear toggles, certain messages will always appear
-	AutoGear = true, --set to false if you dont want DT/Regen/Refresh/PetDT gear to come on automatically at the defined %'s here
-	WScheck = true, --set to false if you dont want to use the WSdistance safety check
-	WSdistance = 10, --default max distance (yalms) to allow non-ranged WS to go off at if the above WScheck is true
-	RegenGearHPP = 95, -- set HPP to have your idle regen set to come on
-	RefreshGearMPP = 95, -- set MPP to have your idle refresh set to come on
-	DTGearHPP = 40, -- set HPP to have your DT set to come on
-	PetDTGearHPP = 50, -- set pet HPP to have your PetDT set to come on
-	MoonshadeTP = 2250, -- this is the TP amount you want to equip EAR2 with moonshade earring when you have less than this amount, set to 0 if you dont want to use at all
+	Messages = false,           --set to true if you want chat log messages to appear on any /gc command used such as DT, TH, or KITE gear toggles, certain messages will always appear
+	AutoGear = true,            --set to false if you dont want DT/Regen/Refresh/PetDT gear to come on automatically at the defined %'s here
+	WScheck = true,             --set to false if you dont want to use the WSdistance safety check
+	WSdistance = 10,            --default max distance (yalms) to allow non-ranged WS to go off at if the above WScheck is true
+	RegenGearHPP = 95,          -- set HPP to have your idle regen set to come on
+	RefreshGearMPP = 95,        -- set MPP to have your idle refresh set to come on
+	DTGearHPP = 40,             -- set HPP to have your DT set to come on
+	PetDTGearHPP = 50,          -- set pet HPP to have your PetDT set to come on
+	MoonshadeTP = 2250,         -- this is the TP amount you want to equip EAR2 with moonshade earring when you have less than this amount, set to 0 if you dont want to use at all
 	Tele_Ring = "Dim. Ring (Dem)", -- put your tele ring in here
-	CurrentLevel = 0, -- current level for level sync
+	CurrentLevel = 0,           -- current level for level sync
 }
 
 --[[
@@ -639,37 +639,37 @@ gcinclude.NinNukes = T({
 	"Suiton: San",
 })
 gcinclude.Rolls = T({
-	{ "Fighter's Roll", 5, 9 },
-	{ "Monk's Roll", 3, 7 },
-	{ "Healer's Roll", 3, 7 },
-	{ "Corsair's Roll", 5, 9 },
-	{ "Ninja Roll", 4, 8 },
-	{ "Hunter's Roll", 4, 8 },
-	{ "Chaos Roll", 4, 8 },
-	{ "Magus's Roll", 2, 6 },
-	{ "Drachen Roll", 4, 8 },
-	{ "Choral Roll", 2, 6 },
-	{ "Beast Roll", 4, 8 },
-	{ "Samurai Roll", 2, 6 },
-	{ "Evoker's Roll", 5, 9 },
-	{ "Rogue's Roll", 5, 9 },
-	{ "Warlock's Roll", 4, 8 },
-	{ "Puppet Roll", 3, 7 },
-	{ "Gallant's Roll", 3, 7 },
-	{ "Wizard's Roll", 5, 9 },
-	{ "Dancer's Roll", 3, 7 },
-	{ "Scholar's Roll", 2, 6 },
+	{ "Fighter's Roll",    5, 9 },
+	{ "Monk's Roll",       3, 7 },
+	{ "Healer's Roll",     3, 7 },
+	{ "Corsair's Roll",    5, 9 },
+	{ "Ninja Roll",        4, 8 },
+	{ "Hunter's Roll",     4, 8 },
+	{ "Chaos Roll",        4, 8 },
+	{ "Magus's Roll",      2, 6 },
+	{ "Drachen Roll",      4, 8 },
+	{ "Choral Roll",       2, 6 },
+	{ "Beast Roll",        4, 8 },
+	{ "Samurai Roll",      2, 6 },
+	{ "Evoker's Roll",     5, 9 },
+	{ "Rogue's Roll",      5, 9 },
+	{ "Warlock's Roll",    4, 8 },
+	{ "Puppet Roll",       3, 7 },
+	{ "Gallant's Roll",    3, 7 },
+	{ "Wizard's Roll",     5, 9 },
+	{ "Dancer's Roll",     3, 7 },
+	{ "Scholar's Roll",    2, 6 },
 	{ "Naturalist's Roll", 3, 7 },
-	{ "Runeist's Roll", 4, 8 },
-	{ "Bolter's Roll", 3, 9 },
-	{ "Caster's Roll", 2, 7 },
-	{ "Courser's Roll", 3, 9 },
-	{ "Blitzer's Roll", 4, 9 },
-	{ "Tactician's Roll", 5, 8 },
-	{ "Allies' Roll", 3, 10 },
-	{ "Miser's Roll", 5, 7 },
-	{ "Companion's Roll", 2, 10 },
-	{ "Avenger's Roll", 4, 8 },
+	{ "Runeist's Roll",    4, 8 },
+	{ "Bolter's Roll",     3, 9 },
+	{ "Caster's Roll",     2, 7 },
+	{ "Courser's Roll",    3, 9 },
+	{ "Blitzer's Roll",    4, 9 },
+	{ "Tactician's Roll",  5, 8 },
+	{ "Allies' Roll",      3, 10 },
+	{ "Miser's Roll",      5, 7 },
+	{ "Companion's Roll",  2, 10 },
+	{ "Avenger's Roll",    4, 8 },
 }) -- {name,lucky,unlucky}
 gcinclude.CORmsg = true
 gcinclude.MPSet = false
@@ -792,13 +792,13 @@ function gcinclude.HandleCommands(args)
 			gcinclude.settings.WSdistance = tonumber(args[2])
 			print(
 				chat.header("GCinclude")
-					:append(chat.message("WS Distance is on and set to " .. gcinclude.settings.WSdistance))
+				:append(chat.message("WS Distance is on and set to " .. gcinclude.settings.WSdistance))
 			)
 		else
 			gcinclude.settings.WScheck = not gcinclude.settings.WScheck
 			print(
 				chat.header("GCinclude")
-					:append(chat.message("WS distance check is now " .. tostring(gcinclude.settings.WScheck)))
+				:append(chat.message("WS distance check is now " .. tostring(gcinclude.settings.WScheck)))
 			)
 			print(
 				chat.header("GCinclude"):append(chat.message("Can change WS distance allowed by using /wsdistance ##"))
@@ -1059,9 +1059,7 @@ function gcinclude.SetRegenRefreshGear()
 	local pet = gData.GetPet()
 	if player.Status == "Idle" then
 		if player.HPP < gcinclude.settings.RegenGearHPP then
-			if gcinclude.settings.CurrentLevel <= 50 then
-				gFunc.Equip("Head", "Garrison Sallet +1")
-			end
+			-- 			print(chat.header('GCinclude'):append(chat.message("Level: " .. player.MainJobSync .. ".")));
 			gFunc.EquipSet("Idle_Regen")
 			if player.MainJobSync <= 50 then
 				gFunc.Equip("Head", "Garrison Sallet +1")
@@ -1102,7 +1100,7 @@ function gcinclude.CheckWsBailout()
 	then
 		print(
 			chat.header("GCinclude")
-				:append(chat.message("Distance to mob is too far! Move closer or increase WS distance"))
+			:append(chat.message("Distance to mob is too far! Move closer or increase WS distance"))
 		)
 		print(chat.header("GCinclude"):append(chat.message("Can change WS distance allowed by using /wsdistance ##")))
 		return false
@@ -1184,13 +1182,13 @@ function gcinclude.DoCORmsg(roll)
 			print(
 				chat.header("GCinclude"):append(
 					"["
-						.. chat.warning(roll)
-						.. "]"
-						.. "  [Lucky: "
-						.. chat.success(gcinclude.Rolls[n][2])
-						.. "]  [Unlucky: "
-						.. chat.error(gcinclude.Rolls[n][3])
-						.. "]"
+					.. chat.warning(roll)
+					.. "]"
+					.. "  [Lucky: "
+					.. chat.success(gcinclude.Rolls[n][2])
+					.. "]  [Unlucky: "
+					.. chat.error(gcinclude.Rolls[n][3])
+					.. "]"
 				)
 			)
 		end

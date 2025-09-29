@@ -332,7 +332,9 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 
 	local player = gData.GetPlayer()
 	if player.Status == "Engaged" then

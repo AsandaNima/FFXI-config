@@ -6,7 +6,7 @@ local Settings = {
 }
 
 local sets = {
-	Idle = {--[[
+	Idle = { --[[
         Ammo = 'Staunch Tathlum',
         Head = 'Nyame Helm',
         Neck ='Unmoving Collar +1',
@@ -431,7 +431,9 @@ profile.HandleDefault = function()
 		Settings.CurrentLevel = myLevel
 	end
 
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 
 	if player.Status == "Engaged" then
 		gFunc.EquipSet(sets.Tp_Default)

@@ -41,8 +41,8 @@ local sets = {
 		Ring2 = { "San d'Orian Ring" },
 
 		Back = { "Mist Silk Cape" },
-		Legs = { "Mithran Loincloth" },
-		Feet = { "Mithran Gaiters" },
+		Legs = { "Garrison Hose +1", "Mithran Loincloth" },
+		Feet = { "Garrison Boots +1", "Mithran Gaiters" },
 	},
 	Tp_Hybrid = {},
 	Tp_Acc = {},
@@ -162,11 +162,11 @@ local sets = {
 	Cataclysm_Acc = {},
 
 	Sublimation = {},
-	Power = { --rapture/ebullience
+	Power = {  --rapture/ebullience
 	},
 	Klimaform = { --klimaform dmg boost
 	},
-	TH = { --/th will force this set to equip for 10 seconds
+	TH = {     --/th will force this set to equip for 10 seconds
 	},
 	Movement = {
 		Body = "Kupo Suit",
@@ -208,7 +208,7 @@ profile.HandleDefault = function()
 		Settings.CurrentLevel = myLevel
 	end
 
-	local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel()
+	-- 	local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel()
 	if myLevel ~= Settings.CurrentLevel then
 		gFunc.EvaluateLevels(profile.Sets, myLevel)
 		Settings.CurrentLevel = myLevel
@@ -219,7 +219,12 @@ profile.HandleDefault = function()
 		return
 	end
 
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
+
+
+	-- 	gFunc.EquipSet(sets.Idle)
 
 	if player.Status == "Engaged" then
 		gFunc.EquipSet(sets.Tp_Default)

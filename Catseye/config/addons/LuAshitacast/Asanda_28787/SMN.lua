@@ -19,7 +19,7 @@ local sets = {
 		Legs = "Assid. Pants +1",
 		Feet = "Volte Gaiters",
 	},
-	Pet_Idle = { --only need 14, rest 512|575|670 skill for favor then refresh
+	Pet_Idle = {      --only need 14, rest 512|575|670 skill for favor then refresh
 		Main = "Gridarvor", --5
 		Sub = "Elan Strap",
 		Ammo = "Epitaph",
@@ -155,7 +155,7 @@ local sets = {
 		Waist = "Siegel Sash",
 	},
 
-	Cure = { --I cap is 50, II cap is 30
+	Cure = {            --I cap is 50, II cap is 30
 		Main = "Bunzi's Rod", --I 30
 		Sub = "Ammurapi Shield",
 		Ammo = "Pemphredo Tathlum",
@@ -249,7 +249,7 @@ local sets = {
 	Ws_Hybrid = {},
 	Ws_Acc = {},
 
-	BP = { --I/II cap at 15, the rest need 680 skill total
+	BP = {          --I/II cap at 15, the rest need 680 skill total
 		Ammo = "Epitaph", --II 5
 		Head = "Beckoner's Horn +1",
 		Neck = "Incanter's Torque",
@@ -335,7 +335,7 @@ local sets = {
 		Waist = "Regal Belt",
 		Legs = "Assid. Pants +1", --need to Augment
 	},
-	SmnHealing = { --avatar HP+
+	SmnHealing = {          --avatar HP+
 		Ammo = "Epitaph",
 		Head = "Beckoner's Horn +1",
 		Neck = "Incanter's Torque",
@@ -460,7 +460,9 @@ profile.HandleDefault = function()
 	elseif player.Status == "Resting" then
 		gFunc.EquipSet(sets.Resting)
 	else
-		gFunc.EquipSet(sets.Idle)
+		if gcdisplay.GetCycle("craft") == "none" then
+			gFunc.EquipSet(sets.Idle)
+		end
 	end
 
 	if (pet ~= nil) and (pet.Status == "Idle") then

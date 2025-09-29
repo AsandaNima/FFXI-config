@@ -23,7 +23,7 @@ local sets = {
 		--        Legs = "Savage Loincloth",
 		--        Feet = "Seer's pumps",
 	},
-	Resting = {
+	Resting_Priority = {
 		Main = { "Iridal Staff", "Pilgrim's Wand" },
 		Body = "Seer's Tunic",
 		Legs = "Baron's Slops",
@@ -58,9 +58,9 @@ local sets = {
 	},
 	Cure_Precast_Priority = { --fast cast for cure only
 	},
-	Enhancing_Precast = { --fast cast for enhancing
+	Enhancing_Precast = {  --fast cast for enhancing
 	},
-	Stoneskin_Precast = { --stoneskin specific
+	Stoneskin_Precast = {  --stoneskin specific
 	},
 
 	Cure_Priority = { -- MND and cure extra
@@ -226,7 +226,9 @@ profile.HandleDefault = function()
 		Settings.CurrentLevel = myLevel
 	end
 
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 
 	if player.Status == "Engaged" then
 		gFunc.EquipSet(sets.Tp_Default)

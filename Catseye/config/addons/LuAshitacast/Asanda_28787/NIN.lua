@@ -81,16 +81,16 @@ local sets = {
 profile.Sets = sets
 
 profile.Packer = {
-	{ Name = "Toolbag (Ino)", Quantity = "all" },
+	{ Name = "Toolbag (Ino)",   Quantity = "all" },
 	{ Name = "Toolbag (Shika)", Quantity = "all" },
-	{ Name = "Toolbag (Cho)", Quantity = "all" },
+	{ Name = "Toolbag (Cho)",   Quantity = "all" },
 	{ Name = "Toolbag (Shihe)", Quantity = "all" },
-	{ Name = "Shihei", Quantity = "all" },
+	{ Name = "Shihei",          Quantity = "all" },
 	{ Name = "Inoshishinofuda", Quantity = "all" },
-	{ Name = "Chonofuda", Quantity = "all" },
-	{ Name = "Shikanofuda", Quantity = "all" },
-	{ Name = "Forbidden Key", Quantity = "all" },
-	{ Name = "Date Shuriken", Quantity = "all" },
+	{ Name = "Chonofuda",       Quantity = "all" },
+	{ Name = "Shikanofuda",     Quantity = "all" },
+	{ Name = "Forbidden Key",   Quantity = "all" },
+	{ Name = "Date Shuriken",   Quantity = "all" },
 }
 
 profile.OnLoad = function()
@@ -110,7 +110,9 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 	local game = gData.GetEnvironment()
 	local player = gData.GetPlayer()
 	local yonin = gData.GetBuffCount("Yonin")

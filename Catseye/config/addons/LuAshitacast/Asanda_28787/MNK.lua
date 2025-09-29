@@ -6,7 +6,13 @@ local Settings = {
 }
 
 local sets = {
-	Idle = {},
+	Idle = {
+		Head = 'Temple Crown',
+		Body = "Temple Cyclas",
+		Hands = "Temple Gloves",
+		Legs = "Temple Hose",
+		Feet = "Temple Gaiters",
+	},
 	Resting = {},
 	Idle_Regen = {},
 	Idle_Refresh = {},
@@ -21,7 +27,7 @@ local sets = {
 		Ear2 = { "Wilderness Earring", "Pigeon Earring" },
 
 		Body = { "Garrison Tunica +1", "Rambler's Cloak", "Mithran Separates" },
-		Hands = { "Battle Gloves", "Mithran Gauntlets" },
+		Hands = { "Shinobi Tekko", "Battle Gloves", "Mithran Gauntlets" },
 		Ring1 = { "Rajas Ring", "Archer's Ring", "Bastokan Ring" },
 		Ring2 = { "Ulthalam's Ring", "Archer's Ring", "San d'Orian Ring" },
 
@@ -99,7 +105,9 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 	local impetus = gData.GetBuffCount("Impetus")
 	local footwork = gData.GetBuffCount("Footwork")
 

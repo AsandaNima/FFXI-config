@@ -6,7 +6,7 @@ local sets = {
 		Main = "Epeolatry",
 		Sub = "Utu Grip",
 		Ammo = "Staunch Tathlum", --2
-		Head = "Nyame Helm", --7
+		Head = "Nyame Helm",  --7
 		Neck = "Futhark Torque +1", --2 currently
 		Ear1 = "Odnowa Earring +1", --3
 		Ear2 = "Eabani Earring",
@@ -57,7 +57,7 @@ local sets = {
 
 	Dt = {
 		Ammo = "Staunch Tathlum", --2
-		Head = "Nyame Helm", --7
+		Head = "Nyame Helm",  --7
 		Neck = "Futhark Torque +1", --4 currently
 		Ear1 = "Odnowa Earring +1", --3
 		Ear2 = "Eabani Earring",
@@ -150,7 +150,7 @@ local sets = {
 		Main = "Epeolatry",
 		--Sub = 'Refined Grip +1',--3
 		Ammo = "Staunch Tathlum", --2
-		Head = "Nyame Helm", --7
+		Head = "Nyame Helm",  --7
 		Neck = "Futhark Torque +1",
 		Ear1 = "Odnowa Earring +1", --2
 		Ear2 = "Ethereal Earring", --3kinda
@@ -206,7 +206,7 @@ local sets = {
 		Neck = "Baetyl Pendant", -- 4
 		Ear1 = "Loquac. Earring", -- 2
 		Ear2 = "Etiolation Earring", -- 1
-		Body = "Agwu's Robe", -- 8
+		Body = "Agwu's Robe",  -- 8
 		Hands = "Leyline Gloves", -- 6
 		Ring1 = "Prolix Ring", -- 2
 		Ring2 = "Kishar Ring", -- 4
@@ -214,7 +214,7 @@ local sets = {
 		Legs = "Aya. Cosciales +2", -- 6
 		Feet = "Carmine Greaves +1", --7
 	},
-	Precast_Inspiration = { --this set I use for when my 5/5 inspire merits kicking in with val/vall up
+	Precast_Inspiration = {    --this set I use for when my 5/5 inspire merits kicking in with val/vall up
 		Ammo = "Staunch Tathlum",
 		Head = "Nyame Helm",
 		Neck = "Baetyl Pendant",
@@ -232,17 +232,17 @@ local sets = {
 		Ear1 = "Mendi. Earring", -- 5
 	},
 	Enhancing_Precast = {
-		Waist = "Siegel Sash", -- 8
+		Waist = "Siegel Sash",  -- 8
 		Legs = "Futhark Trousers +2", -- 13
 	},
-	SIR = { --10 merits + 90
+	SIR = {                     --10 merits + 90
 		Ammo = "Staunch Tathlum", -- 10
 		Head = "Erilaz Galea +2", -- 15
 		Neck = "Moonlight Necklace", -- 15
 		Hands = "Rawhide Gloves", -- 15
 		Waist = "Audumbla Sash", -- 10
 		Legs = "Carmine Cuisses +1", -- 20
-		Feet = "Taeon Boots", -- 10
+		Feet = "Taeon Boots",   -- 10
 	},
 	Enmity = {
 		Neck = "Unmoving Collar +1",
@@ -264,7 +264,7 @@ local sets = {
 		Legs = "Eri. Leg Guards +1",
 		Feet = "Erilaz Greaves +1",
 	},
-	SIRenmity = { -- Foil and blue spells mostly
+	SIRenmity = {              -- Foil and blue spells mostly
 		Ammo = "Staunch Tathlum", -- 10
 		Head = "Erilaz Galea +2", -- 15
 		Neck = "Moonlight Necklace", -- 15
@@ -286,7 +286,7 @@ local sets = {
 		},
 		Waist = "Audumbla Sash", -- 10
 		Legs = "Carmine Cuisses +1", -- 20
-		Feet = "Taeon Boots", -- 8
+		Feet = "Taeon Boots",  -- 8
 	},
 
 	Cure = {
@@ -486,7 +486,7 @@ local sets = {
 profile.Sets = sets
 
 profile.Packer = {
-	{ Name = "Om. Sandwich", Quantity = "all" },
+	{ Name = "Om. Sandwich",    Quantity = "all" },
 	{ Name = "Black Curry Bun", Quantity = "all" },
 }
 
@@ -507,7 +507,9 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 
 	local player = gData.GetPlayer()
 	if player.Status == "Engaged" then

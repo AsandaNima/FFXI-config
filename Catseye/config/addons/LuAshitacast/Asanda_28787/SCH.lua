@@ -18,7 +18,7 @@ local sets = {
 		Feet = { "Sandals" },
 	},
 	Idle_Staff = {},
-	Resting = {
+	Resting_Priority = {
 		Main = { "Iridal Staff", "Pilgrim's Wand" },
 		Body = "Seer's Tunic",
 		Legs = "Baron's Slops",
@@ -41,8 +41,8 @@ local sets = {
 		Ring2 = { "San d'Orian Ring" },
 
 		Back = { "Mist Silk Cape" },
-		Legs = { "Mithran Loincloth" },
-		Feet = { "Mithran Gaiters" },
+		Legs = { "Garrison Hose +1", "Mithran Loincloth" },
+		Feet = { "Garrison Boots +1", "Mithran Gaiters" },
 	},
 	Tp_Hybrid = {},
 	Tp_Acc = {},
@@ -65,7 +65,7 @@ local sets = {
 		Body = { "Seer's Tunic" },
 		Hands = { "Scholar's Bracers", "Savage gauntlets" },
 		Ring1 = { "Saintly Ring" },
-		Ring2 = { "Saintly Ring" },
+		Ring2 = { "San d'Orian Ring" },
 
 		Waist = { "Friar's rope" },
 		Legs = { "Savage Loincloth" },
@@ -166,7 +166,7 @@ local sets = {
 	Cataclysm_Acc = {},
 
 	Sublimation = {},
-	Power = { --rapture/ebullience
+	Power = {  --rapture/ebullience
 	},
 	Klimaform = { --klimaform dmg boost
 		Main = { "Iridal Staff" },
@@ -201,9 +201,18 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
+	-- handle levelsync
 	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
 	local sub = gData.GetBuffCount("Sublimation: Activated")
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 
 	if player.Status == "Engaged" then
 		gFunc.EquipSet(sets.Tp_Default)
@@ -249,6 +258,15 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	local spell = gData.GetAction()
 
 	gFunc.EquipSet(sets.Precast)
@@ -270,7 +288,14 @@ profile.HandlePrecast = function()
 end
 
 profile.HandleMidcast = function()
+	-- handle levelsync
 	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
 	local weather = gData.GetEnvironment()
 	local spell = gData.GetAction()
 	local target = gData.GetActionTarget()

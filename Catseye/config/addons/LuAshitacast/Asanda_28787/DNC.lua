@@ -57,7 +57,7 @@ local sets = {
 		Ear1 = { "Pigeon Earring", "Optical Earring" },
 		Ear2 = { "Outlaw's Earring", "Pigeon Earring" },
 
-		Body = { "Raptor Jerkin", "Garrison Tunica +1", "Leather Vest", "Mithran Separates" },
+		Body = { "Dino Jerkin", "Garrison Tunica +1", "Leather Vest", "Mithran Separates" },
 		Hands = { "Battle Gloves", "Mithran Gauntlets" },
 		Ring1 = { "Rajas Ring", "Archer's Ring", "Bastokan Ring" },
 		Ring2 = { "Ulthalam's Ring", "Archer's Ring", "San d'Orian Ring" },
@@ -203,7 +203,7 @@ local sets = {
 
 	Waltz_Priority = {
 		Head = { "Dancer's Tiara", "Garrison Sallet +1" },
-		Body = { "Dancer's Casaque", "Raptor Jerkin", "Garrison Tunica +1" },
+		Body = { "Dancer's Casaque", "Dino Jerkin", "Garrison Tunica +1" },
 		Legs = { "Dancer's Tights" },
 		Feet = { "Savage Gaiters" },
 
@@ -262,7 +262,9 @@ profile.HandleDefault = function()
 		Settings.CurrentLevel = myLevel
 	end
 
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 
 	local climactic = gData.GetBuffCount("Climactic Flourish")
 

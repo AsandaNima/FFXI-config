@@ -148,25 +148,25 @@ local sets = {
 		Feet = "Nyame Sollerets",
 	},
 
-	Preshot = { --base preshot, no flurry, 70cap, 10 from gifts
+	Preshot = {                  --base preshot, no flurry, 70cap, 10 from gifts
 		Hands = "Carmine Fin. Ga. +1", --8
 		Ring1 = "Crepuscular Ring", --3
-		Waist = "Impulse Belt", --3
+		Waist = "Impulse Belt",  --3
 		Legs = "Ikenga's Trousers", --8
-		Feet = "Meg. Jam. +2", --10
+		Feet = "Meg. Jam. +2",   --10
 	},
-	Preshot_FlurryI = { --with flurry I on, gives 15, 10 from gifts
+	Preshot_FlurryI = {          --with flurry I on, gives 15, 10 from gifts
 		Hands = "Carmine Fin. Ga. +1", --8
 		Ring1 = "Crepuscular Ring", --3
-		Waist = "Impulse Belt", --3
+		Waist = "Impulse Belt",  --3
 		Legs = "Ikenga's Trousers", --8
-		Feet = "Meg. Jam. +2", --10
+		Feet = "Meg. Jam. +2",   --10
 	},
-	Preshot_FlurryII = { --with flurry II on, gives 30, 10 from gifts
+	Preshot_FlurryII = {         --with flurry II on, gives 30, 10 from gifts
 		Hands = "Carmine Fin. Ga. +1", --8
-		Waist = "Impulse Belt", --3
+		Waist = "Impulse Belt",  --3
 		Legs = "Ikenga's Trousers", --8
-		Feet = "Meg. Jam. +2", --10
+		Feet = "Meg. Jam. +2",   --10
 	},
 	Midshot = {
 		Head = "Malignance Chapeau",
@@ -298,7 +298,7 @@ profile.Sets = sets
 
 profile.Packer = {
 	{ Name = "Decimating Bullet", Quantity = "all" },
-	{ Name = "Dec. Bul. Pouch", Quantity = "all" },
+	{ Name = "Dec. Bul. Pouch",   Quantity = "all" },
 }
 
 profile.OnLoad = function()
@@ -320,7 +320,9 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 
 	local player = gData.GetPlayer()
 	if player.Status == "Engaged" then

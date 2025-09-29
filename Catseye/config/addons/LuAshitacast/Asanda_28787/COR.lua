@@ -78,9 +78,9 @@ profile.Sets = sets
 
 profile.Packer = {
 	{ Name = "Decimating Bullet", Quantity = "all" },
-	{ Name = "Dec. Bul. Pouch", Quantity = "all" },
-	{ Name = "Trump Card", Quantity = "all" },
-	{ Name = "Trump Card Case", Quantity = "all" },
+	{ Name = "Dec. Bul. Pouch",   Quantity = "all" },
+	{ Name = "Trump Card",        Quantity = "all" },
+	{ Name = "Trump Card Case",   Quantity = "all" },
 }
 
 profile.OnLoad = function()
@@ -103,7 +103,9 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 	if gcdisplay.GetToggle("TPgun") == true then
 		gFunc.EquipSet(sets.Idle_TPgun)
 	end

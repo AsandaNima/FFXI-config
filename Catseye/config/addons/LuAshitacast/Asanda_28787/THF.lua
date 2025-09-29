@@ -21,7 +21,7 @@ local sets = {
 		Ear1 = { "Brutal Earring", "Outlaw's Earring", "Pigeon Earring" },
 		Ear2 = { "Suppanomimi", "Pigeon Earring", "Optical Earring" },
 
-		Body = { "Adhemar Jacket", "Garrison Tunica +1", "Leather Vest", "Mithran Separates" },
+		Body = { "Adhemar Jacket", "Dino Jerkin", "Garrison Tunica +1", "Leather Vest", "Mithran Separates" },
 		Hands = { "Adhemar Wristbands", "Battle Gloves", "Mithran Gauntlets" },
 		Ring1 = { "Rajas Ring", "Archer's Ring" },
 		Ring2 = { "Zilant Ring", "Ulthalam's Ring", "Archer's Ring" },
@@ -67,7 +67,7 @@ local sets = {
 		Neck = "Fotia Gorget",
 		Ear2 = "Outlaw's Earring",
 
-		Body = "Adhemar Jacket",
+		Body = "Dino Jerkin",
 		Hands = "Adhemar Wristbands",
 		Ring1 = "Rajas Ring",
 		Ring2 = "Zilant Ring",
@@ -85,7 +85,7 @@ local sets = {
 		Neck = "Fotia Gorget",
 		Ear2 = "Outlaw's Earring",
 
-		Body = "Adhemar Jacket",
+		Body = "Dino Jerkin",
 		Hands = "Adhemar Wristbands",
 		Ring1 = "Rajas Ring",
 		Ring2 = "Zilant Ring",
@@ -125,8 +125,32 @@ local sets = {
 	Exent_Acc_SA = {},
 	Exent_Acc_TA = {},
 	Exent_Acc_SATA = {},
-	SATA_Priority = {},
-	SA_Priority = {},
+	SATA_Priority = {
+		Head = "Adhemar Bonnet",
+		Neck = "Fotia Gorget",
+		Ear2 = "Outlaw's Earring",
+		Body = "Dino Jerkin",
+		Hands = "Adhemar Wristbands",
+		Ring1 = "Rajas Ring",
+		Ring2 = "Zilant Ring",
+		Back = "Assassin's Cape",
+		Waist = "Warwolf Belt",
+		Legs = "Adhemar Kecks",
+		Feet = "Adhemar Gamashes",
+	},
+	SA_Priority = {
+		Head = "Adhemar Bonnet",
+		Neck = "Fotia Gorget",
+		Ear2 = "Outlaw's Earring",
+		Body = "Dino Jerkin",
+		Hands = "Adhemar Wristbands",
+		Ring1 = "Rajas Ring",
+		Ring2 = "Zilant Ring",
+		Back = "Assassin's Cape",
+		Waist = "Warwolf Belt",
+		Legs = "Adhemar Kecks",
+		Feet = "Adhemar Gamashes",
+	},
 	TA_Priority = {},
 	TH = {},
 	Flee = {
@@ -192,7 +216,9 @@ profile.HandleDefault = function()
 		gcinclude.settings.CurrentLevel = myLevel -- set CurrentLevel in gcinclude
 	end
 
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 	local sa = gData.GetBuffCount("Sneak Attack")
 	local ta = gData.GetBuffCount("Trick Attack")
 

@@ -15,9 +15,10 @@ local sets = {
 	Dt_Priority = {},
 
 	Tp_Default_Priority = {
-		Head = { "Tlahtlamah Glasses" },
+		Head = { "Entrancing Ribbon", "Tlahtlamah Glasses" },
 		Neck = { "Armiger's Lace" },
 		Ear1 = { "Optical Earring" },
+		Ear2 = { "Wilderness Earring" },
 
 		Body = { "Leather Vest", "Fisherman's Smock" },
 		Hands = { "Mithran Gauntlets" },
@@ -25,7 +26,7 @@ local sets = {
 		Ring2 = { "San d'Orian Ring" },
 
 		Waist = { "Leather Belt" },
-		Legs = { "Mithran Loincloth" },
+		Legs = { "Herder's Subligar", "Mithran Loincloth" },
 		Feet = { "Leaping Boots", "Mithran Gaiters" },
 	},
 	Tp_Hybrid_Priority = {},
@@ -99,7 +100,9 @@ profile.HandleDefault = function()
 		gcinclude.settings.CurrentLevel = myLevel -- set CurrentLevel in gcinclude
 	end
 
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 
 	if player.Status == "Engaged" then
 		gFunc.EquipSet(sets.Tp_Default)

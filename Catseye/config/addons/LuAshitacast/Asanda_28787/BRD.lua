@@ -105,7 +105,7 @@ local sets = {
 		Ring2 = "Chirich Ring +1",
 	},
 
-	Precast = { --74
+	Precast = {                            --74
 		Main = { Name = "Kali", AugPath = "C" }, --7
 		Sub = "Genmei Shield",
 		Range = { Name = "Gjallarhorn", AugTrial = 3591 },
@@ -143,7 +143,7 @@ local sets = {
 		Head = "Umuthi Hat",
 		Waist = "Siegel Sash",
 	},
-	Song_Precast = { --87
+	Song_Precast = {   --87
 		Main = "Bihu Knife", --20
 		Sub = "Genmei Shield",
 		Range = { Name = "Gjallarhorn", AugTrial = 3591 },
@@ -171,7 +171,7 @@ local sets = {
 		Feet = "Volte Gaiters", --6
 	},
 
-	Cure = { --I cap is 50, II cap is 30
+	Cure = {            --I cap is 50, II cap is 30
 		Main = "Bunzi's Rod", --I 30
 		Sub = "Ammurapi Shield",
 		Ammo = "Pemphredo Tathlum",
@@ -185,7 +185,7 @@ local sets = {
 		Waist = "Rumination Sash",
 		Feet = "Vanya Clogs", --I 10
 	},
-	Self_Cure = { --cap 30
+	Self_Cure = {       --cap 30
 		Waist = "Gishdubar Sash",
 	},
 	Regen = {
@@ -268,7 +268,7 @@ local sets = {
 		Legs = "Brioso Cannions +2",
 		Feet = "Brioso Slippers +3",
 	},
-	Harp = { --use /forcestring in game to lock this on all songs, I personally just use Paeons
+	Harp = {           --use /forcestring in game to lock this on all songs, I personally just use Paeons
 		Range = "Daurdabla", -- This should be ur extra song harp, whichever you use
 	},
 	Foe = {
@@ -470,7 +470,9 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
-	gFunc.EquipSet(sets.Idle)
+	if gcdisplay.GetCycle("craft") == "none" then
+		gFunc.EquipSet(sets.Idle)
+	end
 
 	local player = gData.GetPlayer()
 	if player.Status == "Engaged" then

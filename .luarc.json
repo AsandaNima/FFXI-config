@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "workspace.library": ["/home/master/Documents/git/FFXI config"],
+  "runtime.version": "Lua 5.3",
+  "diagnostics.disable": ["undefined-global"],
+    "diagnostics.globals": [
+        "gcinclude"
+    ]
+}

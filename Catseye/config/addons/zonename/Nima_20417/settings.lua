@@ -9,10 +9,10 @@ settings["color"] = 4294956800;
 settings["visible"] = true;
 settings["background"]["visible"] = false;
 settings["background"]["color"] = 2147483648;
-settings["padding"] = 0.10000000000000001;
+settings["italic"] = false;
 settings["position_x"] = 1920;
 settings["color_outline"] = 16811;
 settings["position_y"] = 1080;
-settings["italic"] = false;
+settings["padding"] = 0.10000000000000001;
 
 return settings;
