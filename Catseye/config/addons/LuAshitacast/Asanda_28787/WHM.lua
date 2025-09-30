@@ -6,22 +6,16 @@ local Settings = {
 }
 
 local sets = {
-	Idle = {
+	Idle_Priority = {
 		Main = "Earth Staff",
-		--        Main = "Yew Wand +1",
-		--        Sub = "Genmei Shield",
-		--        Ammo = "Staunch Tathlum",
-		--        Head = "Brass Hairpin",
-		--        Neck = "Justice Badge",
+		Head = { "Gambler's Chapeau" },
 		Ear1 = { "Pigeon Earring" },
 		Ear2 = { "Pigeon Earring" },
-		--        Body = "Seer's Tunic",
-		--        Hands = "Savage Gauntlets",
-		--        Ring1 = "Stikini Ring +1",
-		--        Ring2 = { Name = "Metamor. Ring +1", AugPath="A" },
-		--        Waist = "Friar's rope",
-		--        Legs = "Savage Loincloth",
-		--        Feet = "Seer's pumps",
+		Ring1 = { "Serket Ring" },
+		Ring2 = { "Mana Ring" },
+		Hands = { "Savage Gauntlets", "Garrison gloves +1" },
+		Legs = { "Savage Loincloth", "Seer's Slacks" },
+		Feet = { "Sandals" },
 	},
 	Resting_Priority = {
 		Main = { "Iridal Staff", "Pilgrim's Wand" },
@@ -35,19 +29,20 @@ local sets = {
 	Dt = {},
 
 	Tp_Default_Priority = {
-		Head = { "Cmp. Eye Circlet" },
-		Neck = { "Pile Chain" },
+		Head = { "Empress hairpin", "Cmp. Eye Circlet" },
+		Neck = { "Peacock Charm", "Pile Chain" },
 		Ear1 = { "Pigeon Earring", "Optical Earring" },
 		Ear2 = { "Pigeon Earring" },
 
-		Body = { "Robe", "Mithran Separates" },
-		Hands = { "Linen Cuffs", "Gloves", "Mithran Gauntlets" },
-		Ring1 = { "Bastokan Ring" },
-		Ring2 = { "San d'Orian Ring" },
+		Body = { "Robe", "Rambler's Cloak", "Mithran Separates" },
+		Hands = { "Black mitts", "Linen Cuffs", "Gloves", "Mithran Gauntlets" },
+		Ring1 = { "Rajas Ring", "Archer's Ring", "Bastokan Ring" },
+		Ring2 = { "Zilant Ring", "Ulthalam's Ring", "Archer's Ring", "San d'Orian Ring" },
 
 		Back = { "Mist Silk Cape" },
-		Legs = { "Mithran Loincloth" },
-		Feet = { "Mithran Gaiters" },
+		Waist = { "Ninurta's Sash", "Virtuoso Belt", "Tilt Belt", "Leather Belt" },
+		Legs = { "White Slacks", "Garrison Hose +1", "Mithran Loincloth" },
+		Feet = { "Garrison Boots +1", "Mithran Gaiters" },
 	},
 	Tp_Hybrid_Priority = {},
 	Tp_Acc_Priority = {},

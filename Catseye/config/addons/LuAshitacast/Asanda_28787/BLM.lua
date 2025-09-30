@@ -30,18 +30,19 @@ local sets = {
 	Dt = {},
 
 	Tp_Default_Priority = {
-		Head = { "Cmp. Eye Circlet" },
-		Neck = { "Pile Chain" },
+		Head = { "Empress hairpin", "Cmp. Eye Circlet" },
+		Neck = { "Peacock Charm", "Pile Chain" },
 		Ear1 = { "Pigeon Earring", "Optical Earring" },
 		Ear2 = { "Pigeon Earring" },
 
 		Body = { "Robe", "Rambler's Cloak", "Mithran Separates" },
-		Hands = { "Linen Cuffs", "Gloves", "Mithran Gauntlets" },
-		Ring1 = { "Bastokan Ring" },
-		Ring2 = { "San d'Orian Ring" },
+		Hands = { "Black mitts", "Linen Cuffs", "Gloves", "Mithran Gauntlets" },
+		Ring1 = { "Rajas Ring", "Archer's Ring", "Bastokan Ring" },
+		Ring2 = { "Zilant Ring", "Ulthalam's Ring", "Archer's Ring", "San d'Orian Ring" },
 
 		Back = { "Mist Silk Cape" },
-		Legs = { "Garrison Hose +1", "Mithran Loincloth" },
+		Waist = { "Ninurta's Sash", "Virtuoso Belt", "Tilt Belt", "Leather Belt" },
+		Legs = { "White Slacks", "Garrison Hose +1", "Mithran Loincloth" },
 		Feet = { "Garrison Boots +1", "Mithran Gaiters" },
 	},
 	Tp_Hybrid = {},

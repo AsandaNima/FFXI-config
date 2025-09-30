@@ -12,13 +12,13 @@ settings["enable_audio"] = true;
 settings["show_gui"] = true;
 settings["hide_sorting_text"] = false;
 settings["show_config_gui"] = false;
-settings["selected_sound"] = 1;
+settings["sort_ascending"] = false;
 settings["stopped_indicator"] = "x";
-settings["completion_label"] = "Completion";
+settings["selected_sound"] = 1;
 settings["audio_alert_threshold"] = 100;
 settings["slow_indicator"] = "=";
 settings["sort_by"] = "completion";
 settings["debug"] = false;
-settings["sort_ascending"] = false;
+settings["completion_label"] = "Completion";
 
 return settings;

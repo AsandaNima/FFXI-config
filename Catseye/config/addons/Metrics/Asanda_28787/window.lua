@@ -6,7 +6,7 @@ settings["Hub_X"] = 100;
 settings["Config_Y"] = 100;
 settings["Window_Scaling"] = 1;
 settings["Screenshot_X"] = 100;
-settings["Active_Window"] = "Settings";
+settings["Y_Pos"] = 52;
 settings["Config_Window_Visible"][1] = false;
 settings["Show_Mouse"] = false;
 settings["Style"] = 0;
@@ -16,7 +16,7 @@ settings["Hub_Y"] = 100;
 settings["Screenshot_Y"] = 100;
 settings["Config_X"] = 100;
 settings["X_Pos"] = 2777;
-settings["Y_Pos"] = 52;
+settings["Active_Window"] = "Settings";
 settings["Multi_Window"] = false;
 
 return settings;

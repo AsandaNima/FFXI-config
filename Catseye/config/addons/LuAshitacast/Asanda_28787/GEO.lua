@@ -224,7 +224,14 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
+	-- handle levelsync
 	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
 	local pet = gData.GetPet()
 
 	if gcdisplay.GetCycle("craft") == "none" then
@@ -282,6 +289,15 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	local spell = gData.GetAction()
 
 	gFunc.EquipSet(sets.Precast)
@@ -300,7 +316,14 @@ profile.HandlePrecast = function()
 end
 
 profile.HandleMidcast = function()
+	-- handle levelsync
 	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
 	local weather = gData.GetEnvironment()
 	local spell = gData.GetAction()
 	local target = gData.GetActionTarget()
