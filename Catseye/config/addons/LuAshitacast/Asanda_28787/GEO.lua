@@ -14,7 +14,7 @@ local sets = {
 
 		Hands = { "Savage Gauntlets", "Garrison gloves +1" },
 		Legs = { "Savage Loincloth", "Seer's Slacks" },
-		Feet = { "Sandals" },
+		Feet = { "Geomancy Sandals", "Sandals" },
 	},
 	Idle_Staff = {},
 	Resting_Priority = {
@@ -197,7 +197,7 @@ local sets = {
 	TH = { --/th will force this set to equip for 10 seconds
 	},
 	Movement = {
-		Body = "Kupo Suit",
+		Feet = "Geomancy Sandals",
 	},
 }
 profile.Sets = sets

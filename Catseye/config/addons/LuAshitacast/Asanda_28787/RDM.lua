@@ -8,13 +8,14 @@ local Settings = {
 local sets = {
 	Idle_Priority = {
 		Main = "Earth Staff",
-		Head = { "Gambler's Chapeau" },
+		Head = { "Warlock's Chapeau", "Gambler's Chapeau" },
 		Ear1 = { "Pigeon Earring" },
 		Ear2 = { "Pigeon Earring" },
 
-		Hands = { "Savage Gauntlets", "Garrison gloves +1" },
-		Legs = { "Savage Loincloth" },
-		Feet = { "Sandals" },
+		Body = { "Warlock's Tabard" },
+		Hands = { "Warlock's Gloves", "Savage Gauntlets", "Garrison gloves +1" },
+		Legs = { "Warlock's Tights", "Savage Loincloth" },
+		Feet = { "Warlock's Boots", "Sandals" },
 	},
 	Resting_Priority = {
 		Main = { "Iridal Staff", "Pilgrim's Wand" },

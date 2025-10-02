@@ -91,6 +91,7 @@ local sets = {
 		Head = "Thurandaut Chapeau",
 		Hands = "Thurandaut Gloves",
 		Waist = { "Ninurta's Sash" },
+		Legs = { "White Slacks" },
 	},
 
 	Enhancing = {},
@@ -140,10 +141,12 @@ local sets = {
 	Pet_WS_Priority = {
 		Head = { "Entrancing Ribbon" },
 		Ear2 = "Wilderness Earring",
+		Hands = { "Black Mitts" },
 		Legs = { "Herder's Subligar" },
 		Back = "Pantin Cape",
 	},
 	Pet_RNGWS_Priority = {
+		Hands = { "Black Mitts" },
 		Legs = "Seer's Slacks",
 	},
 

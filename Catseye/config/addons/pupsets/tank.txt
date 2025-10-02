@@ -3,7 +3,7 @@ Valoredge Frame
 Strobe
 Tension Spring
 Armor Plate II
-Auto-Repair Kit III
+Magniplug
 Schurzen
 Accelerator
 Shock Absorber
@@ -11,4 +11,4 @@ Inhibitor
 Optic Fiber
 Stabilizer
 Flame Holder
-Magniplug
+Auto-Repair Kit III

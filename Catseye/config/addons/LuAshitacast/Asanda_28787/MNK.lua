@@ -26,7 +26,7 @@ local sets = {
 		Ear1 = { "Brutal earring", "Outlaw's Earring", "Pigeon Earring", "Optical Earring" },
 		Ear2 = { "Wilderness Earring", "Pigeon Earring" },
 
-		Body = { "Garrison Tunica +1", "Rambler's Cloak", "Mithran Separates" },
+		Body = { "Shinobi Gi", "Garrison Tunica +1", "Rambler's Cloak", "Mithran Separates" },
 		Hands = { "Shinobi Tekko", "Battle Gloves", "Mithran Gauntlets" },
 		Ring1 = { "Rajas Ring", "Archer's Ring", "Bastokan Ring" },
 		Ring2 = { "Ulthalam's Ring", "Archer's Ring", "San d'Orian Ring" },
