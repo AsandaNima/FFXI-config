@@ -8,6 +8,7 @@ local Settings = {
 local sets = {
 	Idle_Priority = {
 		Main = "Earth Staff",
+		Sub = { { Name = "Neph. Grip", Level = 51 } },
 		Head = { "Gambler's Chapeau" },
 		Ear1 = { "Pigeon Earring" },
 		Ear2 = { "Pigeon Earring" },
@@ -19,18 +20,20 @@ local sets = {
 	},
 	Idle_Staff = {},
 	Resting_Priority = {
-		Main = { "Iridal Staff", "Pilgrim's Wand" },
+		Main = { "Chatoyant Staff", "Pilgrim's Wand" },
 		Body = "Seer's Tunic",
 		Legs = "Baron's Slops",
 	},
 	Idle_Regen = {},
-	Idle_Refresh = {},
+	Idle_Refresh = {
+		Body = { "Royal cloak" },
+	},
 	Town = {},
 
 	Dt = {},
 
 	Tp_Default_Priority = {
-		Head = { "Empress hairpin", "Cmp. Eye Circlet" },
+		Head = { "Empress hairpin", "Fungus Hat", "Cmp. Eye Circlet" },
 		Neck = { "Peacock Charm", "Pile Chain" },
 		Ear1 = { "Pigeon Earring", "Optical Earring" },
 		Ear2 = { "Pigeon Earring" },
@@ -49,7 +52,8 @@ local sets = {
 	Tp_Acc = {},
 
 	Precast_Priority = { --fast cast prio
-		Head = { "Entrancing Ribbon" },
+		Head = { "Optical Hat", "Heroic Hairpin", "Entrancing Ribbon", "Fungus Hat" },
+		Waist = { "Swift Belt" },
 		Legs = { "Garrison Hose +1" },
 	},
 	Cure_Precast = {},
@@ -89,9 +93,9 @@ local sets = {
 	},
 	Self_Enhancing = {},
 	Skill_Enhancing = {},
-	Stoneskin = {
+	Stoneskin_Priority = {
 		Head = { "Seer's Crown", "Garrison Sallet +1" },
-		Neck = { "Justice Badge" },
+		Neck = { "Stone Gorget", "Justice Badge" },
 
 		Body = { "Seer's Tunic" },
 		Hands = { "Savage gauntlets" },
@@ -120,29 +124,37 @@ local sets = {
 		Feet = { "Seer's Pumps" },
 	},
 
-	Drain = {},
+	Drain = {
+		Hands = "Vampiric Mitts",
+		Feet = "Vampiric Boots",
+	},
 
 	Nuke_Priority = {
-		Main = { "Iridal Staff" },
-		Head = { "Gambler's Chapeau" },
-		Body = { "Seer's Tunic" },
+		Ammo = { "Morion Tathlum" },
+		Main = { "Chatoyant Staff" },
+		Head = { "Gambler's Chapeau", "Fungus Hat" },
+		Ear1 = { "Moldavite Earring", "Morion Earring" },
+		Ear2 = { "Morion Earring" },
+		Body = { "Illusionist's Garb", "Seer's Tunic" },
 		Hands = { "Garrison Gloves +1" },
-		Ring1 = { "Windurstian Ring" },
-		Ring2 = { "Hermit's Ring" },
+		Ring1 = { "Tamas Ring", "Eremite's Ring", "Windurstian Ring" },
+		Ring2 = { "Eremite's Ring" },
+		Back = { "Black Cape +1", "Bronze Cape" },
+		Waist = { "Mrc.Cpt. Belt" },
 		Legs = { "Seer's Slacks" },
 		Feet = { "Garrison boots +1" },
 	},
 	NukeACC = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 	},
 	Burst = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 	},
 	Helix = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 	},
 	HelixBurst = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 	},
 	Storm = {},
 	Kaustra = { --need to refine this set
@@ -172,6 +184,9 @@ local sets = {
 	Movement = {
 		Body = "Kupo Suit",
 	},
+	Relic = {},
+	Artifact = {},
+
 }
 
 profile.Sets = sets
@@ -209,11 +224,6 @@ profile.HandleDefault = function()
 		Settings.CurrentLevel = myLevel
 	end
 
-	-- 	local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel()
-	if myLevel ~= Settings.CurrentLevel then
-		gFunc.EvaluateLevels(profile.Sets, myLevel)
-		Settings.CurrentLevel = myLevel
-	end
 
 	if (gcdisplay.GetToggle("Death") == true) and (player.MPP > 50) then
 		gFunc.EquipSet(sets.Death)

@@ -49,48 +49,48 @@
 <!-- General DI Drops End -->
 
 <!-- Colkhab Specific Drops Start -->
-<item id="20820">pass</item> <!-- Hatxliik -->
-<item id="20958">pass</item> <!-- Kuakuakait -->
-<item id="20992">pass</item> <!-- Taikogane -->
+<item id="20820">lot</item> <!-- Hatxliik -->
+<item id="20958">lot</item> <!-- Kuakuakait -->
+<item id="20992">lot</item> <!-- Taikogane -->
 <item id="3980">lot</item> <!-- Bztavian Stinger -->
 <!-- Colkhab Specific Drops End -->
 
 <!-- Tchakka Specific Drops Start -->
-<item id="20630">pass</item> <!-- Atoyac -->
-<item id="21047">pass</item> <!-- Azukinagamitsu -->
-<item id="21253">pass</item> <!-- Atetepeyorg -->
+<item id="20630">lot</item> <!-- Atoyac -->
+<item id="21047">lot</item> <!-- Azukinagamitsu -->
+<item id="21253">lot</item> <!-- Atetepeyorg -->
 <item id="3979">lot</item> <!-- Rockfin Tooth -->
 <!-- Tchakka Specific Drops End -->
 
 <!-- Achuka Specific Drops Start -->
-<item id="20543">pass</item> <!-- Maochinoli -->
-<item id="20731">pass</item> <!-- Xiutleato -->
+<item id="20543">lot</item> <!-- Maochinoli -->
+<item id="20731">lot</item> <!-- Xiutleato -->
 <item id="3977">lot</item> <!-- Gabbrath Horn -->
 <!-- Achuka Specific Drops End -->
 
 <!-- Yumcox Specific Drops Start -->
-<item id="20872">pass</item> <!-- Ixtab -->
-<item id="21125">pass</item> <!-- Tamaxchi -->
+<item id="20872">lot</item> <!-- Ixtab -->
+<item id="21125">lot</item> <!-- Tamaxchi -->
 <item id="4014">lot</item> <!-- Yggdreant Bole -->
 <!-- Yumcox Specific Drops End -->
 
 <!-- Hurkan Specific Drops Start -->
-<item id="21334">pass</item> <!-- Animikii Bullet -->
-<item id="20826">pass</item> <!-- Hunahpu -->
-<item id="20768">pass</item> <!-- Kaquljaan -->
-<item id="20917">pass</item> <!-- Xbalanque -->
+<item id="21334">lot</item> <!-- Animikii Bullet -->
+<item id="20826">lot</item> <!-- Hunahpu -->
+<item id="20768">lot</item> <!-- Kaquljaan -->
+<item id="20917">lot</item> <!-- Xbalanque -->
 <item id="4012">lot</item> <!-- Waktza Rostrum -->
 <!-- Hurkan Specific Drops End -->
 
 <!-- Kumhau Specific Drops Start -->
-<item id="21233">pass</item> <!-- Ajjub Bow -->
-<item id="21463">pass</item> <!-- Nepote Bell -->
-<item id="21186">pass</item> <!-- Baqil Staff -->
+<item id="21233">lot</item> <!-- Ajjub Bow -->
+<item id="21463">lot</item> <!-- Nepote Bell -->
+<item id="21186">lot</item> <!-- Baqil Staff -->
 <item id="8752">lot</item> <!-- Cehuetzi Claw -->
 <!-- Kumhau Specific Drops End -->
 
 <!-- Helga Specific Drops Start -->
-<item id="10151">pass</item> <!-- Cipher: Mayakov -->
+<item id="10151">lot</item> <!-- Cipher: Mayakov -->
 <!--<item id="">lot</item> <!-- Cipher: Matsui-P I don't have an item ID for this cipher-->
 
 </itemlist>

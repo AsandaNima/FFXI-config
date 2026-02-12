@@ -2,13 +2,13 @@ Sharpshot Head
 Sharpshot Frame
 Tension Spring
 Inhibitor
-Flame Holder
-Magniplug
-Armor Plate II
-Turbo Charger
+Tension Spring III
+Drum Magazine
+Auto-Repair Kit III
+Barrage Turbine
 Scope
-Accelerator
+Repeater
 Optic Fiber
 Dynamo
 Stealth Screen
-Auto-Repair Kit III
+Magniplug

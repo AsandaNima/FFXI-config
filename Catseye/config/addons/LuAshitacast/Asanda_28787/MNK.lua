@@ -14,48 +14,56 @@ local sets = {
 		Feet = "Temple Gaiters",
 	},
 	Resting = {},
-	Idle_Regen = {},
+	Idle_Regen_Priority = {
+		Body = { "Scorpion Harness" },
+	},
 	Idle_Refresh = {},
 	Town = {},
 
 	Dt_Priority = {},
 
 	Tp_Default_Priority = {
-		Head = { "Empress Hairpin", "Garrison Sallet +1" },
+		Head = { "Empress Hairpin", "Garrison Sallet +1", "Fungus Hat" },
 		Neck = { "Peacock Charm", "Spike Necklace", "Pile Chain" },
 		Ear1 = { "Brutal earring", "Outlaw's Earring", "Pigeon Earring", "Optical Earring" },
-		Ear2 = { "Wilderness Earring", "Pigeon Earring" },
+		Ear2 = { "Wilder. Earring +1", "Pigeon Earring" },
 
-		Body = { "Shinobi Gi", "Garrison Tunica +1", "Rambler's Cloak", "Mithran Separates" },
-		Hands = { "Shinobi Tekko", "Battle Gloves", "Mithran Gauntlets" },
+		Body = { "Scorpion Harness", "Shinobi Gi", "Garish Tunic", "Garrison Tunica +1", "Rambler's Cloak", "Mithran Separates" },
+		Hands = { "Shinobi Tekko +1", "Battle Gloves", "Mithran Gauntlets" },
 		Ring1 = { "Rajas Ring", "Archer's Ring", "Bastokan Ring" },
 		Ring2 = { "Ulthalam's Ring", "Archer's Ring", "San d'Orian Ring" },
 
-		Back = { "Exile's Cloak", "Ram Mantle", "Traveler's Mantle" },
-		Waist = { "Ninurta's Sash", "Virtuoso Belt", "Tilt Belt", "Purple Belt", "Lizard Belt", "Leather Belt" },
-		Legs = { "Shinobi Hakama", "Garrison Hose +1", "Mithran Loincloth" },
-		Feet = { "Savage Gaiters", "Garrison Boots +1", "Mithran Gaiters" },
+		Back = { "Bruiser's Cloak", "Traveler's Mantle" },
+		Waist = { "Ninurta's Sash", "Brown Belt", "Purple Belt", "Lizard Belt", "Leather Belt" },
+		Legs = { "Shinobi Hakama", "Garish Slacks", "Garrison Hose +1", "Mithran Loincloth" },
+		Feet = { "Fuma Kyahan", "Savage Gaiters", "Garish Pumps", "Garrison Boots +1", "Mithran Gaiters" },
 	},
 	Tp_Hybrid_Priority = {},
-	Tp_Acc_Priority = {},
+	Tp_Acc_Priority = {
+		Waist = { "Ninurta's Sash", "Virtuoso Belt", "Purple Belt", "Lizard Belt", "Leather Belt" },
+	},
 
-	Precast = {},
+	Precast = {
+		Feet = "Fuma Kyahan",
+	},
 
 	Preshot = {},
 	Midshot = {},
 
 	Ws_Default_Priority = {
+		Head = { "Empress Hairpin" },
 		Neck = { "Fotia Gorget", "Spike Necklace" },
 		Ear1 = "Ethereal Earring", -- +5attk
 		Ear2 = "Aesir Ear Pendant", -- +7attk
 
-		Body = { "Savage Separates" },
+		Body = { "Garrison Tunica +1" },
+		Hands = { "Ochiudo's Kote" },
 		Ring1 = "Rajas Ring", -- +5dex +5str +5tp +5subtle
-		Ring2 = "Archer's Ring",
 
-		Back = { "Pantin Cape", "Exile's Cloak" },
-		Legs = { "Shinobi Hakama", "Garrison Hose +1" },
-		Waist = "Virtuoso Belt",
+		Back = { "Amemet Mantle +1", "Exile's Cloak" },
+		Waist = { "Warwolf Belt", "Virtuoso Belt", "Lizard belt" },
+		Legs = { "Garrison Hose +1" },
+		Feet = { "Savage Gaiters", "Garish Pumps" },
 	},
 	Ws_Hybrid = {},
 	Ws_Acc = {},
@@ -70,9 +78,22 @@ local sets = {
 	Shijin_Acc = {},
 
 	Impetus = {},
-	Focus = {},
-	Dodge = {},
-	Chakra = {},
+	Focus_Priority = {},
+	Dodge_Priority = {},
+	ChiBlast_Priority = { -- MND
+		Head = { "Garrison Sallet +1" },
+		Neck = { "Justice Badge" },
+		Body = { "Shade Harness" },
+		Hands = { "Savage Gauntlets" },
+		Legs = { "Savage Loincloth" },
+		Feet = { "Garrison Boots +1" },
+	},
+	Chakra_Priority = { -- VIT
+		Body = { "Shade Harness" },
+		Hands = { "Savage Gauntlets", "Garrison Gloves +1" },
+		Legs = { "Savage Loincloth" },
+		Waist = { "Warwolf Belt" },
+	},
 	FootworkJA = {},
 	Footwork = {},
 	HundredFists = {},
@@ -81,6 +102,9 @@ local sets = {
 
 	TH = {},
 	Movement = {},
+	Relic = {},
+	Artifact = {},
+
 }
 profile.Sets = sets
 
@@ -159,6 +183,8 @@ profile.HandleAbility = function()
 		gFunc.EquipSet(sets.Dodge)
 	elseif string.match(ability.Name, "Hundred Fists") then
 		gFunc.EquipSet(sets.HundredFists)
+	elseif string.match(ability.Name, "Chi Blast") then
+		gFunc.EquipSet(sets.ChiBlast)
 	elseif string.match(ability.Name, "Chakra") then
 		gFunc.EquipSet(sets.Chakra)
 	elseif string.match(ability.Name, "Footwork") then

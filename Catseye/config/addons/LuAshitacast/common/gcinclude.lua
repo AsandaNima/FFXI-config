@@ -7,109 +7,122 @@ These are universal sets for things like doomed or asleep; avoid main/sub/range/
 The second section is a couple basic settings to decide on whether or not to use you the automatic equiping function of idle regen, idle refresh, DT gear etc.
 More details in each section.
 ]]
+gcinclude.CasterJob = T({
+	"BLM",
+	"RDM",
+	"SCH",
+	"SMN",
+	"WHM",
+	"DRK",
+	"RUN",
+	"PLD",
+	"BLU",
+	"GEO",
+})
 gcinclude.sets = T({
 	alchemy = {
 		Main = "Caduceus",
 		Sub = "Kupo Shield",
 
 		Head = "Midras's Helm +1",
-		Neck = "Alchemist's Torque",
+		Neck = "Artisan's Torque",
 
 		Body = "Alchemist's Apron",
 		Ring1 = "Artificer's Ring",
 
-		Back = "Bonze Cape",
+		Back = "Shaper's Shawl",
 	},
 	bonecraft = {
 		Sub = "Kupo Shield",
 
-		Head = "Midras's Helm +1",
-		Neck = "Boneworker's Torque",
+		Head = "Protective Specs.",
+		Neck = "Artisan's Torque",
 
-		Body = "Boneworker's Apron",
+		Body = "Bonewrk. Smock",
 		Ring1 = "Artificer's Ring",
 
-		Back = "Bonze Cape",
+		Back = "Shaper's Shawl",
 	},
 	clothcraft = {
 		Sub = "Kupo Shield",
 
 		Head = "Midras's Helm +1",
-		Neck = "Weaver's Torque",
+		Neck = "Artisan's Torque",
 
-		Body = "Weaver's Apron",
+		Body = "Weaver's Smock",
 		Ring1 = "Artificer's Ring",
 
-		Back = "Bonze Cape",
+		Back = "Shaper's Shawl",
 	},
 	cooking = {
 		Main = "Debahocho +1",
 		Sub = "Kupo Shield",
 
 		Head = "Midras's Helm +1",
-		Neck = "Culinarian's Torque",
+		Neck = "Artisan's Torque",
 
 		Body = "Culinarian's Apron",
 		Ring1 = "Artificer's Ring",
 
-		Back = "Bonze Cape",
+		Back = "Shaper's Shawl",
 	},
 	goldsmith = {
 		Sub = "Kupo Shield",
 
 		Head = "Midras's Helm +1",
-		Neck = "Goldsmith's Torque",
+		Neck = "Artisan's Torque",
 
-		Body = "Goldsmith's Apron",
+		Body = "Goldsmith's Smock",
 		Ring1 = "Artificer's Ring",
 
-		Back = "Bonze Cape",
+		Back = "Shaper's Shawl",
 	},
 	leathercraft = {
 		Sub = "Kupo Shield",
 
 		Head = "Midras's Helm +1",
-		Neck = "Tanner's Torque",
+		Neck = "Artisan's Torque",
 
 		Body = "Tanner's Apron",
 		Hands = "Tanner's Gloves",
 		Ring1 = "Artificer's Ring",
 
-		Back = "Bonze Cape",
+		Back = "Shaper's Shawl",
 	},
 	smithing = {
 		Sub = "Kupo Shield",
 
 		Head = "Midras's Helm +1",
-		Neck = "Smithy's Torque",
+		Neck = "Artisan's Torque",
 
-		Body = "Blacksmith's Apron",
+		Body = "Blksmith. Smock",
 		Hands = "Smithy's Mitts",
 		Ring1 = "Artificer's Ring",
 
-		Back = "Bonze Cape",
+		Back = "Shaper's Shawl",
 	},
 	woodworking = {
 		Sub = "Kupo Shield",
 
 		Head = "Midras's Helm +1",
-		Neck = "Carver's Torque",
+		Neck = "Artisan's Torque",
 
 		Body = "Carpenter's Apron",
 		Hands = "Carpenter's Gloves",
 		Ring1 = "Artificer's Ring",
 
-		Back = "Bonze Cape",
+		Back = "Shaper's Shawl",
 	},
 	fishing = {
 		Range = "Lu Shang's F. Rod",
 
 		Head = "Tlahtlamah Glasses",
+		Neck = "Fisher's Torque",
 
 		Body = "Fisherman's Smock",
-		Hands = "Fsh. Gloves",
+		Hands = "Mariner's Gloves +1",
 
-		Legs = "Fisherman's Hose",
+		Legs = "Mariner's Hose +1",
 		Feet = "Fisherman's Boots",
 	},
 	mining = {
@@ -117,33 +130,36 @@ gcinclude.sets = T({
 		Neck = "Field Torque",
 
 		Body = "Plain Tunica",
-		Hands = "Plain Gloves",
+		Hands = "Plain Gloves +1",
 
 		Waist = "Field Rope",
 		Legs = "Plain Hose",
-		Feet = "Plain Boots",
+		Feet = "Plain Boots +1",
 	},
 	logging = {
 		Head = "Miner's Helmet",
 		Neck = "Field Torque",
 
 		Body = "Plain Tunica",
-		Hands = "Plain Gloves",
+		Hands = "Plain Gloves +1",
 
 		Waist = "Field Rope",
 		Legs = "Plain Hose",
-		Feet = "Plain Boots",
+		Feet = "Plain Boots +1",
 	},
 	harvesting = {
 		Head = "Miner's Helmet",
 		Neck = "Field Torque",
 
 		Body = "Plain Tunica",
-		Hands = "Plain Gloves",
+		Hands = "Plain Gloves +1",
 
 		Waist = "Field Rope",
 		Legs = "Plain Hose",
-		Feet = "Plain Boots",
+		Feet = "Plain Boots +1",
+	},
+	excavation = {
+		Main = "Brigand's Shovel",
 	},
 	Doomed = { -- this set will equip any time you have the doom status
 		Ring1 = "Purity Ring",
@@ -187,7 +203,7 @@ gcinclude.settings = {
 	You can also set any of these on a per job basis in the job file in the OnLoad function. See my COR job file to see how this is done
 	but as an example you can just put 'gcinclude.settings.RefreshGearMPP = 50;' in your job files OnLoad function to modify for that job only
 	]]
-	Messages = false,           --set to true if you want chat log messages to appear on any /gc command used such as DT, TH, or KITE gear toggles, certain messages will always appear
+	Messages = true,            --set to true if you want chat log messages to appear on any /gc command used such as DT, TH, or KITE gear toggles, certain messages will always appear
 	AutoGear = true,            --set to false if you dont want DT/Regen/Refresh/PetDT gear to come on automatically at the defined %'s here
 	WScheck = true,             --set to false if you dont want to use the WSdistance safety check
 	WSdistance = 10,            --default max distance (yalms) to allow non-ranged WS to go off at if the above WScheck is true
@@ -210,7 +226,8 @@ gcdisplay = gFunc.LoadFile("common\\gcdisplay.lua")
 gcinclude.AliasList = T{'gcmessages','wsdistance','dt','th','kite','meleeset','gcdrain','gcaspir','nukeset','burst','weapon','elecycle','helix','weather','nuke','death','fight','sir','tankset','proc','cj','pupmode','tpgun','cormsg','forcestring','siphon','warpring','telering','mpset'};
 ]]
 --
-gcinclude.AliasList = T({ "gcmessages", "craft", "tankset", "sir", "meleeset", "pupmode", "warpring", "expring" })
+gcinclude.AliasList = T({ "gcmessages", "craft", "tankset", "sir", "meleeset", "pupmode", "warpring", "expring", "yonin",
+	"hasso" })
 
 gcinclude.Towns = T({
 	"Tavnazian Safehold",
@@ -253,6 +270,7 @@ gcinclude.Towns = T({
 })
 
 gcinclude.LockingRings = T({
+	"Prouesse Ring",
 	"Provenance Ring",
 	"Empress Band",
 	"Trizek Ring",
@@ -674,6 +692,8 @@ gcinclude.Rolls = T({
 gcinclude.CORmsg = true
 gcinclude.MPSet = false
 gcinclude.craft = false
+gcinclude.Yonin = false
+gcinclude.Hasso = true
 
 function gcinclude.Message(toggle, status)
 	if toggle ~= nil and status ~= nil then
@@ -742,6 +762,13 @@ function gcinclude.SetVariables()
 	if player.MainJob == "PUP" then
 		gcdisplay.CreateCycle("PupMode", { [1] = "Tank", [2] = "Melee", [3] = "Ranger", [4] = "Mage", [5] = "Heal" })
 	end
+	if player.MainJob == "NIN" then
+		gcdisplay.CreateToggle("Yonin", false)
+	end
+	if player.MainJob == "SAM" then
+		gcdisplay.CreateToggle("Hasso", true)
+	end
+
 	-- 	if (player.MainJob == 'BRD') then
 	-- 		gcdisplay.CreateToggle('String', false);
 	-- 	end
@@ -933,6 +960,31 @@ function gcinclude.HandleCommands(args)
 			status = gcdisplay.GetCycle("TankSet")
 		end
 	end
+
+	if (player.MainJob == "NIN") then
+		if args[1] == "yonin" then -- Set Ninja Yonin - Innin tatus
+			gcdisplay.AdvanceToggle("Yonin")
+			--toogle = "Yonin acive"
+			--status = gcdisplay.GetToogle("Yonin")
+			gcinclude.Yonin = not gcinclude.Yonin
+			toggle = "Yonin active"
+			status = gcinclude.Yonin
+		end
+	end
+	if (player.MainJob == "SAM") then
+		if args[1] == "hasso" then -- Set Samurai Hasso
+			gcdisplay.AdvanceToggle("Hasso")
+			--toogle = "Yonin acive"
+			--status = gcdisplay.GetToogle("Yonin")
+			gcinclude.Hasso = not gcinclude.Hasso
+			toggle = "Hasso active"
+			status = gcinclude.Hasso
+		end
+	end
+
+
+
+
 	if (player.MainJob == "SAM") or (player.MainJob == "NIN") then
 		if args[1] == "proc" then
 			gcdisplay.AdvanceToggle("PROC")
@@ -1057,17 +1109,19 @@ function gcinclude.SetRegenRefreshGear()
 
 	local player = gData.GetPlayer()
 	local pet = gData.GetPet()
+
 	if player.Status == "Idle" then
 		if player.HPP < gcinclude.settings.RegenGearHPP then
-			-- 			print(chat.header('GCinclude'):append(chat.message("Level: " .. player.MainJobSync .. ".")));
+			-- 			print(chat.header('GCinclude'):append(chat.message("RegenGearHPP: " .. player.MainJobSync .. ".")))
 			gFunc.EquipSet("Idle_Regen")
 			if player.MainJobSync <= 50 then
 				gFunc.Equip("Head", "Garrison Sallet +1")
 			end
 		end
 		if player.MPP < gcinclude.settings.RefreshGearMPP then
+			-- 			print(chat.header('GCinclude'):append(chat.message("RefreshGearMPP: " .. player.MainJobSync .. ".")))
 			gFunc.EquipSet("Idle_Refresh")
-			if player.MainJobSync <= 50 then
+			if player.MainJobSync <= 50 and (gcinclude.CasterJob:contains(player.MainJob) or gcinclude.CasterJob:contains(player.SubJob)) then
 				gFunc.Equip("Body", "Garrison Tunica +1")
 			end
 		end
@@ -1370,7 +1424,7 @@ function gcinclude.CheckCancels() --tossed Stoneskin in here too
 	if action.Name == "Spectral Jig" and sneak ~= 0 then
 		gFunc.CancelAction()
 		AshitaCore:GetChatManager():QueueCommand(1, "/cancel Sneak")
-		do_jig:once(2)
+		do_jig:once(1)
 	elseif action.Name == "Sneak" and sneak ~= 0 and target.Name == me then
 		gFunc.CancelAction()
 		AshitaCore:GetChatManager():QueueCommand(1, "/cancel Sneak")

@@ -6,44 +6,78 @@ local Settings = {
 }
 
 local sets = {
-	Idle = {},
+	Idle = {
+		head = "Ninja Hatsuburi",
+		body = "Ninja Chainmail",
+		hands = "Ninja Tekko",
+		legs = "Ninja Hakama",
+		feet = "Ninja Kyahan",
+
+	},
 	Resting = {},
-	Idle_Regen = {},
+	Idle_Regen_Priority = {
+		Body = { "Scorpion Harness" },
+	},
 	Idle_Refresh = {},
 	Town = {},
 
 	Dt = {},
 
-	Tp_Default = {
-		Head = { "Empress hairpin", "Garrison Sallet +1", "Cmp. Eye Circlet" },
-		Neck = { "Peacock Charm", "Pile Chain" },
-		Ear1 = { "Optical Earring" },
-		Ear2 = { "Outlaw's Earring" },
+	Tp_Default_Priority = {
+		Head = { "Yagudo Crown", "Optical Hat", "Heroic Hairpin", "Empress Hairpin", "Garrison Sallet +1" },
+		Neck = { "Peacock Charm", "Spike Necklace", "Pile Chain" },
+		Ear1 = { "Brutal earring", "Pigeon Earring", "Optical Earring" },
+		Ear2 = { "Suppanomimi", "Pigeon Earring", "Tribal Earring" },
 
-		Body = { "Garrison Tunica +1", "Leather Vest", "Mithran Separates" },
-		Hands = { "Guerilla Gloves", "Mithran Gauntlets" },
-		Ring1 = { "Archer's Ring", "Bastokan Ring" },
-		Ring2 = { "Archer's Ring", "San d'Orian Ring" },
+		Body = { "Scorpion Harness", "Shinobi Gi", "Soil Gi +1", "Garrison Tunica +1", "Leather Vest", "Mithran Separates" },
+		Hands = { "Shinobi Tekko +1", "Soil Tekko +1", "Guerilla Gloves", "Mithran Gauntlets" },
+		Ring1 = { "Zilant Ring", "Sniper's Ring", "Archer's Ring", "Balance Ring +1", "Bastokan Ring" },
+		Ring2 = { "Sniper's Ring", "Archer's Ring", "Balance Ring +1", "San d'Orian Ring" },
 
-		Back = { "Ram Mantle", "Traveler's Mantle" },
-		Waist = { "Virtuoso Belt", "Tilt Belt", "Leather Belt" },
-		Legs = { "Garrison Hose", "Phl. Trousers", "Mithran Loincloth" },
-		Feet = { "Leaping Boots", "Mithran Gaiters" },
+		Back = { "Nomad's Mantle" },
+		Waist = { "Ninurta's Sash", "Swift Belt", "Tilt Belt", "Lizard Belt", "Leather Belt" },
+		Legs = { "Shinobi Hakama", "Jujitsu Sitabaki", "Soil Sitabaki +1", "Garrison Hose +1", "Phl. Trousers", "Mithran Loincloth" },
+		Feet = { "Fuma Kyahan", "Savage Gaiters", "Leaping Boots", "Mithran Gaiters" },
 	},
 	Tp_Hybrid = {},
 	Tp_Acc = {},
 	Tp_Proc = {},
 
-	Precast = {},
+	Precast_Priority = {
+		Head = { "Optical Hat", "Heroic Hairpin" },
+		Waist = { "Swift Belt" },
+		Feet = { "Dino Ledelsens", "Fuma Kyahan" },
+	},
 
-	Utsu = {},
-	Nuke = {},
-	Macc = {},
+	Utsu_Priority = {
+	},
+	Nuke = {
+		Head = "Ninja Hatsuburi",
+		Ear1 = "Moldavite Earring",
+	},
+	Macc = {
+		Head = "Ninja Hatsuburi",
+	},
 
 	Preshot = {},
 	Midshot = {},
 
-	Ws_Default = {},
+	Ws_Default_Priority = {
+		Head = { "Optical Hat", "Empress Hairpin" },
+		Neck = { "Fotia Gorget", "Spike Necklace" },
+		Ear1 = { "Brutal earring", "Minuet Earring", "Pigeon Earring" },
+		Ear2 = { "Outlaw's Earring", "Pigeon Earring" },
+
+		Body = { "Brigandine +1", "Soil Gi +1", "Garrison Tunica +1" },
+		Hands = { "Ochiudo's Kote", "Soil Tekko +1", "Shade Gloves", "Cotton Tekko", "Guerilla Gloves" },
+		Ring1 = { "Zilant Ring", "Balance Ring +1", "Bastokan Ring" },
+		Ring2 = { "Rajas Ring", "Balance Ring +1", "San d'Orian Ring" },
+
+		Back = { "Amemet Mantle +1", "Exile's Cloak", "Ram Mantle", "Lizard Mantle" },
+		Waist = { "Warwolf Belt", "Ryl.Kgt. Belt", "Lizard Belt" },
+		Legs = { "Jujitsu Sitabaki", "Garrison Hose +1", "Phl. Trousers" },
+		Feet = { "Shinobi Kyahan", "Leaping Boots" },
+	},
 	Ws_Hybrid = {},
 	Ws_Acc = {},
 	Ws_Proc = {},
@@ -64,7 +98,7 @@ local sets = {
 	Chi_Hybrid = {},
 	Chi_Acc = {},
 
-	Enmity = {},
+	Enmity_Priority = {},
 
 	Futae = {},
 	Yonin = {},
@@ -73,10 +107,25 @@ local sets = {
 	Mijin = {},
 	TH = {},
 	Movement = {},
-	Movement_Night = {},
-	Extra1 = {},
-	Extra2 = {},
-	Extra3 = {},
+	Movement_Night = {
+		Feet = "Ninja Kyahan",
+	},
+	Relic = {
+		head = "Koga Hatsuburi",
+		body = "Koga Chainmail",
+		hands = "Koga Tekko",
+		legs = "Koga Hakama",
+		feet = "Koga Kyahan",
+		waist = "Koga Sarashi",
+	},
+	Artifact = {
+		head = "Ninja Hatsuburi",
+		body = "Ninja Chainmail",
+		hands = "Ninja Tekko",
+		legs = "Ninja Hakama",
+		feet = "Ninja Kyahan",
+	},
+
 }
 profile.Sets = sets
 
@@ -99,6 +148,8 @@ profile.OnLoad = function()
 
 	AshitaCore:GetChatManager():QueueCommand(1, "/macro book 10")
 	AshitaCore:GetChatManager():QueueCommand(1, "/macro set 1")
+
+	AshitaCore:GetChatManager():QueueCommand(-1, "/bind F9 /yonin")
 end
 
 profile.OnUnload = function()
@@ -110,11 +161,19 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	if gcdisplay.GetCycle("craft") == "none" then
 		gFunc.EquipSet(sets.Idle)
 	end
 	local game = gData.GetEnvironment()
-	local player = gData.GetPlayer()
 	local yonin = gData.GetBuffCount("Yonin")
 	local innin = gData.GetBuffCount("Innin")
 	local migawari = gData.GetBuffCount("Migawari")
@@ -123,6 +182,15 @@ profile.HandleDefault = function()
 		gFunc.EquipSet(sets.Tp_Default)
 		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
 			gFunc.EquipSet("Tp_" .. gcdisplay.GetCycle("MeleeSet"))
+		end
+		if player.MainJobSync >= 40 then
+			if yonin == 0 and innin == 0 then
+				if gcinclude.Yonin then
+					AshitaCore:GetChatManager():QueueCommand(1, '/ja "Yonin" <me>')
+				else
+					AshitaCore:GetChatManager():QueueCommand(1, '/ja "Innin" <me>')
+				end
+			end
 		end
 		if yonin > 0 then
 			gFunc.EquipSet(sets.Yonin)
@@ -143,6 +211,7 @@ profile.HandleDefault = function()
 		else
 			gFunc.EquipSet(sets.Movement)
 		end
+		--check if range is empty, if it is fill up ammo with shuriken based on level
 	end
 
 	gcinclude.CheckDefault()
@@ -182,32 +251,43 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	local spell = gData.GetAction()
-	gcinclude.DoShadows(spell)
+	-- 	gcinclude.DoShadows(spell)
 
 	gFunc.EquipSet(sets.Precast)
 	gcinclude.CheckCancels()
 end
 
 profile.HandleMidcast = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
 	local spell = gData.GetAction()
-	local futae = gData.GetBuffCount("Futae")
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
+	gFunc.EquipSet(sets.Macc)
 
 	if spell.Skill == "Ninjutsu" then
 		if string.contains(spell.Name, "Utsusemi") then
 			gFunc.EquipSet(sets.Utsu)
 		elseif gcinclude.NinNukes:contains(spell.Name) then
 			gFunc.EquipSet(sets.Nuke)
-			if futae > 0 then
-				gFunc.EquipSet(sets.futae)
-			end
 		else
 			gFunc.EquipSet(sets.Macc)
 		end
-	end
-
-	if gcdisplay.GetToggle("TH") == true then
-		gFunc.EquipSet(sets.TH)
 	end
 end
 
@@ -264,3 +344,5 @@ profile.HandleWeaponskill = function()
 		end
 	end
 end
+
+return profile

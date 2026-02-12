@@ -6,9 +6,17 @@ local Settings = {
 }
 
 local sets = {
-	Idle_Priority = {},
+	Idle_Priority = {
+		Head = "Drachen Armet",
+		Body = "Drachen Mail",
+		Hands = "Drachen Fng. Gnt.",
+		Legs = "Drachen Brais",
+		Feet = "Drachen Greaves",
+	},
 	Resting_Priority = {},
-	Idle_Regen_Priority = {},
+	Idle_Regen_Priority = {
+		Body = { "Scorpion Harness" },
+	},
 	Idle_Refresh_Priority = {},
 	Town = {},
 
@@ -16,23 +24,26 @@ local sets = {
 
 	Tp_Default_Priority = {
 		Head = { "Entrancing Ribbon", "Tlahtlamah Glasses" },
-		Neck = { "Armiger's Lace" },
-		Ear1 = { "Optical Earring" },
-		Ear2 = { "Wilderness Earring" },
+		Neck = { "Peacock Charm", "Armiger's Lace", "Pile Chain" },
+		Ear1 = { "Wilder. Earring +1", "Optical Earring" },
+		Ear2 = { "Tribal Earring" },
 
-		Body = { "Leather Vest", "Fisherman's Smock" },
-		Hands = { "Mithran Gauntlets" },
-		Ring1 = { "Bastokan Ring" },
-		Ring2 = { "San d'Orian Ring" },
-
-		Waist = { "Leather Belt" },
-		Legs = { "Herder's Subligar", "Mithran Loincloth" },
+		Body = { "Scorpion Harness", "Brigandine +1", "Eisenbrust", "Garrison Tunica +1", "Solid Mail", "Leather Vest", "Fisherman's Smock" },
+		Hands = { "Guerilla Gloves", "Mithran Gauntlets" },
+		Ring1 = { "Rajas Ring", "Balance Ring +1", "Bastokan Ring" },
+		Ring2 = { "Archer's Ring", "Balance Ring +1", "San d'Orian Ring" },
+		Back = { "Amemet Mantle +1", "Excile's Cloack" },
+		Waist = { "Swift Belt", "Tilt Belt", "Leather Belt" },
+		Legs = { "Dino Trousers", "Herder's Subligar", "Garrison Hose +1", "Solid Cuisses", "Mithran Loincloth" },
 		Feet = { "Leaping Boots", "Mithran Gaiters" },
 	},
 	Tp_Hybrid_Priority = {},
 	Tp_Acc_Priority = {},
 
-	Precast_Priority = {},
+	Precast_Priority = {
+		Head = { "Drachen Armet" },
+		Waist = { "Swift Belt" },
+	},
 
 	Cure_Priority = {},
 
@@ -48,14 +59,25 @@ local sets = {
 	Preshot = {},
 	Midshot = {},
 
-	Ws_Default = {},
+	Ws_Default_Priority = {
+		Head = { "Empress Hairpin" },
+		Neck = { "Spike Nacklace" },
+		Body = { "Dino Jerkin", "Savage Separates" },
+		Hands = { "Guerilla Gloves" },
+		Ring1 = { "Rajas Ring" },
+		Wait = { "Lizard Belt" },
+		Legs = { "Dino Trousers", "Garrison Hose +1" },
+		Feet = { "Savage Gaiters" },
+	},
 	Ws_Hybrid = {},
 	Ws_Acc = {},
 	Aedge_Default = {},
 	Aedge_Hybrid = {},
 	Aedge_Acc = {},
 
-	Jumps_Default = {},
+	Jumps_Default = {
+
+	},
 	Jumps_Hybrid = {},
 	Jumps_Acc = {},
 
@@ -63,6 +85,15 @@ local sets = {
 	Movement = {
 		Legs = "Carmine Cuisses +1",
 	},
+	Artifact = {
+		Head = "Drachen Armet",
+		Body = "Drachen Mail",
+		Hands = "Drachen Fng. Gnt.",
+		Legs = "Drachen Brais",
+		Feet = "Drachen Greaves",
+	},
+	Relic = {},
+
 }
 profile.Sets = sets
 

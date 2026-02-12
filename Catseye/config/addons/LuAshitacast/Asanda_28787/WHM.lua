@@ -7,29 +7,32 @@ local Settings = {
 
 local sets = {
 	Idle_Priority = {
-		Main = "Earth Staff",
+		Main = { "Earth Staff" },
+		Sub = { { Name = "Neph. Grip", Level = 51 } },
 		Head = { "Gambler's Chapeau" },
 		Ear1 = { "Pigeon Earring" },
 		Ear2 = { "Pigeon Earring" },
-		Ring1 = { "Serket Ring" },
-		Ring2 = { "Mana Ring" },
+		Ring1 = { "Serket Ring", "Astral Ring" },
+		Ring2 = { "Mana Ring", "Astral Ring" },
 		Hands = { "Savage Gauntlets", "Garrison gloves +1" },
 		Legs = { "Savage Loincloth", "Seer's Slacks" },
 		Feet = { "Sandals" },
 	},
 	Resting_Priority = {
-		Main = { "Iridal Staff", "Pilgrim's Wand" },
+		Main = { "Chatoyant Staff", "Pilgrim's Wand" },
 		Body = "Seer's Tunic",
 		Legs = "Baron's Slops",
 	},
 	Idle_Regen = {},
-	Idle_Refresh = {},
+	Idle_Refresh = {
+		Body = { "Royal cloak" },
+	},
 	Town = {},
 
 	Dt = {},
 
 	Tp_Default_Priority = {
-		Head = { "Empress hairpin", "Cmp. Eye Circlet" },
+		Head = { "Empress hairpin", "Fungus Hat", "Cmp. Eye Circlet" },
 		Neck = { "Peacock Charm", "Pile Chain" },
 		Ear1 = { "Pigeon Earring", "Optical Earring" },
 		Ear2 = { "Pigeon Earring" },
@@ -48,7 +51,8 @@ local sets = {
 	Tp_Acc_Priority = {},
 
 	Precast_Priority = { --fast cast prio
-		Head = { "Entrancing Ribbon" },
+		Head = { "Optical Hat", "Heroic Hairpin", "Entrancing Ribbon" },
+		Waist = { "Swift Belt" },
 		Legs = { "Garrison Hose +1" },
 	},
 	Cure_Precast_Priority = { --fast cast for cure only
@@ -59,7 +63,7 @@ local sets = {
 	},
 
 	Cure_Priority = { -- MND and cure extra
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 		Head = { "Seer's Crown", "Garrison Sallet +1" },
 		Neck = { "Justice Badge" },
 
@@ -91,9 +95,9 @@ local sets = {
 	},
 	Self_Enhancing = {},
 	Skill_Enhancing = {},
-	Stoneskin = {
+	Stoneskin_Priority = {
 		Head = { "Seer's Crown", "Garrison Sallet +1" },
-		Neck = { "Justice Badge" },
+		Neck = { "Stone Gorget", "Justice Badge" },
 
 		Body = { "Seer's Tunic" },
 		Hands = { "Savage gauntlets" },
@@ -109,7 +113,7 @@ local sets = {
 	Self_Refresh = {},
 
 	Enfeebling_Priority = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 		Head = { "Seer's Crown", "Garrison Sallet +1" },
 		Neck = { "Justice Badge" },
 
@@ -124,11 +128,11 @@ local sets = {
 	},
 
 	Drain = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 	},
 
 	Divine_Priority = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 		Head = { "Seer's Crown", "Garrison Sallet +1" },
 		Neck = { "Justice Badge" },
 
@@ -142,10 +146,20 @@ local sets = {
 		Feet = { "Seer's Pumps" },
 	},
 	Nuke = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
+		Head = { "Gambler's Chapeau" },
+		Ear1 = { "Moldavite Earring" },
+		Body = { "Illusionist's Garb", "Seer's Tunic" },
+		Hands = { "Garrison Gloves +1" },
+		Ring1 = { "Windurstian Ring" },
+		Ring2 = { "Hermit's Ring" },
+		Back = { "Black Cape +1", "Bronze Cape" },
+		Waist = { "Mrc.Cpt. Belt" },
+		Legs = { "Seer's Slacks" },
+		Feet = { "Garrison boots +1" },
 	},
 	NukeACC = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 	},
 
 	Preshot = {},
@@ -166,6 +180,9 @@ local sets = {
 	Invisible = {
 		Hands = "Dream Mittens +1",
 	},
+	Relic = {},
+	Artifact = {},
+
 	["upgrade"] = {
 		Main = {
 			Name = "Pilgrim's Wand",

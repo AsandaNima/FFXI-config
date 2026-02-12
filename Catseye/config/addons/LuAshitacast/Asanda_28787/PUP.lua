@@ -6,7 +6,8 @@ local Settings = {
 }
 
 local sets = {
-	Idle = {
+	Idle_Priority = {
+		Range = { "Turbo Animator", "Animator" },
 		Ear1 = { "Pigeon Earring" },
 		Ear2 = { "Pigeon Earring" },
 	},
@@ -15,6 +16,7 @@ local sets = {
 		Head = "Pup. Taj",
 	},
 	Idle_Regen = {
+		Head = "Pantin Taj",
 		Feet = "Thurandaut Boots",
 	},
 	Idle_Refresh = {},
@@ -26,31 +28,31 @@ local sets = {
 	Pet_Only_Tp_Default_Priority = {
 		Head = { "Entrancing Ribbon" },
 		Legs = { "Herder's Subligar" },
-		Ear2 = "Wilderness Earring",
+		Ear2 = "Wilder. Earring +1",
 	},
 	Pet_Only_Tp_Hybrid_Priority = {},
 	Pet_Only_Tp_Acc_Priority = {
 		Head = { "Entrancing Ribbon" },
 		Legs = { "Herder's Subligar" },
-		Ear2 = "Wilderness Earring",
+		Ear2 = "Wilder. Earring +1",
 	},
 	-- These profile.Sets will be for when both you and your pet are engaged
 	Tp_Default_Priority = {
 		Range = { "Turbo Animator", "Animator" },
 		Ammo = { "Automat. Oil +2", "Automat. Oil +1", "Automation Oil" },
 
-		Head = { "Thurandaut Chapeau", "Entrancing Ribbon", "Garrison Sallet +1" },
+		Head = { "Thurandaut Chapeau", "Empress Hairpin", "Garrison Sallet", "Entrancing Ribbon", "Garrison Sallet +1" },
 		Neck = { "Peacock Charm", "Pile Chain" },
 		Ear1 = { "Brutal earring", "Outlaw's Earring", "Pigeon Earring", "Optical Earring" },
-		Ear2 = { "Wilderness Earring", "Pigeon Earring" },
+		Ear2 = { "Wilder. Earring +1", "Pigeon Earring" },
 
-		Body = { "Thurandaut Tabard", "Pup. Tobe", "Garrison Tunica +1", "Rambler's Cloak", "Mithran Separates" },
+		Body = { "Thurandaut Tabard", "Pup. Tobe", "Garrison Tunica +1", "Mithran Separates" },
 		Hands = { "Thurandaut Gloves", "Battle Gloves", "Mithran Gauntlets" },
-		Ring1 = { "Rajas Ring", "Archer's Ring", "Bastokan Ring" },
-		Ring2 = { "Zilant Ring", "Ulthalam's Ring", "Archer's Ring", "San d'Orian Ring" },
+		Ring1 = { "Rajas Ring", "Archer's Ring", "Balance Ring +1", "Bastokan Ring" },
+		Ring2 = { "Zilant Ring", "Ulthalam's Ring", "Archer's Ring", "Balance Ring +1", "San d'Orian Ring" },
 
-		Back = { "Pantin Cape", "Exile's Cloak", "Ram Mantle", "Traveler's Mantle" },
-		Waist = { "Ninurta's Sash", "Virtuoso Belt", "Tilt Belt", "Lizard Belt", "Leather Belt" },
+		Back = { "Bruiser's Cloak", "Traveler's Mantle" },
+		Waist = { "Ninurta's Sash", "Swift Belt", "Tilt Belt", "Lizard Belt", "Leather Belt" },
 		Legs = { "Thurandaut Tights", "Herder's Subligar", "Garrison Hose +1", "Mithran Loincloth" },
 		Feet = { "Thurandaut Boots", "Savage Gaiters", "Garrison Boots +1", "Mithran Gaiters" },
 	},
@@ -64,12 +66,12 @@ local sets = {
 		Body = "Thurandaut Tabard",
 		Hands = { "Thurandaut Gloves", "Seer's Mitts" },
 		Legs = { "Herder's Subligar" },
-		Ear2 = { "Wilderness Earring" },
+		Ear2 = { "Wilder. Earring +1" },
 	},
 	Melee_Priority = {
 		Hands = { "Thurandaut Gloves", "Seer's Mitts" },
 		Legs = { "Herder's Subligar" },
-		Ear2 = { "Wilderness Earring" },
+		Ear2 = { "Wilder. Earring +1" },
 		Back = { "Pantin Cape" },
 	},
 	Ranger_Priority = {},
@@ -111,8 +113,8 @@ local sets = {
 
 		Body = "Thurandaut Tabard",
 		Hands = "Thurandaut Gloves",
-		Ring1 = "Rajas Ring", -- +5dex +5str +5tp +5subtle
-		Ring2 = "Zilant Ring",
+		Ring1 = { "Rajas Ring", "Balance Ring +1" }, -- +5dex +5str +5tp +5subtle
+		Ring2 = { "Zilant Ring", "Balance Ring +1" },
 
 		Back = { "Pantin Cape", "Exile's Cloak" },
 		Waist = "Virtuoso Belt",
@@ -140,7 +142,7 @@ local sets = {
 
 	Pet_WS_Priority = {
 		Head = { "Entrancing Ribbon" },
-		Ear2 = "Wilderness Earring",
+		Ear2 = "Wilder. Earring +1",
 		Hands = { "Black Mitts" },
 		Legs = { "Herder's Subligar" },
 		Back = "Pantin Cape",
@@ -163,6 +165,22 @@ local sets = {
 
 	TH = {},
 	Movement = {},
+	Relic = {
+		head = "Pantin Taj",
+		body = "Pantin Tobe",
+		hands = "Pantin Dastanas",
+		legs = "Pantin Churidars",
+		feet = "Pantin Babouches",
+		back = "Pantin Cape",
+	},
+	Artifact = {
+		head = "Pup. Taj",
+		body = "Pup. Tobe",
+		hands = "Pup. Dastanas",
+		legs = "Pup. Churidars",
+		feet = "Pup. Babouches",
+	},
+
 }
 profile.Sets = sets
 
@@ -224,6 +242,14 @@ profile.HandleDefault = function()
 	elseif player.IsMoving == true then
 		gFunc.EquipSet(sets.Movement)
 	end
+
+	if pet ~= nil then
+		if (player.Status == "Engaged") and (pet.Status ~= "Engaged") then
+			AshitaCore:GetChatManager():QueueCommand(1, '/ja "Deploy" <t>')
+		end
+	end
+
+
 
 	gcinclude.CheckDefault()
 	if (pet ~= nil) and (pet.TP > 950) and (pet.Status == "Engaged") then

@@ -7,23 +7,30 @@ local Settings = {
 
 local sets = {
 	Idle_Priority = {
-		Main = "Earth Staff",
-		Head = { "Warlock's Chapeau", "Gambler's Chapeau" },
+		Main = { "Earth Staff" },
+		Sub = { { Name = "Neph. Grip", Level = 51 } },
+		Head = { "Duelist's Chapeau", "Warlock's Chapeau", "Gambler's Chapeau" },
 		Ear1 = { "Pigeon Earring" },
 		Ear2 = { "Pigeon Earring" },
-
-		Body = { "Warlock's Tabard" },
-		Hands = { "Warlock's Gloves", "Savage Gauntlets", "Garrison gloves +1" },
-		Legs = { "Warlock's Tights", "Savage Loincloth" },
-		Feet = { "Warlock's Boots", "Sandals" },
+		Ring1 = { "Serket Ring" },
+		Ring2 = { "Mana Ring" },
+		Body = { "Warlock's Tabard", "Savage Separates", "Illusionist'r Garb", "Garrison Tunic +1", "Solid Mail", "Mithran Separates" },
+		Hands = { "Warlock's Gloves", "Savage Gauntlets", "Garrison gloves +1", "Mithran Gauntlets" },
+		Legs = { "Warlock's Tights", "Savage Loincloth", "Garrison Hose +1", "Solid Cuisses", "Mithran Loincloth" },
+		Feet = { "Warlock's Boots", "Savage Gaiters", "Garrison Boots +1", "Sandals", "Mithran Gaiters" },
 	},
 	Resting_Priority = {
-		Main = { "Iridal Staff", "Pilgrim's Wand" },
+		Main = { "Chatoyant Staff", "Pilgrim's Wand" },
 		--         Body = "Seer's Tunic",
 		Legs = "Baron's Slops",
 	},
-	Idle_Regen = {},
-	Idle_Refresh = {},
+	Idle_Regen_Priority = {
+		Body = { "Scorpion Harness" },
+	},
+	Idle_Refresh_Priority = {
+		Head = { "Duelist's Chapeau", { Name = "displaced", Level = 59 } },
+		Body = { { Name = "ignore", Level = 75 }, "Royal cloak" },
+	},
 	Town = {},
 
 	Dt_Priority = {
@@ -44,12 +51,12 @@ local sets = {
 	},
 
 	Tp_Default_Priority = {
-		Head = { "Cmp. Eye Circlet" },
+		Head = { "Optical Hat", "Heroic Hairpin", "Fungus Hat", "Cmp. Eye Circlet" },
 		Neck = { "Pile Chain" },
 		Ear1 = { "Pigeon Earring", "Optical Earring" },
 		Ear2 = { "Pigeon Earring" },
 
-		Body = { "Robe", "Rambler's Cloak", "Mithran Separates" },
+		Body = { "Scorpion Harness", "Solid Mail", "Rambler's Cloak", "Mithran Separates" },
 		Hands = { "Linen Cuffs", "Gloves", "Mithran Gauntlets" },
 		Ring1 = { "Bastokan Ring" },
 		Ring2 = { "San d'Orian Ring" },
@@ -67,8 +74,10 @@ local sets = {
 	},
 
 	Precast_Priority = { --30 from traits, 53 from gear
-		Head = { "Entrancing Ribbon" },
-		Legs = { "Garrison Hose +1" },
+		Head = { "Warlock's Chapeau", "Entrancing Ribbon" },
+		Waist = { "Ninurta's Sash", "Swift Belt" },
+		Legs = { "Malignance Tights", "Garrison Hose +1" },
+		Feet = { "Malignance Boots" },
 	},
 	Cure_Precast = {},
 	Enhancing_Precast = {
@@ -87,8 +96,8 @@ local sets = {
 	Stoneskin_Precast = {},
 
 	Cure_Priority = { --I cap is 50, II cap is 30
-		Main = { "Iridal Staff" },
-		Head = { "Seer's Crown", "Garrison Sallet +1" },
+		Main = { "Chatoyant Staff" },
+		Head = { "Malignance's Chapeau", "Seer's Crown", "Garrison Sallet +1" },
 		Neck = { "Justice Badge" },
 
 		--         Body = {"Seer's Tunic"},
@@ -102,33 +111,41 @@ local sets = {
 	},
 	Self_Cure = { --cap 30
 	},
-	Regen_Priority = {},
+	Regen_Priority = {
+		Head = { "Malignance Chapeau" },
+	},
 	Cursna = {},
 
 	Enhancing_Priority = {
-		Head = { "Garrison Sallet +1" },
+		Head = { "Malignance Chapeau" },
 		Neck = { "Justice Badge" },
 
 		--         Body = {"Seer's Tunic"},
-		Hands = { "Savage gauntlets" },
+		Hands = { "Warlock's Gloves", "Savage gauntlets" },
 		Ring1 = { "Saintly Ring" },
 		Ring2 = { "Saintly Ring" },
 
 		Waist = { "Friar's rope" },
-		Legs = { "Savage Loincloth" },
-		--         Feet = {"Seer's Pumps"},
+		Legs = { "Warlock's Tights", "Savage Loincloth" },
+		Feet = { "Malignance Boots" },
 	},
-	Self_Enhancing = {},
+	Self_Enhancing = { { "Malignance Chapeau" } },
 	Skill_Enhancing = {},
-	Stoneskin_Priority = {},
-	Phalanx_Priority = {},
-	Refresh_Priority = {},
-	Self_Refresh = {},
+	Stoneskin_Priority = {
+		Head = { "Malignance Chapeau", "Garrison Sallet +1" },
+		Neck = { "Stone Gorget" },
+		Feet = { "Malignance Boots" },
+	},
+	Phalanx_Priority = { { "Malignance Chapeau" } },
+	Refresh_Priority = { { "Malignance Chapeau" } },
+	Self_Refresh = { { "Malignance Chapeau" } },
 
 	Enfeebling_Priority = {
-		Main = { "Iridal Staff" },
-		Head = { "Seer's Crown", "Garrison Sallet +1" },
+		Main = { "Chatoyant Staff" },
+		Head = { "Duelist's Chapeau", "Seer's Crown", "Garrison Sallet +1" },
 		Neck = { "Justice Badge" },
+
+		Body = { "Warlock's Tabard" },
 
 		--         Body = {"Seer's Tunic"},
 		Hands = { "Savage gauntlets" },
@@ -148,12 +165,17 @@ local sets = {
 	},
 
 	Nuke_Priority = {
-		Main = { "Iridal Staff" },
-		Head = { "Gambler's Chapeau" },
-		Hands = { "Garrison Gloves +1" },
+		Main = { "Chatoyant Staff" },
+		Head = { "Warlock's Chapeau", "Gambler's Chapeau" },
+		Ear1 = { "Moldavite Earring" },
+		Body = { "Illusionist's Garb", "Seer's Tunic" },
+		Hands = { "Duelist's Gloves", "Garrison Gloves +1" },
 		Ring1 = { "Windurstian Ring" },
 		Ring2 = { "Hermit's Ring" },
 		--         Legs = {"Seer's Slacks"},
+		Back = { "Black Cape +1", "Bronze Cape" },
+		Waist = { "Mrc.Cpt. Belt" },
+		Legs = { "Duelist's Tights" },
 		Feet = { "Garrison boots +1" },
 	},
 	NukeACC_Priority = {},
@@ -185,6 +207,9 @@ local sets = {
 	Movement = {
 		--         Legs = 'Carmine Cuisses +1',
 	},
+	Relic = {},
+	Artifact = {},
+
 }
 profile.Sets = sets
 

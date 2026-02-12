@@ -1,44 +1,86 @@
 local profile = {}
 gcinclude = gFunc.LoadFile("common\\gcinclude.lua")
-
+local Settings = {
+	CurrentLevel = 0,
+}
 local sets = {
 	Idle = {},
 	Resting = {},
-	Idle_Regen = {},
+	Idle_Regen_Priority = {
+		Body = { "Myn. Domaru +1", "Scorpion Harness" },
+		Hands = { "Ryuo Tekko" },
+	},
 	Idle_Refresh = {},
 	Town = {},
 
 	Dt = {},
 
-	Tp_Default = {},
+	Tp_Default_Priority = {
+		Head = {
+			"Ryuo Somen", --5% haste
+			"Yagudo Crown", "Optical Hat", "Empress Hairpin", "Garrison Sallet +1" },
+		Neck = { "Peacock Charm", "Spike Necklace", "Armiger's Lace", "Pile Chain" },
+		Ear1 = { "Brutal earring", -- 1DA 1STP
+			"Pigeon Earring", "Optical Earring" },
+		Ear2 = { "Bushinomimi", "Aesir Ear Pendant", "Pigeon Earring", "Tribal Earring" },
+
+		Body = { "Ryuo Domaru", "Shinobi Gi", "Brigandine +1", "Soil Gi +1", "Garrison Tunica +1", "Solid Mail", "Leather Vest", "Mithran Separates" },
+		Hands = { "Myn. Kote +1", -- +3%haste +7str
+			"Shinobi Tekko +1", "Soil Tekko +1", "Guerilla Gloves", "Mithran Gauntlets" },
+		Ring1 = { "Rajas Ring", -- 5STP
+			"Sniper's Ring", "Archer's Ring", "Balance Ring +1", "Bastokan Ring" },
+		Ring2 = { "Sniper's Ring", "Archer's Ring", "Balance Ring +1", "San d'Orian Ring" },
+
+		Back = { "Amemet Mantle +1", "Exile's Cloak", "Ram Mantle", "Lizard Mantle" },
+		Waist = { "Ninurta's Sash", -- 6% haste
+			"Swift Belt", "Tilt Belt", "Lizard Belt", "Leather Belt" },
+		Legs = { "Myn. Haidate +1", -- 5% haste 9STP
+			"Ryuo Hakama", "Shinobi Hakama", "Jujitsu Sitabaki", "Soil Sitabaki +1", "Garrison Hose +1", "Phl. Trousers",
+			"Solid Cuisses", "Mithran Loincloth" },
+		Feet = { "Ryuo Sune-Ate", -- 3% haste
+			"Fuma Kyahan", "Savage Gaiters", "Leaping Boots", "Mithran Gaiters" },
+	},
 	Tp_Hybrid = {},
 	Tp_Acc = {},
 	Tp_Proc = {},
 
-	Precast = {},
+	Precast_Priority = {
+		head = { "Ryuo Somen" },
+		Waist = { "Ninurta's Sash", "Swift Belt" },
+		Feet = { "Ryuo Sune-Ate", "Fuma Kyahan" },
+	},
 
 	Cure = {},
 
 	Enhancing = {},
 
-	Preshot = {},
-	Midshot = {},
+	Preshot_Priority = {
+		Back = { "Frugal Cape" },
+	},
+	Midshot_Priority = {
+		Head = { "Optical Hat" },
+		Neck = { "Peacock Charm" },
 
-	Ws_Default = {
-		Head = { "Empress Hairpin", "Garrison Sallet +1" },
-		Neck = { "Peacock Charm", "Spike Necklace", "Pile Chain" },
-		Ear1 = { "Brutal earring", "Outlaw's Earring", "Pigeon Earring", "Optical Earring" },
-		Ear2 = { "Wilderness Earring", "Pigeon Earring" },
+		Ring1 = { "Marid Ring" },
+		Ring2 = { "Marid Ring" },
 
-		Body = { "Garrison Tunica +1", "Rambler's Cloak", "Mithran Separates" },
-		Hands = { "Battle Gloves", "Mithran Gauntlets" },
-		Ring1 = { "Rajas Ring", "Archer's Ring", "Bastokan Ring" },
-		Ring2 = { "Ulthalam's Ring", "Archer's Ring", "San d'Orian Ring" },
+		Back = { "Jaeger Mantle", "Sniper's Shroud" },
+		Waist = { "Sao. Koshi-ate" },
+	},
 
-		Back = { "Exile's Cloak", "Ram Mantle", "Traveler's Mantle" },
-		Waist = { "Ninurta's Sash", "Virtuoso Belt", "Tilt Belt", "Purple Belt", "Lizard Belt", "Leather Belt" },
-		Legs = { "Shinobi Hakama", "Garrison Hose +1", "Mithran Loincloth" },
-		Feet = { "Savage Gaiters", "Garrison Boots +1", "Mithran Gaiters" },
+	Ws_Default_Priority = {
+		Head = { "Myn. Kabuto +1", "Shade Tiara" },
+		Neck = { "Spike Necklace", "Armiger's Lace" },
+		Ear1 = { "Pigeon Earring" },
+		Ear2 = { "Pigeon Earring" },
+		Body = { "Ryuo Domaru", "Brigandine +1", "Savage Separates" },
+		Hands = { "Ochiudo's Kote", "Shade Mittens", "Cotton Tekko" },
+		Ring1 = { "Rajas Ring", "Courage Ring +1" },
+		Ring2 = { "Courage Ring +1", "San d'Orian Ring" },
+		Back = { "Amemet Mantle +1", "Earth Mantle", "Lizard Mantle" },
+		Waist = { "Warwolf Belt", "Ryl.Kgt. Belt", "Plate Belt" },
+		Legs = { "Ryuo Hakama", "Shade Tights", "Garrison Hose +1", "Phl. Trousers" },
+		Feet = { "Savage Gaiters" },
 	},
 	Ws_Hybrid = {},
 	Ws_Acc = {},
@@ -47,6 +89,43 @@ local sets = {
 	Savage_Default = {},
 	Savage_Hybrid = {},
 	Savage_Acc = {},
+
+	Shoha_Default = {      --str > attack > acc >
+		Head = "Myn. Kabuto +1", -- +5str
+		Neck = "Fotia Gorget",
+		Ear1 = "Brutal Earring", -- +5 DA
+		Ear2 = "Bushinomimi", -- +2str
+
+		body = "Myn. Domaru +1", -- +6str
+		Hands = "Myn. Kote +1", -- +7str
+		Ring1 = "Rajas Ring", -- +5str
+		Ring2 = "Flame Ring", -- +5str
+
+		Back = "Exile's Cloak", -- +4str
+		Waist = "Warwolf Belt", -- +5str
+		legs = "Ryuo Hakama", -- +5str and WS acc. Better than Haidate?
+		Feet = "Savage Gaiters", -- +3str
+		-- TODO: update ring2, feet
+	},
+	Shoha_Hybrid = {},
+	Shoha_Acc = {},
+
+	Apex_Default = {
+		Head = "Ryuo Somen",
+		Neck = "Fotia Gorget",
+		Ear1 = "Drone Earring",
+		Ear2 = "Drone Earring",
+		Body = "Brigandine +1",
+		Hands = "Myn. Kote +1",
+		Ring1 = "Sattva Ring",
+		Ring2 = "Breeze Ring",
+		Back = "Ram Mantle",
+		Waist = "Sao. Koshi-Ate",
+		Legs = "Saotome Haidate",
+		Feet = "Ryuo Sune-Ate",
+	},
+	Apex_Hybrid = {},
+	Apex_Acc = {},
 
 	Jinpu_Default = {},
 	Jinpu_Hybrid = {},
@@ -61,16 +140,48 @@ local sets = {
 	Stardiver_Acc = {},
 
 	Hasso = {},
-	ThirdEye = {},
-	Seigan = {},
+	ThirdEye = {
+		Head = "Ryuo Somen",
+		legs = "Saotome Haidate",
+		feet = "Ryuo Sune-Ate",
+	},
+	Seigan = {
+		body = "Ryuo Domaru",
+	},
 	Sekkanoki = {},
 	Sengikori = {},
-	Meditate = {},
+	Meditate = {
+		head = "Myn. Kabuto +1",
+		body = "Myn. Domaru +1",
+		hands = "Saotome Kote",
+	},
 	Meikyo = {},
 	Enmity = {},
 
 	TH = {},
 	Movement = {},
+	Relic = {
+		head = "Saotome Kabuto",
+		body = "Saotome Domaru",
+		hands = "Saotome Kote",
+		legs = "Saotome Haidate",
+		feet = "Saotome Sune-ate",
+		waist = "Sao. Koshi-ate",
+	},
+	Artifact = {
+		head = "Myn. Kabuto +1",
+		body = "Myn. Domaru +1",
+		hands = "Myn. Kote +1",
+		legs = "Myn. Haidate +1",
+		feet = "Myn. Sune-ate +1",
+	},
+	Crystal_Warrior = {
+		head = "Ryuo Somen",
+		body = "Ryuo Domaru",
+		hands = "Ryuo Tekko",
+		legs = "Ryuo Hakama",
+		feet = "Ryuo Sune-Ate",
+	},
 }
 profile.Sets = sets
 
@@ -82,8 +193,10 @@ profile.OnLoad = function()
 	gSettings.AllowAddSet = true
 	gcinclude.Initialize()
 
-	AshitaCore:GetChatManager():QueueCommand(1, "/macro book 4")
-	AshitaCore:GetChatManager():QueueCommand(1, "/macro set 8")
+	AshitaCore:GetChatManager():QueueCommand(1, "/macro book 18")
+	AshitaCore:GetChatManager():QueueCommand(1, "/macro set 1")
+
+	AshitaCore:GetChatManager():QueueCommand(-1, "/bind F9 /hasso")
 end
 
 profile.OnUnload = function()
@@ -95,19 +208,37 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	if gcdisplay.GetCycle("craft") == "none" then
 		gFunc.EquipSet(sets.Idle)
 	end
 	local hasso = gData.GetBuffCount("Hasso")
 	local thirdeye = gData.GetBuffCount("Third Eye")
+	local thirdeyeCD = gData.GetAction("Third Eye")
 	local seigan = gData.GetBuffCount("Seigan")
-	local player = gData.GetPlayer()
 
 	if player.Status == "Engaged" then
 		gFunc.EquipSet(sets.Tp_Default)
 		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
 			gFunc.EquipSet("Tp_" .. gcdisplay.GetCycle("MeleeSet"))
 		end
+		-- if engaged and no Hasso or Seigan, use it accordingly
+		if hasso == 0 and seigan == 0 then
+			if player.MainJobSync >= 25 and gcinclude.Hasso then
+				AshitaCore:GetChatManager():QueueCommand(1, '/ja "Hasso" <me>')
+			elseif player.MainJobSync >= 35 and not gcinclude.Hasso then
+				AshitaCore:GetChatManager():QueueCommand(1, '/ja "Seigan" <me>')
+			end
+		end
+
 		if hasso >= 1 then
 			gFunc.EquipSet(sets.Hasso)
 		end
@@ -139,6 +270,14 @@ end
 
 profile.HandleAbility = function()
 	local ability = gData.GetAction()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
 
 	if string.match(ability.Name, "Provoke") then
 		gFunc.EquipSet(sets.Enmity)
@@ -165,6 +304,15 @@ end
 
 profile.HandlePrecast = function()
 	local spell = gData.GetAction()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	gFunc.EquipSet(sets.Precast)
 
 	gcinclude.CheckCancels()
@@ -172,6 +320,14 @@ end
 
 profile.HandleMidcast = function()
 	local spell = gData.GetAction()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
 
 	if spell.Skill == "Enhancing Magic" then
 		gFunc.EquipSet(sets.Enhancing)
@@ -184,14 +340,29 @@ profile.HandleMidcast = function()
 end
 
 profile.HandlePreshot = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	gFunc.EquipSet(sets.Preshot)
 end
 
 profile.HandleMidshot = function()
-	gFunc.EquipSet(sets.Midshot)
-	if gcdisplay.GetToggle("TH") == true then
-		gFunc.EquipSet(sets.TH)
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
 	end
+
+	gFunc.EquipSet(sets.Midshot)
 end
 
 profile.HandleWeaponskill = function()
@@ -221,6 +392,16 @@ profile.HandleWeaponskill = function()
 			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
 				gFunc.EquipSet("Jinpu_" .. gcdisplay.GetCycle("MeleeSet"))
 			end
+		elseif string.match(ws.Name, "Tachi: Shoha") then
+			gFunc.EquipSet(sets.Shoha_Default)
+			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+				gFunc.EquipSet("Shoha_" .. gcdisplay.GetCycle("MeleeSet"))
+			end
+		elseif string.match(ws.Name, "Apex Arrow") then
+			gFunc.EquipSet(sets.Apex_Default)
+			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
+				gFunc.EquipSet("Apex_" .. gcdisplay.GetCycle("MeleeSet"))
+			end
 		elseif string.match(ws.Name, "Tachi: Ageha") then
 			gFunc.EquipSet(sets.Ageha_Default)
 			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
@@ -241,3 +422,5 @@ profile.HandleWeaponskill = function()
 		end
 	end
 end
+
+return profile

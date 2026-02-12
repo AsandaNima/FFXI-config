@@ -1,19 +1,39 @@
 local profile = {}
 gcinclude = gFunc.LoadFile("common\\gcinclude.lua")
-
+local Settings = {
+	CurrentLevel = 0,
+}
 local sets = {
-	Idle = {},
+	Idle_Priority = {
+		Ammo = { "Iron Bullet", "Bullet", "Tin Bullet", "Bronze Bullet" },
+	},
 	Idle_TPgun = {},
-	Resting = {},
-	Idle_Regen = {},
-	Idle_Refresh = {},
+	Resting_Priority = {},
+	Idle_Regen_Priority = {
+		Body = { "Scorpion Harness" },
+	},
+	Idle_Refresh_Priority = {},
 	Town = {},
 
 	Dt = {},
 
-	Tp_Default = {},
-	Tp_Hybrid = {},
-	Tp_Acc = {},
+	Tp_Default_Priority = {
+		Ammo = { "Iron Bullet", "Bullet", "Tin Bullet", "Bronze Bullet" },
+		Head = { "Heroic Hairpin", "Garrison Sallet +1", "Fungus Hat", "Cmp. Eue Circlet" },
+		Neck = { "Peacock Charm", "Spike Necklace", "Armiger's Lace", "Pile Chain" },
+		Ear1 = { "Pigeon Earring", "Optical Earring" },
+		Ear2 = { "Pigeon Earring", "Tribal Earring" },
+		Body = { "Scorpion Harness", "Brigandine +1", "Garrison Tunica +1", "Leather Vest", "Blksmith. Smock" },
+		Hands = { "battle gloves", "Smithy's Mitts" },
+		Ring1 = { "Zilant Ring", "Sniper's Ring", "Archer's Ring", "Balance Ring +1", "Bastokan Ring" },
+		Ring2 = { "Sniper's Ring", "Archer's Ring", "Balance Ring +1", "San d'Orian Ring" },
+		Back = { "Nomad's Mantle" },
+		Waist = { "Swift Belt", "Leather Belt", "Bronze Bandolier" },
+		Legs = { "Noct Brais", "Garrison Hose +1", "Phl. Trousers", "Mithran Loincloth" },
+		Feet = { "Leaping Boots", "Mithran Gaiters" },
+	},
+	Tp_Hybrid_Priority = {},
+	Tp_Acc_Priority = {},
 
 	Precast = {},
 
@@ -28,16 +48,38 @@ local sets = {
 
 	Nuke = {},
 
-	Preshot = {},
+	Preshot_Priority = {
+		Back = { "Frugal cape" },
+	},
 	Preshot_FlurryI = {},
 	Preshot_FlurryII = {},
-	Midshot = {},
-	Midshot_Acc = {},
+	Midshot_Priority = {
+		Head = { "Corsair's Tricorne", "Empress Hairpin" },
+		Neck = { "Peacock Charm", "Pegasus Collar" },
+		Body = { "Corsair's Frac", "Noct Doublet" },
+		Hands = { "Noct gloves" },
+		Ring1 = { "Sniper's Ring", "Bone Ring +1" },
+		Ring2 = { "Sniper's Ring", "Bone Ring +1" },
+
+		Back = { "Amemet Mantle +1", "Sniper's Shroud" },
+		Waist = { "Bronze Bandolier" },
+		Legs = { "Noct Brais" },
+		Feet = { "Noct Gaiters" },
+	},
+	Midshot_Acc_Priority = {},
 	TripleShot = {},
 
-	Ws_Default = {},
-	Ws_Hybrid = {},
-	Ws_Acc = {},
+	Ws_Default_Priority = {
+		Neck = { "Pegasus Collar" },
+		Ear1 = { "Pigeon Earring" },
+		Ear2 = { "Pigeon Earring" },
+		Ring1 = { "Reflex Ring" },
+		Ring2 = { "Reflex Ring" },
+		Back = { "Sniper's Shroud" },
+		Waist = { "Bronze Bandolier" },
+	},
+	Ws_Hybrid_Priority = {},
+	Ws_Acc_Priority = {},
 	WsObi = {},
 
 	Savage_Default = {},
@@ -64,7 +106,9 @@ local sets = {
 	Leaden_Hybrid = {},
 	Leaden_Acc = {},
 	--Quick Draw
-	QD = {},
+	QD = {
+		head = "Corsair's Tricorne",
+	},
 	QD_Acc = {},
 	Rolls = {},
 	Fold = {},
@@ -72,7 +116,26 @@ local sets = {
 	RandomDeal = {},
 	SnakeEye = {},
 	TH = {},
-	Movement = {},
+	Movement = {
+		Neck = "Pegasus Collar",
+	},
+	Relic = {},
+	Artifact = {},
+
+	['upgrade'] = {
+		Main = 'Bronze Knife',
+		Sub = 'Kupo Shield',
+		Ammo = 'Bronze Bullet',
+		Head = 'Tlahtlamah Glasses',
+		Body = 'Blksmith. Smock',
+		Hands = 'Smithy\'s Mitts',
+		Ring1 = 'Bastokan Ring',
+		Ring2 = 'Windurstian Ring',
+		Back = 'Shaper\'s Shawl',
+		Legs = 'Mithran Loincloth',
+		Feet = 'Mithran Gaiters',
+	},
+
 }
 profile.Sets = sets
 
@@ -87,8 +150,8 @@ profile.OnLoad = function()
 	gSettings.AllowAddSet = true
 	gcinclude.Initialize()
 
-	AshitaCore:GetChatManager():QueueCommand(1, "/macro book 10")
-	AshitaCore:GetChatManager():QueueCommand(1, "/macro set 10")
+	AshitaCore:GetChatManager():QueueCommand(1, "/macro book 7")
+	AshitaCore:GetChatManager():QueueCommand(1, "/macro set 1")
 
 	gcinclude.settings.RefreshGearMPP = 50
 	gcinclude.CORmsg = false -- set this to false if you do not want to see lucky/unlucky # messages, can also do /cormsg in game to change on the fly
@@ -103,6 +166,15 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	if gcdisplay.GetCycle("craft") == "none" then
 		gFunc.EquipSet(sets.Idle)
 	end
@@ -110,7 +182,6 @@ profile.HandleDefault = function()
 		gFunc.EquipSet(sets.Idle_TPgun)
 	end
 
-	local player = gData.GetPlayer()
 	if player.Status == "Engaged" then
 		gFunc.EquipSet(sets.Tp_Default)
 		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
@@ -135,6 +206,15 @@ profile.HandleDefault = function()
 end
 
 profile.HandleAbility = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	local ability = gData.GetAction()
 
 	if ability.Name:contains("Roll") then
@@ -150,6 +230,7 @@ profile.HandleAbility = function()
 	elseif ability.Name == "Snake Eye" then
 		gFunc.EquipSet(sets.SnakeEye)
 	elseif (ability.Name:contains("Shot")) and (ability.Name ~= "Triple Shot") then
+		gFunc.EquipSet(sets.Midshot)
 		gFunc.EquipSet(sets.QD)
 		if
 			(gcdisplay.GetCycle("Melee") == "Acc")
@@ -206,6 +287,15 @@ profile.HandleMidcast = function()
 end
 
 profile.HandlePreshot = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	local flurryI = gData.GetBuffCount(265)
 	local flurryII = gData.GetBuffCount(581)
 
@@ -219,6 +309,15 @@ profile.HandlePreshot = function()
 end
 
 profile.HandleMidshot = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	local triple = gData.GetBuffCount("Triple Shot")
 	gFunc.EquipSet(sets.Midshot)
 
@@ -236,6 +335,7 @@ end
 
 profile.HandleWeaponskill = function()
 	local canWS = gcinclude.CheckWsBailout()
+	gFunc.EquipSet(sets.Midshot)
 	if canWS == false then
 		gFunc.CancelAction()
 		return

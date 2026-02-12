@@ -9,14 +9,14 @@ local gcdisplay = {
 
 
 
-local fontSettings = T{
+local fontSettings = T {
 	visible = true,
 	font_family = 'Arial',
 	font_height = 12,
 	color = 0xFFFFFFFF,
 	position_x = 300,
 	position_y = 0,
-	background = T{
+	background = T {
 		visible = true,
 		color = 0xFF000000,
 	}
@@ -27,7 +27,7 @@ function gcdisplay.AdvanceCycle(name)
 	if (type(ctable) ~= 'table') then
 		return;
 	end
--- 	print(chat.header('GCinclude'):append(chat.message("Loop table." .. ctable.Array[ctable.Index])));
+	-- 	print(chat.header('GCinclude'):append(chat.message("Loop table." .. ctable.Array[ctable.Index])));
 	ctable.Index = ctable.Index + 1;
 	if (ctable.Index > #ctable.Array) then
 		ctable.Index = 1;
@@ -46,16 +46,15 @@ end
 
 function gcdisplay.Update()
 	local player = AshitaCore:GetMemoryManager():GetPlayer();
-	
+
 	local MID = player:GetMainJob();
 	local SID = player:GetSubJob();
 	Def = player:GetDefense();
 	Attk = player:GetAttack();
-	MainLV =player:GetMainJobLevel();
+	MainLV = player:GetMainJobLevel();
 	SubLV = player:GetSubJobLevel();
 	Main = AshitaCore:GetResourceManager():GetString("jobs.names_abbr", MID);
 	Sub = AshitaCore:GetResourceManager():GetString("jobs.names_abbr", SID);
-	
 end
 
 function gcdisplay.CreateToggle(name, default)
@@ -81,7 +80,7 @@ end
 function gcdisplay.GetCycle(name)
 	local ctable = Cycles[name];
 	if (type(ctable) == 'table') then
--- 		print(chat.header('GCinclude'):append(chat.message("Loop table." .. ctable.Array[ctable.Index])));
+		-- 		print(chat.header('GCinclude'):append(chat.message("Loop table." .. ctable.Array[ctable.Index])));
 		return ctable.Array[ctable.Index];
 	else
 		return 'Unknown';
@@ -89,18 +88,18 @@ function gcdisplay.GetCycle(name)
 end
 
 function gcdisplay.SetCycle(name, value)
-local ctable = Cycles[name];
-if (type(ctable) ~= 'table') then
-	return;
-end
-for key, values in pairs(ctable.Array) do
--- 	print(chat.header('GCinclude'):append(chat.message("Loop table." .. ctable.Array[ctable.Index])));
-	if values == value then
-		ctable.Index = key
-		return; -- Exit the loop since we found it
+	local ctable = Cycles[name];
+	if (type(ctable) ~= 'table') then
+		return;
 	end
-end
-ctable.Index = 1;
+	for key, values in pairs(ctable.Array) do
+		-- 	print(chat.header('GCinclude'):append(chat.message("Loop table." .. ctable.Array[ctable.Index])));
+		if values == value then
+			ctable.Index = key
+			return; -- Exit the loop since we found it
+		end
+	end
+	ctable.Index = 1;
 end
 
 function gcdisplay.Unload()
@@ -112,9 +111,9 @@ end
 
 function gcdisplay.Initialize()
 	gcdisplay.Update();
-	gcdisplay.FontObject = fonts.new(fontSettings);	
-	ashita.events.register('d3d_present', 'gcdisplay_present_cb', function ()
-		local display = MainLV .. Main .. '/' .. SubLV .. Sub ..'   Attk:' .. Attk .. '   Def:' .. Def;
+	gcdisplay.FontObject = fonts.new(fontSettings);
+	ashita.events.register('d3d_present', 'gcdisplay_present_cb', function()
+		local display = MainLV .. Main .. '/' .. SubLV .. Sub .. '   Attk:' .. Attk .. '   Def:' .. Def;
 		for k, v in pairs(Toggles) do
 			display = display .. '   ';
 			if (v == true) then

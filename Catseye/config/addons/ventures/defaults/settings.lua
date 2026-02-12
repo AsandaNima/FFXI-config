@@ -2,7 +2,7 @@ require('common');
 
 local settings = T{ };
 settings["alert_threshold"] = 90;
-settings["area_label"] = "Area";
+settings["show_hvnm_title"] = true;
 settings["auto_refresh_interval"] = 60;
 settings["fast_indicator"] = "^";
 settings["notes_visible"] = false;
@@ -13,12 +13,13 @@ settings["show_gui"] = true;
 settings["hide_sorting_text"] = false;
 settings["show_config_gui"] = false;
 settings["sort_ascending"] = false;
-settings["stopped_indicator"] = "x";
-settings["enable_alerts"] = true;
-settings["audio_alert_threshold"] = 100;
-settings["slow_indicator"] = "=";
-settings["sort_by"] = "completion";
-settings["debug"] = false;
 settings["selected_sound"] = 1;
+settings["stopped_indicator"] = "x";
+settings["area_label"] = "Area";
+settings["audio_alert_threshold"] = 100;
+settings["debug"] = false;
+settings["sort_by"] = "completion";
+settings["slow_indicator"] = "=";
+settings["enable_alerts"] = true;
 
 return settings;

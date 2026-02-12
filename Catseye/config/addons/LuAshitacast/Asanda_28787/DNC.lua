@@ -22,7 +22,9 @@ local sets = {
 		--         Feet = 'Gleti\'s Boots',
 	},
 	Resting = {},
-	Idle_Regen = {},
+	Idle_Regen_Priority = {
+		Body = { "Scorpion Harness" },
+	},
 	Idle_Refresh = {},
 	Town = {
 		--         Main = 'Tauret',
@@ -51,161 +53,103 @@ local sets = {
 		--         Feet = 'Nyame Sollerets',
 	},
 
-	Tp_Default_Priority = {
-		Head = { "Yagudo Crown", "Empress Hairpin", "Garrison Sallet +1", "Cmp. Eye Cerclet" },
+	Tp_Default_Priority = {     -- 23% haste, so far
+		Head = { "Dancer's Tiara +1", -- +5 haste
+			"Yagudo Crown", "Heroic Hairpin", "Empress Hairpin", "Garrison Sallet +1", "Fungus Hat", "Cmp. Eye Cerclet" },
 		Neck = { "Peacock Charm", "Pile Chain" },
-		Ear1 = { "Pigeon Earring", "Optical Earring" },
-		Ear2 = { "Outlaw's Earring", "Pigeon Earring" },
+		Ear1 = { "Brutal Earring", -- 5 DA
+			"Pigeon Earring", "Optical Earring" },
+		Ear2 = { "Suppanomimi", -- WD, +5 Sword
+			"Outlaw's Earring", "Pigeon Earring", "Tribal Earring" },
 
-		Body = { "Dino Jerkin", "Garrison Tunica +1", "Leather Vest", "Mithran Separates" },
-		Hands = { "Battle Gloves", "Mithran Gauntlets" },
+		Body = { "Rawhide Vest", -- 3% haste
+			"Scorpion Harness", "Dino Jerkin", "Brigandine +1", "Garrison Tunica +1", "Leather Vest", "Mithran Separates" },
+		Hands = { "Rawhide Gloves", -- 3% haste
+			"Battle Gloves", "Mithran Gauntlets" },
 		Ring1 = { "Rajas Ring", "Archer's Ring", "Bastokan Ring" },
-		Ring2 = { "Ulthalam's Ring", "Archer's Ring", "San d'Orian Ring" },
+		Ring2 = { "Zilant Ring", "Sniper's Ring,", "Ulthalam's Ring", "Archer's Ring", "San d'Orian Ring" },
 
-		Back = { "Exile's Cloak", "Ram Mantle", "Traveler's Mantle" },
-		Waist = { "Virtuoso Belt", "Tilt Belt", "Lizard Belt", "Leather Belt" },
-		Legs = { "Raptor Trousers", "Garrison Hose +1", "Mithran Loincloth" },
-		Feet = { "Leaping boots", "Mithran Gaiters" },
-
-		--         Ammo = { Name = 'Coiste Bodhar', AugPath='A' },
-		--         Head = { Name = 'Adhemar Bonnet +1', AugPath='B' },
-		--         Neck = 'Anu Torque',
-		--         Ear1 = 'Sherida Earring',
-		--         Ear2 = 'Eabani Earring',
-		--         Body = 'Gleti\'s Cuirass',
-		--         Hands = 'Adhemar Wrist. +1',
-		--         Ring1 = 'Gere Ring',
-		--         Ring2 = 'Epona\'s Ring',
-		--         Back = 'Senuna\'s Mantle',
-		--         Waist = { Name = 'Sailfi Belt +1', AugPath='A' },
-		--         Legs = 'Samnuha Tights',
-		--         Feet = { Name = 'Herculean Boots', Augment = { [1] = 'Accuracy+20', [2] = 'Attack+6', [3] = 'AGI+1', [4] = '"Triple Atk."+3' } },
+		Back = { "Nomad's Mantle" },
+		Waist = { "Ninurta's Sach", -- 6% haste
+			"Swift Belt", "Tilt Belt", "Lizard Belt", "Leather Belt" },
+		Legs = { "Rawhide Trousers", --3% haste
+			"Dino Trousers", "Garrison Hose +1", "Mithran Loincloth" },
+		Feet = { "Dancer's Toe Shoes +1", -- 3% haste
+			"Dino Ledelsens", "Leaping boots", "Mithran Gaiters" },
 	},
 	Tp_Hybrid_Priority = {
-		--         Head = 'Malignance Chapeau',
-		--         Neck = 'Sanctity Necklace',
-		--         Body = 'Malignance Tabard',
-		--         Hands = 'Malignance Gloves',
-		--         Legs = 'Gleti\'s Breeches',
-		--         Feet = 'Gleti\'s Boots',
 	},
 	Tp_Acc_Priority = {
 		Neck = "Spike Necklace",
 		Ring1 = { "Archer's Ring" },
 		Ring2 = { "Archer's Ring" },
-
-		--         Ammo = 'Yamarang',
-		--         Head = 'Malignance Chapeau',
-		--         Neck = 'Sanctity Necklace',
-		--         Ear1 = 'Mache Earring +1',
-		--         Ear2 = 'Telos Earring',
-		--         Body = 'Malignance Tabard',
-		--         Hands = 'Malignance Gloves',
-		--         Ring1 = 'Cacoethic Ring +1',
-		--         Ring2 = 'Chirich Ring +1',
-		--         Legs = 'Gleti\'s Breeches',
-		--         Feet = 'Gleti\'s Boots',
 	},
 
 	Precast = {
-		--         Ammo = 'Staunch Tathlum',
-		--         Neck = 'Baetyl Pendant',
-		--         Ear1 = 'Loquac. Earring',
-		--         Ear2 = 'Etiolation Earring',
-		--         Hands = 'Leyline Gloves',
-		--         Ring2 = 'Prolix Ring',
 	},
 
 	Preshot = {},
 	Midshot = {
-		--         Ear1 = 'Telos Earring',
-		--         Ear2 = 'Crep. Earring',
 	},
 
 	Ws_Default_Priority = {
-		--         Ammo = 'Voluspa Tathlum',
-		--         Head = { Name = 'Adhemar Bonnet +1', AugPath='B' },
+		Head = { "Rawhide Mask", -- +10 attk
+			"Etoile Tiara", -- +4str +5 attk
+			"Empress Hairpin" -- +3AGI
+		},
 		Neck = { "Fotia Gorget", "Spike Necklace" },
-		--         Ear1 = 'Sherida Earring',
-		--         Ear2 = 'Mache Earring +1',
-		--         Body = 'Nyame Mail',
-		--         Hands = 'Meg. Gloves +2',
-		--         Ring1 = 'Beithir Ring',
-		--         Ring2 = 'Karieyh Ring +1',
-		--         Waist = 'Fotia Belt',
-		--         Legs = 'Nyame Flanchard',
-		--         Feet = { Name = 'Herculean Boots', Augment = { [1] = 'Accuracy+30', [2] = 'Weapon skill damage +8%', [3] = 'Attack+6', [4] = 'Mag. Acc.+2' } },
+		Ear1 = { "Aesir Ear Pendant", -- +7 attk
+		},
+		Ear2 = { "Suppanomimi", -- +2 AGI, WD, +5 Sword
+		},
+		Body = { "Rawhide Vest" -- +10AGI, +10 Dagger
+		},
+		Hands = { "Etoile Bangles" -- +3AGI, +5attk
+		},
+		Ring1 = { "Sattva Ring" -- +5AGI
+		},
+		Ring2 = { "Breeze Ring" -- +5AGI
+		},
+		Back = { "Amemet Mantle +1", -- +2STR +15attk
+		},
+		Waist = { "Ryl.Kgt Belt" -- +2AGI
+		},
+		Legs = { "Rawhide Trousers" -- +5AGI, +5STR
+		},
+		Feet = { "Dino Ledelsens" -- +4AGI
+		},
 	},
 	Ws_Hybrid = {},
 	Ws_Acc = {},
 
 	Evis_Default_Priority = {
-		--         Head = 'Adhemar Bonnet +1',
-		--         Neck = 'Fotia Gorget',
-		--         Ear1 = 'Sherida Earring',
-		--         Ear2 = 'Odr Earring',
-		--         Body = 'Meg. Cuirie +2',
-		--         Hands = 'Mummu Wrists +2',
-		--         Ring1 = 'Gere Ring',
-		--         Ring2 = 'Ilabrat Ring',
-		--         Waist = 'Fotia Belt',
-		--         Legs = 'Mummu Kecks +2',
-		--         Feet = 'Gleti\'s Boots',
 	},
 	Evis_Hybrid = {},
 	Evis_Acc = {},
 
 	Rudra_Default_Priority = {
-		--         Head = 'Blistering Sallet +1',
-		--         Neck = 'Sanctity Necklace',
-		--         Body = 'Meg. Cuirie +2',
-		--         Hands = 'Meg. Gloves +2',
-		--         Ring1 = 'Beithir Ring',
-		--         Ring2 = 'Karieyh Ring +1',
-		--         Waist = 'Sailfi Belt +1',
-		--         Legs = 'Mummu Kecks +2',
-		--         Feet = { Name = 'Herculean Boots', Augment = { [1] = 'Accuracy+30', [2] = 'Weapon skill damage +8%', [3] = 'Attack+6', [4] = 'Mag. Acc.+2' } },
 	},
 	Rudra_Hybrid = {},
 	Rudra_Acc = {},
 
 	Pyrrhic_Default = {
-		--         Ammo = 'Coiste Bodhar',
-		--         Head = 'Adhemar Bonnet +1',
-		--         Neck = 'Fotia Gorget',
-		--         Body = 'Herculean Vest',
-		--         Hands = 'Adhemar Wrist. +1',
-		--         Ring1 = 'Gere Ring',
-		--         Ring2 = 'Epona\'s Ring',
-		--         Waist = 'Fotia Belt',
-		--         Legs = 'Samnuha Tights',
-		--         Feet = { Name = 'Herculean Boots', Augment = { [1] = 'Accuracy+20', [2] = 'Attack+6', [3] = 'AGI+1', [4] = '"Triple Atk."+3' } },
 	},
 	Pyrrhic_Hybrid = {},
 	Pyrrhic_Acc = {},
 
 	Aedge_Default_Priority = {
-		--         Ammo = 'Pemphredo Tathlum',
-		--         Head = 'Nyame Helm',
-		--         Neck = 'Baetyl Pendant',
-		--         Ear1 = 'Friomisi Earring',
-		--         Ear2 = 'Crematio Earring',
-		--         Body = 'Nyame Mail',
-		--         Hands = 'Nyame Gauntlets',
-		--         Ring1 = 'Shiva Ring +1',
-		--         Ring2 = 'Karieyh Ring +1',
-		--         Waist = 'Eschan Stone',
-		--         Legs = 'Nyame Flanchard',
-		--         Feet = 'Nyame Sollerets',
 	},
 	Aedge_Hybrid = {},
 	Aedge_Acc = {},
 
 	Waltz_Priority = {
-		Head = { "Dancer's Tiara", "Garrison Sallet +1" },
-		Body = { "Dancer's Casaque", "Dino Jerkin", "Garrison Tunica +1" },
-		Legs = { "Dancer's Tights" },
-		Feet = { "Savage Gaiters" },
+		Head = { "Rawhide Mask", "Dancer's Tiara +1", "Garrison Sallet +1" },
+		Body = { "Rawhide Vest", -- -3 delay
+			"Dancer's Casaque", -- 10% waltz
+			"Dino Jerkin", "Garrison Tunica +1" },
+		Hands = { "Raptor Gloves" },
+		Legs = { "Dancer's Tights +1" },
+		Feet = { "Dino Ledelsens", "Savage Gaiters" },
 
 		--         Ammo = 'Yamarang',
 	},
@@ -213,14 +157,21 @@ local sets = {
 	Climactic = { -- on JA and while buff is active
 		--         Head = 'Maculele Tiara +1',
 	},
+	Violent = { -- on JA and while buff is active
+		-- requires macc and dagger skill(?)
+		Body = "Etoile Casaque",
+	},
 	Samba = { -- on JA and while buff is active
-		Head = "Dancer's Tiara",
+		Head = "Dancer's Tiara +1",
 	},
 	Jig = { -- on JA and while buff is active
+		Legs = "Etoile Tights",
 		Feet = "Dancer's Toe Shoes",
 	},
-	Step_Priority = { -- on JA and while buff is active
+	Step = { -- on JA and while buff is active
 		Hands = "Dancer's Bangles",
+		Feet = "Rawhide Boots",
+		--Feet = "Etoile Toe Shoes",
 	},
 	Striking = { -- on JA and while buff is active
 		--         Body = 'Macu. Casaque +1',
@@ -228,6 +179,21 @@ local sets = {
 
 	Movement = {
 		--         Feet = 'Herald\'s Gaiters',
+	},
+	Relic = {
+		head = "Etoile Tiara",
+		body = "Etoile Casaque",
+		hands = "Etoile Bangles",
+		legs = "Etoile Tights",
+		feet = "Etoile Shoes",
+		back = "Etoile Cape",
+	},
+	Artifact = {
+		head = "Dancer's Tiara +1",
+		body = "Dancer's Casaque",
+		hands = "Dancer's Bangles",
+		legs = "Dancer's Tights +1",
+		feet = "Dancer's Toe Shoes +1",
 	},
 }
 profile.Sets = sets
@@ -314,10 +280,12 @@ profile.HandleAbility = function()
 		gFunc.EquipSet(sets.Samba)
 	elseif string.contains(ability.Name, "Jig") then
 		gFunc.EquipSet(sets.Jig)
-	elseif string.contains(ability.Name, "Step") then
+	elseif string.contains(ability.Name, "Step") or string.contains(ability.Name, "step") then
 		gFunc.EquipSet(sets.Step)
 	elseif string.contains(ability.Name, "Waltz") then
 		gFunc.EquipSet(sets.Waltz)
+	elseif string.contains(ability.Name, "Violent") then
+		gFunc.EquipSet(sets.Violent)
 	end
 
 	gcinclude.CheckCancels()

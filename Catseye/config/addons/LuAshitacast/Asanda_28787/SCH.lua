@@ -7,7 +7,8 @@ local Settings = {
 
 local sets = {
 	Idle_Priority = {
-		Main = "Earth Staff",
+		Main = { "Earth Staff" },
+		Sub = { { Name = "Neph. Grip", Level = 51 } },
 		Head = { "Gambler's Chapeau" },
 		Ear1 = { "Pigeon Earring" },
 		Ear2 = { "Pigeon Earring" },
@@ -19,18 +20,20 @@ local sets = {
 	},
 	Idle_Staff = {},
 	Resting_Priority = {
-		Main = { "Iridal Staff", "Pilgrim's Wand" },
+		Main = { "Chatoyant Staff", "Pilgrim's Wand" },
 		Body = "Seer's Tunic",
 		Legs = "Baron's Slops",
 	},
 	Idle_Regen = {},
-	Idle_Refresh = {},
+	Idle_Refresh = {
+		Body = { "Royal cloak" },
+	},
 	Town = {},
 
 	Dt = {},
 
 	Tp_Default_Priority = {
-		Head = { "Cmp. Eye Circlet" },
+		Head = { "Heroic Hairpin", "Fungus Hat", "Cmp. Eye Circlet" },
 		Neck = { "Pile Chain" },
 		Ear1 = { "Pigeon Earring", "Optical Earring" },
 		Ear2 = { "Pigeon Earring" },
@@ -48,17 +51,18 @@ local sets = {
 	Tp_Acc = {},
 
 	Precast_Priority = { --fast cast prio
-		Head = { "Entrancing Ribbon" },
+		Head = { "Optical Hat", "Heroic Hairpin", "Entrancing Ribbon" },
+		Waist = { "Swift Belt" },
 		Legs = { "Garrison Hose +1" },
 	},
 	Cure_Precast = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 	},
 	Enhancing_Precast = {},
 	Stoneskin_Precast = {},
 
 	Cure_Priority = { -- MND and cure extra
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 		Head = { "Seer's Crown", "Garrison Sallet +1" },
 		Neck = { "Justice Badge" },
 
@@ -93,7 +97,7 @@ local sets = {
 	Skill_Enhancing = {},
 	Stoneskin = {
 		Head = { "Seer's Crown", "Garrison Sallet +1" },
-		Neck = { "Justice Badge" },
+		Neck = { "Stone Gorget", "Justice Badge" },
 
 		Body = { "Seer's Tunic" },
 		Hands = { "Scholar's Bracers", "Savage gauntlets" },
@@ -109,7 +113,7 @@ local sets = {
 	Self_Refresh = {},
 
 	Enfeebling_Priority = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 		Head = { "Seer's Crown", "Garrison Sallet +1" },
 		Neck = { "Justice Badge" },
 
@@ -123,29 +127,37 @@ local sets = {
 		Feet = { "Seer's Pumps" },
 	},
 
-	Drain = {},
+	Drain = {
+		Hands = "Vampiric Mitts",
+		Feet = "Vampiric Boots",
+	},
 
 	Nuke_Priority = {
-		Main = { "Iridal Staff" },
-		Head = { "Gambler's Chapeau" },
-		Body = { "Seer's Tunic" },
+		Ammo = { "Morion Tathlum" },
+		Main = { "Chatoyant Staff", "Maple Wand +1" },
+		Head = { "Gambler's Chapeau", "Fungus Hat" },
+		Ear1 = { "Moldavite Earring", "Morion Earring" },
+		Ear2 = { "Morion Earring" },
+		Body = { "Illusionist's Garb", "Seer's Tunic" },
 		Hands = { "Garrison Gloves +1" },
-		Ring1 = { "Windurstian Ring" },
-		Ring2 = { "Hermit's Ring" },
+		Ring1 = { "Tamas Ring", "Eremite's Ring", "Windurstian Ring" },
+		Ring2 = { "Eremite's Ring" },
+		Back = { "Black Cape +1", "Bronze Cape" },
+		Waist = { "Mrc.Cpt. Belt" },
 		Legs = { "Seer's Slacks" },
 		Feet = { "Garrison boots +1" },
 	},
 	NukeACC = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 	},
 	Burst = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 	},
 	Helix = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 	},
 	HelixBurst = {
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 	},
 	Storm = {},
 	Kaustra = { --need to refine this set
@@ -169,13 +181,29 @@ local sets = {
 	Power = {  --rapture/ebullience
 	},
 	Klimaform = { --klimaform dmg boost
-		Main = { "Iridal Staff" },
+		Main = { "Chatoyant Staff" },
 	},
 	TH = { --/th will force this set to equip for 10 seconds
 	},
 	Movement = {
 		Body = "Kupo Suit",
 	},
+	Relic = {
+		head = "Comm. Tricorne",
+		body = "Commodore Frac",
+		hands = "Commodore Gants",
+		legs = "Comm. Trews",
+		feet = "Comm. Bottes",
+		waist = "Commodore Belt",
+	},
+	Artifact = {
+		head = "Corsairs Tricorne",
+		body = "Corsairs Frac",
+		hands = "Corsairs Gants",
+		legs = "Corsairs Culottes",
+		feet = "Corsairs Bottes",
+	},
+
 }
 profile.Sets = sets
 

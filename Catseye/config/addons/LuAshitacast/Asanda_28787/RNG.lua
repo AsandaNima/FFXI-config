@@ -1,297 +1,181 @@
 local profile = {}
 gcinclude = gFunc.LoadFile("common\\gcinclude.lua")
-
+local Settings = {
+	CurrentLevel = 0,
+}
 local sets = {
 	Idle = {
-		Range = "Holliday",
-		Ammo = "Decimating Bullet",
-		Head = "Malignance Chapeau",
-		Neck = "Bathy Choker +1",
-		Ear1 = "Infused Earring",
-		Ear2 = "Telos Earring",
-		Body = "Malignance Tabard",
-		Hands = "Malignance Gloves",
-		Ring1 = "Petrov Ring",
-		Ring2 = "Karieyh Ring +1",
-		Waist = { Name = "Sailfi Belt +1", AugPath = "A" },
-		Legs = "Ikenga's Trousers",
-		Feet = {
-			Name = "Herculean Boots",
-			Augment = { [1] = "Accuracy+20", [2] = "Attack+6", [3] = "AGI+1", [4] = '"Triple Atk."+3' },
-		},
 	},
 	Resting = {},
 	Idle_Regen = {
-		Neck = "Bathy Choker +1",
-		Ear1 = "Infused Earring",
-		Ring2 = "Chirich Ring +1",
+		Hands = "Herculean Gloves",
 	},
 	Idle_Refresh = {
-		Head = "Rawhide Mask",
-		Ring1 = "Stikini Ring +1",
-		Waist = "Fucho-no-Obi",
 	},
 	Town = {
-		Main = "Naegling",
-		Sub = "Nusku Shield",
-		Range = "Holliday",
-		Ammo = "Decimating Bullet",
-		Head = "Rawhide Mask",
-		Neck = "Iskur Gorget",
-		Ear1 = "Mache Earring +1",
-		Ear2 = "Telos Earring",
-		Body = "Herculean Vest",
-		Hands = { Name = "Adhemar Wrist. +1", AugPath = "B" },
-		Ring1 = "Stikini Ring +1",
-		Ring2 = "Chirich Ring +1",
-		Back = "Solemnity Cape",
-		Waist = { Name = "Sailfi Belt +1", AugPath = "A" },
-		Feet = {
-			Name = "Herculean Boots",
-			Augment = { [1] = "Accuracy+20", [2] = "Attack+6", [3] = "AGI+1", [4] = '"Triple Atk."+3' },
-		},
 	},
 
 	Dt = {
-		Head = "Nyame Helm",
-		Neck = { Name = "Loricate Torque +1", AugPath = "A" },
-		Ear1 = { Name = "Odnowa Earring +1", AugPath = "A" },
-		Ear2 = "Etiolation Earring",
-		Body = "Nyame Mail",
-		Hands = "Nyame Gauntlets",
-		Ring1 = "Defending Ring",
-		Ring2 = { Name = "Gelatinous Ring +1", AugPath = "A" },
-		Back = "Solemnity Cape",
-		Waist = "Flume Belt +1",
-		Legs = "Nyame Flanchard",
-		Feet = "Nyame Sollerets",
 	},
 
-	Tp_Default = {
-		Head = { Name = "Adhemar Bonnet +1", AugPath = "B" },
-		Neck = "Anu Torque",
-		Ear1 = "Sherida Earring",
-		Ear2 = "Telos Earring",
-		Body = "Herculean Vest",
-		Hands = { Name = "Adhemar Wrist. +1", AugPath = "B" },
-		Ring1 = "Petrov Ring",
-		Ring2 = "Epona's Ring",
-		Waist = { Name = "Sailfi Belt +1", AugPath = "A" },
-		Legs = {
-			Name = "Samnuha Tights",
-			Augment = { [1] = "STR+9", [2] = '"Dbl.Atk."+2', [3] = '"Triple Atk."+2', [4] = "DEX+8" },
-		},
-		Feet = {
-			Name = "Herculean Boots",
-			Augment = { [1] = "Accuracy+20", [2] = "Attack+6", [3] = "AGI+1", [4] = '"Triple Atk."+3' },
-		},
+	Tp_Default_Priority = {
+		Head = { "Optical Hat", "Heroic Hairpin", "Empress Hairpin", "Garrison Sallet +1", "Fungus Hat", "Cmp. Eue Circlet" },
+		Neck = { "Peacock Charm", "Spike Necklace", "Armiger's Lace", "Pile Chain" },
+		Ear1 = { "Brutal earring", "Pigeon Earring", "Optical Earring" },
+		Ear2 = { "Pigeon Earring", "Tribal Earring" },
+		Body = { "Scorpion Harness", "Brigandine +1", "Garrison Tunica +1", "Solid Mail", "Leather Vest", "Blksmith. Smock" },
+		Hands = { "Guerilla Gloves", "Smithy's Mitts" },
+		Ring1 = { "Zilant Ring", "Sniper's Ring", "Archer's Ring", "Balance Ring +1", "Bastokan Ring" },
+		Ring2 = { "Sniper's Ring", "Archer's Ring", "Balance Ring +1", "San d'Orian Ring" },
+		Back = { "Nomad's Mantle" },
+		Waist = { "Swift Belt", "Tilt Belt", "Leather Belt", "Bronze Bandolier" },
+		Legs = { "Noct Brais", "Garrison Hose +1", "Phl. Trousers", "Solid Cuisses", "Mithran Loincloth" },
+		Feet = { "Leaping Boots", "Mithran Gaiters" },
 	},
 	Tp_Hybrid = {
-		Head = "Malignance Chapeau",
-		Body = "Malignance Tabard",
-		Hands = "Malignance Gloves",
 	},
 	Tp_Acc = {
-		Ear1 = "Mache Earring +1",
-		Ear2 = "Telos Earring",
-		Hands = "Tatena. Gote +1",
-		Ring1 = "Cacoethic Ring +1",
-		Ring2 = "Chirich Ring +1",
-		Legs = "Tatena. Haidate +1",
-		Feet = "Tatena. Sune. +1",
 	},
 
 	Precast = {
-		Neck = "Baetyl Pendant",
-		Ear1 = "Malignance Earring",
-		Ear2 = "Etiolation Earring",
-		Body = "Taeon Tabard",
-		Ring1 = "Prolix Ring",
-		Legs = "Enif Cosciales",
 	},
 
 	Cure = {
-		Neck = "Incanter's Torque",
-		Ear1 = "Mendi. Earring",
-		Ring2 = { Name = "Metamor. Ring +1", AugPath = "A" },
-		Back = "Solemnity Cape",
-		Legs = "Carmine Cuisses +1",
 	},
 
 	Enhancing = {
-		Neck = "Incanter's Torque",
-		Ear1 = "Mendi. Earring",
-		Ear2 = "Andoaa Earring",
-		Ring2 = { Name = "Metamor. Ring +1", AugPath = "A" },
 	},
 
 	Enfeebling = {
-		Neck = "Erra Pendant",
-		Ring2 = { Name = "Metamor. Ring +1", AugPath = "A" },
 	},
 	Macc = {},
 
 	Drain = {
-		Neck = "Erra Pendant",
-		Ring2 = { Name = "Metamor. Ring +1", AugPath = "A" },
 	},
 
 	Nuke = {
-		Head = "Nyame Helm",
-		Neck = "Baetyl Pendant",
-		Ear1 = "Crematio Earring",
-		Body = "Nyame Mail",
-		Hands = "Nyame Gauntlets",
-		Ring1 = "Shiva Ring +1",
-		Ring2 = { Name = "Metamor. Ring +1", AugPath = "A" },
-		Legs = "Nyame Flanchard",
-		Feet = "Nyame Sollerets",
 	},
 
-	Preshot = {                  --base preshot, no flurry, 70cap, 10 from gifts
-		Hands = "Carmine Fin. Ga. +1", --8
-		Ring1 = "Crepuscular Ring", --3
-		Waist = "Impulse Belt",  --3
-		Legs = "Ikenga's Trousers", --8
-		Feet = "Meg. Jam. +2",   --10
+	Preshot_Priority = { --base preshot, no flurry, 70cap, 10 from gifts
+		head = { "Hunters Beret" },
+		body = { "Scouts Jerkin" },
+		Back = { "Frugal cape" },
+		Feet = { "Herculean Boots" },
 	},
-	Preshot_FlurryI = {          --with flurry I on, gives 15, 10 from gifts
-		Hands = "Carmine Fin. Ga. +1", --8
-		Ring1 = "Crepuscular Ring", --3
-		Waist = "Impulse Belt",  --3
-		Legs = "Ikenga's Trousers", --8
-		Feet = "Meg. Jam. +2",   --10
+	Preshot_FlurryI = { --with flurry I on, gives 15, 10 from gifts
 	},
-	Preshot_FlurryII = {         --with flurry II on, gives 30, 10 from gifts
-		Hands = "Carmine Fin. Ga. +1", --8
-		Waist = "Impulse Belt",  --3
-		Legs = "Ikenga's Trousers", --8
-		Feet = "Meg. Jam. +2",   --10
-	},
-	Midshot = {
-		Head = "Malignance Chapeau",
-		Neck = "Iskur Gorget",
-		Ear1 = "Telos Earring",
-		Ear2 = "Enervating Earring",
-		Body = "Malignance Tabard",
-		Hands = "Malignance Gloves",
-		Ring1 = "Dingir Ring",
-		Ring2 = "Ilabrat Ring",
-		Waist = "Eschan Stone",
-		Legs = "Ikenga's Trousers",
-		Feet = "Nyame Sollerets",
+	Preshot_FlurryII = { --with flurry II on, gives 30, 10 from gifts
 	},
 	Barrage = {
-		Hands = "Orion Bracers",
 	},
-	Midshot_Acc = { --will be over written by barrage set still
-		Head = "Malignance Chapeau",
-		Neck = "Iskur Gorget",
-		Ear1 = "Telos Earring",
-		Ear2 = "Crep. Earring",
-		Body = "Malignance Tabard",
-		Hands = "Malignance Gloves",
-		Ring1 = "Crepuscular Ring",
-		Ring2 = "Cacoethic Ring +1",
-		Waist = "Eschan Stone",
-		Legs = "Ikenga's Trousers",
-		Feet = "Nyame Sollerets",
+	Midshot_Priority = {
+		Head = { "Optical Hat", "Dino Helm", "Empress Hairpin" },
+		Neck = { "Peacock Charm", "Ranger's Necklace" },
+		Body = { "Herculean Vest", "Hunter's Jerkin", "Brigandine +1", "Noct Doublet" },
+		Hands = { "Scout's Bracers", "Black Mitts", "Noct gloves" },
+		Ring1 = { "Marid Ring", "Sniper's Ring", "Bone Ring +1" },
+		Ring2 = { "Marid Ring", "Sniper's Ring", "Bone Ring +1" },
+
+		Back = { "Jaeger Mantle", "Sniper's Shroud" },
+		Waist = { "Scout's Belt", "Bronze Bandolier" },
+		Legs = { "Scout's Braccae", "Dino Trousers", "Noct Brais" },
+		Feet = { "Scout's Socks", "Dino Ledelsens", "Noct Gaiters" },
 	},
 	DoubleShot = {},
 
-	Ws_Default = {
-		Head = "Nyame Helm",
-		Neck = "Fotia Gorget",
-		Body = "Nyame Mail",
-		Hands = "Nyame Gauntlets",
-		Ring1 = "Beithir Ring",
-		Ring2 = "Karieyh Ring +1",
-		Back = "Belenus's Cape",
-		Waist = "Fotia Belt",
-		Legs = "Nyame Flanchard",
-		Feet = {
-			Name = "Herculean Boots",
-			Augment = { [1] = "Accuracy+30", [2] = "Weapon skill damage +8%", [3] = "Attack+6", [4] = "Mag. Acc.+2" },
-		},
+	Ws_Default_Priority = {
+		Head = { "Hunter's Beret", "Dino Helm", "Empress Hairpin" },
+		Neck = { "Ranger's Necklace" },
+		Ear1 = { "Pigeon Earring" },
+		Ear2 = { "Pigeon Earring" },
+		Body = { "Herculean Vest", "Brigandine +1", "Noct Doublet" },
+		Hands = { "Scout's Bracers", "Black Mitts", "Noct gloves" },
+		Ring1 = { "Sattva Ring" },
+		Ring2 = { "Rajas Ring" },
+		Back = { "Amemet Mantle +1", "Sniper's Shroud" },
+		Waist = { "Scout's Belt", "Ryl.Kgt. Belt", "Bronze Bandolier" },
+		Legs = { "Dino Trousers", "Noct Brais" },
+		Feet = { "Scout's Socks", "Dino Ledelsens", "Leaping Boots" },
+
 	},
 	Ws_Hybrid = {},
 	Ws_Acc = {},
 	WsObi = { --puts elemental obi on for trueflight/wildfire under light/fire situations
-		Waist = "Hachirin-no-Obi",
 	},
 
 	Savage_Default = {
-		Head = "Nyame Helm",
-		Ear1 = "Sherida Earring",
-		Ear2 = "Moonshade Earring",
-		Body = "Nyame Mail",
-		Hands = "Meg. Gloves +2",
-		Ring1 = "Beithir Ring",
-		Ring2 = "Karieyh Ring +1",
-		Legs = "Nyame Flanchard",
-		Feet = {
-			Name = "Herculean Boots",
-			Augment = { [1] = "Accuracy+30", [2] = "Weapon skill damage +8%", [3] = "Attack+6", [4] = "Mag. Acc.+2" },
-		},
 	},
 	Savage_Hybrid = {},
 	Savage_Acc = {},
 	Aedge_Default = {
-		Head = "Nyame Helm",
-		Neck = "Baetyl Pendant",
-		Ear1 = "Friomisi Earring",
-		Ear2 = "Crematio Earring",
-		Body = "Nyame Mail",
-		Hands = "Nyame Gauntlets",
-		Ring1 = "Shiva Ring +1",
-		Ring2 = "Karieyh Ring +1",
-		Waist = "Eschan Stone",
-		Legs = "Nyame Flanchard",
-		Feet = "Nyame Sollerets",
 	},
 	Aedge_Hybrid = {},
 	Aedge_Acc = {},
 	TrueFlight_Default = {
-		Head = "Nyame Helm",
-		Neck = "Baetyl Pendant",
-		Ear1 = "Friomisi Earring",
-		Ear2 = "Crematio Earring",
-		Body = "Nyame Mail",
-		Hands = "Carmine Fin. Ga. +1",
-		Ring1 = "Dingir Ring",
-		Ring2 = "Karieyh Ring +1",
-		Back = "Belenus's Cape",
-		Waist = "Eschan Stone",
-		Legs = "Nyame Flanchard", --relic+3
-		Feet = {
-			Name = "Herculean Boots",
-			Augment = { [1] = "Accuracy+30", [2] = "Weapon skill damage +8%", [3] = "Attack+6", [4] = "Mag. Acc.+2" },
-		},
 	},
 	TrueFlight_Hybrid = {},
 	TrueFlight_Acc = {},
 
 	Scavenge = {
-		Feet = "Orion Socks",
+		feet = "Hunters Socks",
+
 	},
 	Sharpshot = {
-		Legs = "Orion Braccae",
+		legs = "Hunters Braccae",
+
 	},
 	TH = {
-		Waist = "Chaac Belt",
-		Feet = {
-			Name = "Herculean Boots",
-			Augment = {
-				[1] = 'Potency of "Cure" effect received+5%',
-				[2] = "Mag. Acc.+19",
-				[3] = "Accuracy+21",
-				[4] = '"Mag. Atk. Bns."+19',
-				[5] = '"Treasure Hunter"+2',
-			},
-		},
 	},
 	Movement = {
-		Legs = "Carmine Cuisses +1",
+	},
+	Relic = {
+		head = "Scouts Beret",
+		body = "Scouts Jerkin",
+		hands = "Scouts Bracers",
+		waist = "Scouts Belt",
+		legs = "Scouts Braccae",
+		feet = "Scouts Socks",
+	},
+	Artifact = {
+		head = "Hunters Beret",
+		body = "Hunters Jerkin",
+		hands = "Hunters Bracers",
+		legs = "Hunters Braccae",
+		feet = "Hunters Socks",
+	},
+
+	['upgrade'] = {
+		Main = { Name = 'Beestinger', Augment = { [1] = 'Crit.hit rate+1', [2] = 'DMG:+3' } },
+		Sub = 'Kupo Shield',
+		Range = 'Light Crossbow +1',
+		Ammo = 'Crossbow Bolt',
+		Head = 'Tlahtlamah Glasses',
+		Neck = 'Pile Chain',
+		Body = { Name = 'Leather Vest', Augment = { [1] = 'VIT+1', [2] = 'INT+1' } },
+		Hands = 'Smithy\'s Mitts',
+		Ring1 = 'San d\'Orian Ring',
+		Ring2 = 'Windurstian Ring',
+		Back = { Name = 'Sniper\'s Shroud', Augment = { [1] = 'AGI+1', [2] = 'HP+8' } },
+		Waist = 'Bronze Bandolier',
+		Legs = 'Mithran Loincloth',
+		Feet = 'Leaping Boots',
+	},
+	['rangews'] = {
+		Main = 'Archer\'s Knife',
+		Sub = { Name = 'Terrapin Traitor', Augment = { [1] = 'Attack+3', [2] = 'DMG:+1' } },
+		Range = 'Insurance +1',
+		Head = 'Dino Helm',
+		Neck = 'Ranger\'s Necklace',
+		Ear1 = { Name = 'Pigeon Earring', Augment = { [1] = 'STR+1', [2] = 'MP+15', [3] = 'Attack+2' } },
+		Ear2 = { Name = 'Pigeon Earring', Augment = { [1] = 'STR+1', [2] = 'MP+15', [3] = 'Attack+2' } },
+		Body = { Name = 'Brigandine +1', Augment = { [1] = 'Attack+4', [2] = 'STR+2', [3] = 'HP+10', [4] = 'MP+10', [5] = 'AGI+2' } },
+		Hands = { Name = 'Black Mitts', Augment = { [1] = 'Pet: Attack+4', [2] = 'Pet: Rng.Atk.+4', [3] = 'MP+5', [4] = 'AGI+3' } },
+		Ring1 = 'Sattva Ring',
+		Ring2 = 'Rajas Ring',
+		Back = { Name = 'Sniper\'s Shroud', Augment = { [1] = 'AGI+1', [2] = 'HP+8' } },
+		Waist = 'Ryl.Kgt. Belt',
+		Legs = { Name = 'Dino Trousers', Augment = { [1] = 'Accuracy+5', [2] = 'HP+20', [3] = 'VIT+4', [4] = 'AGI+4' } },
+		Feet = { Name = 'Dino Ledelsens', Augment = { [1] = 'CHR+4', [2] = 'HP+15', [3] = 'AGI+4', [4] = 'Haste+2' } },
 	},
 }
 profile.Sets = sets
@@ -305,7 +189,7 @@ profile.OnLoad = function()
 	gSettings.AllowAddSet = true
 	gcinclude.Initialize()
 
-	AshitaCore:GetChatManager():QueueCommand(1, "/macro book 10")
+	AshitaCore:GetChatManager():QueueCommand(1, "/macro book 17")
 	AshitaCore:GetChatManager():QueueCommand(1, "/macro set 1")
 
 	gcinclude.settings.RefreshGearMPP = 35
@@ -320,11 +204,19 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	if gcdisplay.GetCycle("craft") == "none" then
 		gFunc.EquipSet(sets.Idle)
 	end
 
-	local player = gData.GetPlayer()
 	if player.Status == "Engaged" then
 		gFunc.EquipSet(sets.Tp_Default)
 		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
@@ -403,6 +295,15 @@ profile.HandleMidcast = function()
 end
 
 profile.HandlePreshot = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	local flurryI = gData.GetBuffCount(265)
 	local flurryII = gData.GetBuffCount(581)
 
@@ -416,6 +317,15 @@ profile.HandlePreshot = function()
 end
 
 profile.HandleMidshot = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	local double = gData.GetBuffCount("Double Shot")
 	local barrage = gData.GetBuffCount("Barrage")
 	gFunc.EquipSet(sets.Midshot)
@@ -446,6 +356,7 @@ profile.HandleWeaponskill = function()
 		local ws = gData.GetAction()
 		local weather = gData.GetEnvironment()
 
+		gFunc.EquipSet(sets.Midshot)
 		gFunc.EquipSet(sets.Ws_Default)
 		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
 			gFunc.EquipSet("Ws_" .. gcdisplay.GetCycle("MeleeSet"))

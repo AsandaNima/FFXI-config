@@ -22,14 +22,12 @@ local sets = {
         Feet = 'Nyame Sollerets',]]
 	},
 	Resting = {},
-	Idle_Regen = {
-		--         Head = 'Crepuscular Helm',
-		--         Neck = 'Bathy Choker +1',
-		--         Ear1 = 'Infused Earring',
-		--         Ring2 = 'Chirich Ring +1',
+	Idle_Regen_Priority = {
+		Body = { "Scorpion Harness" },
 	},
 	Idle_Refresh = {
 		Neck = "Parade Gorget",
+		Body = { "Royal cloak" },
 		--         --Ammo = 'Homiliary',
 		--         Head = 'Jumalik Helm',
 		--         Ring1 = 'Stikini Ring +1',
@@ -67,13 +65,13 @@ local sets = {
 		Neck = { "Peacock Charm", "Armiger's Lace" },
 		Ear1 = { "Brutal earring", "Outlaw's Earring", "Pigeon Earring", "Optical Earring" },
 		Ear2 = { "Suppanomimi", "Pigeon Earring" },
-		Body = { "Found. Breastplate", "Gallant Surcoat", "Mtl. Breastplate", "Eisenbrust", "Garrison Tunica +1" },
+		Body = { "Found. Breastplate", "Gallant Surcoat", "Scorpion Harness", "Mtl. Breastplate", "Eisenbrust", "Garrison Tunica +1", "Solid Mail" },
 		Hands = { "Founder's Gauntlets", "Gallant Gauntlets", "Mythril Gauntlets", "Eisenhentzes", "Guerilla Gloves" },
 		Ring1 = { "Rajas Ring", "Archer's Ring", "San d'Orian Ring" },
 		Ring2 = { "Ulthalam's Ring", "Archer's Ring", "Bastokan Ring" },
 		Back = { "Boxer's Mantle", "Earth Mantle", "Lizard Mantle" },
-		Waist = { "Ninurta's Sash", "Virtuoso Belt", "Ryl.Kgt. Belt", "Tilt Belt", "Plate Belt" },
-		Legs = { "Founder's Hose", "Gallant Breeches", "Mythril Cuisses", "Eisendiechlings", "Garrison Hose +1" },
+		Waist = { "Ninurta's Sash", "Swift Belt", "Ryl.Kgt. Belt", "Tilt Belt", "Plate Belt" },
+		Legs = { "Founder's Hose", "Gallant Breeches", "Mythril Cuisses", "Eisendiechlings", "Garrison Hose +1", "Solid Cuisses" },
 		Feet = { "Founder's Greaves", "Gallant Leggings", "Mythril Leggings", "Eisenschuhs", "Leaping Boots" },
 	},
 	Tp_Hybrid_Priority = {
@@ -107,7 +105,7 @@ local sets = {
 		Neck = { "Peacock Charm", "Armiger's Lace" },
 		Ear1 = { "Brutal earring", "Outlaw's Earring", "Optical Earring" },
 		Ear2 = { "Suppanomimi", "Dodge Earring" },
-		Body = { "Found. Breastplate", "Gallant Surcoat", "Mtl. Breastplate", "Eisenbrust", "Garrison Tunica +1" },
+		Body = { "Found. Breastplate", "Gallant Surcoat", "Mtl. Breastplate", "Brigandine +1", "Eisenbrust", "Garrison Tunica +1" },
 		Hands = { "Founder's Gauntlets", "Gallant Gauntlets", "Mythril Gauntlets", "Eisenhentzes", "Guerilla Gloves" },
 		Ring1 = { "Sattva Ring", "Archer's Ring", "San d'Orian Ring" },
 		Ring2 = { "Bloodbead Ring", "Archer's Ring", "Bastokan Ring" },
@@ -148,6 +146,7 @@ local sets = {
 	Precast_Priority = { --44 w/o Loquac due to HP drop
 		Head = "Founder's Corona",
 		Ear1 = "Loquac. Earring",
+		Waist = { "Swift Belt" },
 		Legs = "Founder's Hose",
 		Feet = "Founder's Greaves",
 		--         Ammo = 'Sapience Orb',--2
@@ -391,6 +390,22 @@ local sets = {
 		--         Legs = 'Carmine Cuisses +1',
 		--         Feet = 'Nyame Sollerets',
 	},
+	Relic = {
+		head = "Abyss Burgeonet",
+		body = "Abyss Cuirass",
+		hands = "Abyss Gauntlets",
+		legs = "Abyss Flanchard",
+		feet = "Abyss Sollerets",
+		back = "Abyss Cape",
+	},
+	Artifact = {
+		head = "Chaos Burgeonet",
+		body = "Chaos Cuirass",
+		hands = "Chaos Gauntlets",
+		legs = "Chaos Flanchard",
+		feet = "Chaos Sollerets",
+	},
+
 }
 profile.Sets = sets
 

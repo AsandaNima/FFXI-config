@@ -1,487 +1,141 @@
 local profile = {}
 gcinclude = gFunc.LoadFile("common\\gcinclude.lua")
+local Settings = {
+	CurrentLevel = 0,
+}
 
 local sets = {
 	Idle = {
-		Main = "Epeolatry",
-		Sub = "Utu Grip",
-		Ammo = "Staunch Tathlum", --2
-		Head = "Nyame Helm",  --7
-		Neck = "Futhark Torque +1", --2 currently
-		Ear1 = "Odnowa Earring +1", --3
-		Ear2 = "Eabani Earring",
-		Body = "Agwu's Robe",
-		Hands = "Nyame Gauntlets", --7
-		Ring1 = "Moonbeam Ring", --4
-		Ring2 = "Defending Ring", --10
-		Back = {
-			Name = "Ogma's Cape",
-			Augment = {
-				[1] = "Parrying rate+5%",
-				[2] = "Mag. Eva.+20",
-				[3] = "Eva.+20",
-				[4] = "HP+80",
-				[5] = "Enmity+10",
-			},
-		},
-		Waist = "Carrier's Sash",
-		Legs = "Nyame Flanchard", ----8
-		Feet = "Nyame Sollerets", --7
 	},
 	Resting = {},
-	Idle_Regen = {
-		Neck = "Bathy Choker +1",
-		Ear1 = "Infused Earring",
-		Body = "Futhark Coat +3",
-		Hands = "Turms Mittens",
-		Ring2 = "Chirich Ring +1",
-		Feet = "Turms Leggings",
+	Idle_Regen_Priority = {
+		Body = { "Scorpion Harness" },
 	},
 	Idle_Refresh = {
-		Ammo = "Homiliary",
-		Head = "Rawhide Mask",
-		Body = "Agwu's Robe",
-		Ring1 = "Stikini Ring +1",
-		Waist = "Fucho-no-Obi",
+		Body = { "Royal cloak" },
 	},
 	Town = {
-		Main = "Epeolatry",
-		Sub = "Utu Grip",
-		Ammo = "Staunch Tathlum",
-		Head = "Erilaz Galea +2",
-		Body = "Agwu's Robe",
-		Hands = "Nyame Gauntlets",
-		Legs = "Carmine Cuisses +1",
-		Feet = "Nyame Sollerets",
 	},
 
 	Dt = {
-		Ammo = "Staunch Tathlum", --2
-		Head = "Nyame Helm",  --7
-		Neck = "Futhark Torque +1", --4 currently
-		Ear1 = "Odnowa Earring +1", --3
-		Ear2 = "Eabani Earring",
-		--Body = 'Nyame Mail',--9
-		Body = "Agwu's Robe", --replace with Runeist coat +3
-		Hands = "Nyame Gauntlets", --7
-		Ring1 = "Moonbeam Ring", --4
-		Ring2 = "Defending Ring", --10
-		Back = {
-			Name = "Ogma's Cape",
-			Augment = {
-				[1] = "Parrying rate+5%",
-				[2] = "Mag. Eva.+20",
-				[3] = "Eva.+20",
-				[4] = "HP+80",
-				[5] = "Enmity+10",
-			},
-		},
-		Waist = "Carrier's Sash",
-		Legs = "Nyame Flanchard", ----8
-		Feet = "Nyame Sollerets", --7
 	},
 
-	Tp_Default = {
-		Main = "Epeolatry",
-		Sub = "Utu Grip",
-		Ammo = "Yamarang",
-		Head = "Adhemar Bonnet +1",
-		Neck = "Anu Torque",
-		Ear1 = "Sherida Earring",
-		Ear2 = "Telos Earring",
-		Body = "Futhark Coat +3",
-		Hands = "Adhemar Wrist. +1",
-		Ring1 = "Epona's Ring",
-		Ring2 = "Niqmaddu Ring",
-		Back = {
-			Name = "Ogma's Cape",
-			Augment = {
-				[1] = '"Dbl.Atk."+10',
-				[2] = "Phys. dmg. taken -10%",
-				[3] = "Accuracy+20",
-				[4] = "Attack+20",
-				[5] = "DEX+20",
-			},
-		},
-		Waist = "Ioskeha Belt +1",
-		Legs = "Meg. Chausses +2",
-		Feet = {
-			Name = "Herculean Boots",
-			Augment = { [1] = "Accuracy+20", [2] = "Attack+6", [3] = "AGI+1", [4] = '"Triple Atk."+3' },
-		},
+	Tp_Default_Priority = {
+		Head = { "Dino Helm", "Shade Tiara", "Gambler's Chapeau", "Fungus Hat", "Cmp. Eye Circlet", "Eyepatch" },
+		Neck = { "Peacock Charm", "Armiger's Lace", "Pile Chain" },
+		Ear1 = { "Brutal earring", "Pigeon Earring", "Optical Earring" },
+		Ear2 = { "Pigeon Earring", "Tribal Earring" },
+
+		Body = { "Scorpion Harness", "Brigandine +1", "Garish Tunic", "Garrison Tunica +1", "Solid Mail", "Coarse Breastplate", "Blksmith. Smock" },
+		Hands = { "Raptor Gloves", "Axe. Gauntlets", "Battle Gloves", "Mithran Gauntlets" },
+		Ring1 = { "Sattva Ring", "Balance Ring +1", "San d'Orian Ring" },
+		Ring2 = { "Sniper's Ring", "Archer's Ring", "Balance Ring +1", "Bastokan Ring" },
+
+		Back = { "Exile's Cloak", "Ram Mantle", "Nomad's Mantle", "Shaper's Shawl" },
+		Waist = { "Swift Belt", "Tilt Belt", "Mrc.Cpt. Belt", "Leather Belt" },
+		Legs = { "Dino Trousers", "Garish Slacks", "Garrison Hose +1", "Solid Cuisses", "Mithran Loincloth" },
+		Feet = { "Dino Ledelsens", "Savage Gaiters", "Leaping Boots", "Mithran Gaiters" },
 	},
 	Tp_Hybrid = {
-		Main = "Epeolatry",
-		Sub = "Utu Grip",
-		Ammo = "Yamarang",
-		Head = "Nyame Helm",
-		Neck = "Anu Torque",
-		Ear1 = "Sherida Earring",
-		Ear2 = "Telos Earring",
-		Body = "Futhark Coat +3",
-		Hands = "Adhemar Wrist. +1",
-		Ring1 = "Epona's Ring",
-		Ring2 = "Niqmaddu Ring",
-		Back = {
-			Name = "Ogma's Cape",
-			Augment = {
-				[1] = '"Dbl.Atk."+10',
-				[2] = "Phys. dmg. taken -10%",
-				[3] = "Accuracy+20",
-				[4] = "Attack+20",
-				[5] = "DEX+20",
-			},
-		},
-		Waist = "Ioskeha Belt +1",
-		Legs = "Meg. Chausses +2",
-		Feet = {
-			Name = "Herculean Boots",
-			Augment = { [1] = "Accuracy+20", [2] = "Attack+6", [3] = "AGI+1", [4] = '"Triple Atk."+3' },
-		},
 	},
 	Tp_Acc = {
-		Ring1 = "Cacoethic Ring +1",
-		Ring2 = "Chirich Ring +1",
-		Waist = "Ioskeha Belt +1",
 	},
 
 	--These will overwrite any above TP profile.Sets if /tankset is used
-	Tank_Main = { --Default Tanking,  dt
-		Main = "Epeolatry",
-		--Sub = 'Refined Grip +1',--3
-		Ammo = "Staunch Tathlum", --2
-		Head = "Nyame Helm",  --7
-		Neck = "Futhark Torque +1",
-		Ear1 = "Odnowa Earring +1", --2
-		Ear2 = "Ethereal Earring", --3kinda
-		--Ear2 = 'Hermodr Earring',--dragon points, 10 parry skill
-		Body = "Futhark Coat +3", --9
-		Hands = "Turms Mittens",
-		Ring1 = "Moonbeam Ring", --4
-		Ring2 = "Defending Ring", --7
-		Back = {
-			Name = "Ogma's Cape",
-			Augment = {
-				[1] = "Parrying rate+5%",
-				[2] = "Mag. Eva.+20",
-				[3] = "Eva.+20",
-				[4] = "HP+80",
-				[5] = "Enmity+10",
-			},
-		},
-		Waist = "Flume Belt +1",
-		Legs = "Eri. Leg Guards +1", -- PDT 7
-		Feet = "Turms Leggings", --7
+	Tank_Main_Priority = { --Default Tanking,  dt
 	},
 	Tank_MEVA = {
-		Main = "Epeolatry", --Aettir technically better here
-		--Sub = 'Refined Grip +1',
-		Ammo = "Staunch Tathlum",
-		Head = "Nyame Helm",
-		Neck = "Warder's Charm +1",
-		Ear1 = "Odnowa Earring +1",
-		Ear2 = "Eabani Earring",
-		Body = "Nyame Mail",
-		Hands = "Nyame Gauntlets",
-		Ring1 = "Defending Ring",
-		Ring2 = "Purity Ring",
-		Back = {
-			Name = "Ogma's Cape",
-			Augment = {
-				[1] = "Parrying rate+5%",
-				[2] = "Mag. Eva.+20",
-				[3] = "Eva.+20",
-				[4] = "HP+80",
-				[5] = "Enmity+10",
-			},
-		}, --want diff cape here
-		Waist = "Carrier's Sash",
-		Legs = "Agwu's Slops",
-		Feet = "Nyame Sollerets",
 	},
 
 	Precast = {
-		Ammo = "Sapience Orb", -- 2
-		Head = "Rune. Bandeau +2", -- 12
-		Neck = "Baetyl Pendant", -- 4
-		Ear1 = "Loquac. Earring", -- 2
-		Ear2 = "Etiolation Earring", -- 1
-		Body = "Agwu's Robe",  -- 8
-		Hands = "Leyline Gloves", -- 6
-		Ring1 = "Prolix Ring", -- 2
-		Ring2 = "Kishar Ring", -- 4
-		Waist = "Audumbla Sash",
-		Legs = "Aya. Cosciales +2", -- 6
-		Feet = "Carmine Greaves +1", --7
 	},
-	Precast_Inspiration = {    --this set I use for when my 5/5 inspire merits kicking in with val/vall up
-		Ammo = "Staunch Tathlum",
-		Head = "Nyame Helm",
-		Neck = "Baetyl Pendant",
-		Ear1 = "Odnowa Earring +1",
-		Ear2 = "Etiolation Earring",
-		Body = "Nyame Mail",
-		Hands = "Nyame Gauntlets",
-		Ring1 = "Eihwaz Ring",
-		Ring2 = "Gelatinous Ring +1",
-		Waist = "Audumbla Sash",
-		Legs = "Futhark Trousers +2",
-		Feet = "Agwu's Pigaches",
+	Precast_Inspiration = { --this set I use for when my 5/5 inspire merits kicking in with val/vall up
 	},
 	Cure_Precast = {
-		Ear1 = "Mendi. Earring", -- 5
 	},
 	Enhancing_Precast = {
-		Waist = "Siegel Sash",  -- 8
-		Legs = "Futhark Trousers +2", -- 13
 	},
-	SIR = {                     --10 merits + 90
-		Ammo = "Staunch Tathlum", -- 10
-		Head = "Erilaz Galea +2", -- 15
-		Neck = "Moonlight Necklace", -- 15
-		Hands = "Rawhide Gloves", -- 15
-		Waist = "Audumbla Sash", -- 10
-		Legs = "Carmine Cuisses +1", -- 20
-		Feet = "Taeon Boots",   -- 10
+	SIR = { --10 merits + 90
 	},
 	Enmity = {
-		Neck = "Unmoving Collar +1",
-		Ear1 = "Odnowa Earring +1",
-		Ear2 = "Cryptic Earring",
-		Body = "Emet Harness +1",
-		Ring1 = "Eihwaz Ring",
-		Ring2 = "Supershear Ring",
-		Back = {
-			Name = "Ogma's Cape",
-			Augment = {
-				[1] = "Parrying rate+5%",
-				[2] = "Mag. Eva.+20",
-				[3] = "Eva.+20",
-				[4] = "HP+80",
-				[5] = "Enmity+10",
-			},
-		},
-		Legs = "Eri. Leg Guards +1",
-		Feet = "Erilaz Greaves +1",
 	},
-	SIRenmity = {              -- Foil and blue spells mostly
-		Ammo = "Staunch Tathlum", -- 10
-		Head = "Erilaz Galea +2", -- 15
-		Neck = "Moonlight Necklace", -- 15
-		Ear1 = "Odnowa Earring +1",
-		Ear2 = "Cryptic Earring",
-		Body = "Emet Harness +1",
-		Hands = "Rawhide Gloves", -- 15
-		Ring1 = "Eihwaz Ring",
-		Ring2 = "Supershear Ring",
-		Back = {
-			Name = "Ogma's Cape",
-			Augment = {
-				[1] = "Parrying rate+5%",
-				[2] = "Mag. Eva.+20",
-				[3] = "Eva.+20",
-				[4] = "HP+80",
-				[5] = "Enmity+10",
-			},
-		},
-		Waist = "Audumbla Sash", -- 10
-		Legs = "Carmine Cuisses +1", -- 20
-		Feet = "Taeon Boots",  -- 8
+	SIRenmity = { -- Foil and blue spells mostly
 	},
 
 	Cure = {
-		Neck = "Sacro Gorget", -- 10
-		Ear1 = "Mendi. Earring", -- 5
-		Back = "Solemnity Cape", -- 7
-		Waist = "Gishdubar Sash", --10rec
 	},
 	Regen = {
-		Head = "Rune. Bandeau +2",
-		Neck = "Sacro Gorget",
-		Legs = "Futhark Trousers +2",
 	},
 	Enhancing = {
-		Head = "Erilaz Galea +2",
-		Neck = "Incanter's Torque",
-		Legs = "Futhark Trousers +2",
 	},
 	Phalanx = {
-		Head = "Fu. Bandeau +1", -- 5
-		Neck = "Incanter's Torque",
 	},
 	Stoneskin = {
-		Waist = "Siegel Sash",
+		Neck = "Stone Gorget",
 	},
 	Temper = {
-		Neck = "Incanter's Torque",
-		Ear1 = "Andoaa Earring",
-		Ring1 = "Stikini Ring +1",
-		--Back = 'Merciful Cape',
-		Legs = "Carmine Cuisses +1",
 	},
 
 	Preshot = {},
 	Midshot = {
-		Ear1 = "Telos Earring",
-		Ear2 = "Crep. Earring",
 	},
 
 	Ws_Default = {
-		Ammo = "Knobkierrie",
-		Head = "Nyame Helm",
-		Neck = "Fotia Gorget",
-		Ear1 = "Sherida Earring",
-		Ear2 = "Telos Earring",
-		Body = "Nyame Mail",
-		Hands = "Futhark Mitons +3",
-		Ring1 = "Petrov Ring",
-		Ring2 = "Karieyh Ring +1",
-		Back = {
-			Name = "Ogma's Cape",
-			Augment = {
-				[1] = '"Dbl.Atk."+10',
-				[2] = "Phys. dmg. taken -10%",
-				[3] = "Accuracy+20",
-				[4] = "Attack+20",
-				[5] = "DEX+20",
-			},
-		},
-		Waist = "Fotia Belt",
-		Legs = "Nyame Flanchard",
-		Feet = {
-			Name = "Herculean Boots",
-			Augment = { [1] = "Accuracy+30", [2] = "Weapon skill damage +8%", [3] = "Attack+6", [4] = "Mag. Acc.+2" },
-		},
 	},
 	Ws_Hybrid = {},
 	Ws_Acc = {},
 	Dimi_Default = {
-		Ammo = "Knobkierrie",
-		Head = "Blistering Sallet +1",
-		Neck = "Fotia Gorget",
-		Ear1 = "Sherida Earring",
-		Ear2 = "Telos Earring",
-		Body = "Nyame Mail",
-		Hands = "Meg. Gloves +2",
-		Ring1 = "Ilabrat Ring",
-		Ring2 = "Karieyh Ring +1",
-		Back = {
-			Name = "Ogma's Cape",
-			Augment = {
-				[1] = '"Dbl.Atk."+10',
-				[2] = "Phys. dmg. taken -10%",
-				[3] = "Accuracy+20",
-				[4] = "Attack+20",
-				[5] = "DEX+20",
-			},
-		},
-		Waist = "Fotia Belt",
-		Legs = "Lustratio Subligar",
-		Feet = {
-			Name = "Herculean Boots",
-			Augment = { [1] = "Accuracy+30", [2] = "Weapon skill damage +8%", [3] = "Attack+6", [4] = "Mag. Acc.+2" },
-		},
 	},
 	Dimi_Hybrid = {},
 	Dimi_Acc = {},
 	Reso_Default = {
-		Ammo = "Seeth. Bomblet +1",
-		Head = "Lustratio Cap",
-		Neck = "Fotia Gorget",
-		Ear1 = "Sherida Earring",
-		Ear2 = "Telos Earring",
-		Body = "Nyame Mail",
-		Hands = "Adhemar Wrist. +1",
-		Ring1 = "Niqmaddu Ring",
-		Ring2 = "Epona's Ring",
-		Back = {
-			Name = "Ogma's Cape",
-			Augment = {
-				[1] = '"Dbl.Atk."+10',
-				[2] = "Phys. dmg. taken -10%",
-				[3] = "Accuracy+20",
-				[4] = "Attack+20",
-				[5] = "DEX+20",
-			},
-		}, --str better
-		Waist = "Fotia Belt",
-		Legs = "Meg. Chausses +2",
-		Feet = "Lustratio Leggings",
 	},
 	Reso_Hybrid = {},
 	Reso_Acc = {},
 	Shockwave_Default = {
-		Ammo = "Seeth. Bomblet +1",
-		Head = "Nyame Helm",
-		Neck = "Sanctity Necklace",
-		Ear1 = "Friomisi Earring",
-		Ear2 = "Crematio Earring",
-		Body = "Nyame Mail",
-		Ring1 = "Shiva Ring +1",
-		Ring2 = "Karieyh Ring +1",
-		Back = {
-			Name = "Ogma's Cape",
-			Augment = {
-				[1] = '"Dbl.Atk."+10',
-				[2] = "Phys. dmg. taken -10%",
-				[3] = "Accuracy+20",
-				[4] = "Attack+20",
-				[5] = "DEX+20",
-			},
-		}, --str better
-		Waist = "Acuity Belt +1",
-		Legs = "Nyame Flanchard",
-		Feet = "Nyame Sollerets",
 	},
 	Shockwave_Hybrid = {},
 	Shockwave_Acc = {},
 
 	Sforzo = {
-		Body = "Futhark Coat +3",
 	},
 	Swipe = {
-		Ammo = "Seeth. Bomblet +1",
-		Head = "Agwu's Cap",
-		Neck = "Baetyl Pendant",
-		Ear2 = "Crematio Earring",
-		Body = "Agwu's Robe",
-		Hands = "Nyame Gauntlets",
-		Ring1 = "Shiva Ring +1",
-		Ring2 = { Name = "Metamor. Ring +1", AugPath = "A" },
-		Waist = "Eschan Stone",
-		Legs = "Agwu's Slops",
-		Feet = "Agwu's Pigaches",
 	},
 	Pulse = {
-		Head = "Erilaz Galea +2",
 	},
 	Vallation = {
-		Body = "Runeist Coat +1",
 	},
 	Battuta = {
-		Head = "Fu. Bandeau +1",
 	},
 	Swordplay = {
-		Hands = "Futhark Mitons +3",
 	},
 
 	TH = {
-		Ammo = "Per. Lucky Egg",
-		Waist = "Chaac Belt",
-		Feet = {
-			Name = "Herculean Boots",
-			Augment = {
-				[1] = 'Potency of "Cure" effect received+5%',
-				[2] = "Mag. Acc.+19",
-				[3] = "Accuracy+21",
-				[4] = '"Mag. Atk. Bns."+19',
-				[5] = '"Treasure Hunter"+2',
-			},
-		},
 	},
 	Movement = {
-		Legs = "Carmine Cuisses +1",
 	},
+	Relic = {},
+	Artifact = {},
+	['gear'] = {
+
+	},
+	['manaburn'] = {
+		Main = 'Chatoyant Staff',
+		Sub = 'Neph. Grip',
+		Ammo = 'Morion Tathlum',
+		Head = { Name = 'Gambler\'s Chapeau', Augment = { [1] = 'Accuracy+3', [2] = '"Mag. Atk. Bns."+1' } },
+		Ear1 = 'Moldavite Earring',
+		Ear2 = 'Morion Earring',
+		Body = { Name = 'Brigandine +1', Augment = { [1] = 'Attack+4', [2] = 'STR+2', [3] = 'HP+10', [4] = 'MP+10', [5] = 'AGI+2' } },
+		Hands = 'Garrison Gloves +1',
+		Ring1 = 'Tamas Ring',
+		Ring2 = 'Eremite\'s Ring',
+		Back = 'Bonze Cape',
+		Waist = 'Ryl.Kgt. Belt',
+		Legs = { Name = 'Shade Tights', Augment = { [1] = 'STR+2', [2] = 'INT+2' } },
+		Feet = 'Garrison Boots +1',
+	},
+
 }
 profile.Sets = sets
 
@@ -494,7 +148,7 @@ profile.OnLoad = function()
 	gSettings.AllowAddSet = true
 	gcinclude.Initialize()
 
-	AshitaCore:GetChatManager():QueueCommand(1, "/macro book 11")
+	AshitaCore:GetChatManager():QueueCommand(1, "/macro book 22")
 	AshitaCore:GetChatManager():QueueCommand(1, "/macro set 1")
 end
 
@@ -507,11 +161,19 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	if gcdisplay.GetCycle("craft") == "none" then
 		gFunc.EquipSet(sets.Idle)
 	end
 
-	local player = gData.GetPlayer()
 	if player.Status == "Engaged" then
 		gFunc.EquipSet(sets.Tp_Default)
 		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
@@ -520,9 +182,9 @@ profile.HandleDefault = function()
 		if gcdisplay.GetToggle("TH") == true then
 			gFunc.EquipSet(sets.TH)
 		end
-		if gcdisplay.GetCycle("TankSet") ~= "None" then
-			gFunc.EquipSet("Tank_" .. gcdisplay.GetCycle("TankSet"))
-		end
+		--		if gcdisplay.GetCycle("TankSet") ~= "None" then
+		--			gFunc.EquipSet("Tank_" .. gcdisplay.GetCycle("TankSet"))
+		--		end
 	elseif player.Status == "Resting" then
 		gFunc.EquipSet(sets.Resting)
 	elseif player.IsMoving == true then
@@ -574,6 +236,15 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	local spell = gData.GetAction()
 	local val = gData.GetBuffCount("Valiance")
 	local vall = gData.GetBuffCount("Vallation")
@@ -591,6 +262,15 @@ profile.HandlePrecast = function()
 end
 
 profile.HandleMidcast = function() --sloppy set handling here, need to clean this up
+	-- handle levelsync
+	local player = gData.GetPlayer()
+	local myLevel = player.MainJobSync
+
+	if myLevel ~= Settings.CurrentLevel then
+		gFunc.EvaluateLevels(profile.Sets, myLevel)
+		Settings.CurrentLevel = myLevel
+	end
+
 	local spell = gData.GetAction()
 
 	gFunc.EquipSet(sets.SIR)

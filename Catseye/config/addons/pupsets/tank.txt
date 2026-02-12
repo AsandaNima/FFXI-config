@@ -1,14 +1,14 @@
 Valoredge Head
 Valoredge Frame
 Strobe
-Tension Spring
-Armor Plate II
+Tension Spring III
+Armor Plate III
 Magniplug
 Schurzen
-Accelerator
+Barrier Module
 Shock Absorber
-Inhibitor
-Optic Fiber
 Stabilizer
-Flame Holder
+Steam Jacket
+Optic Fiber
+Attuner
 Auto-Repair Kit III
