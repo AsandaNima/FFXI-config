@@ -17,11 +17,21 @@ local sets = {
 	Idle_Refresh = {},
 	Town = {},
 	Dt = {},
-	Tp_Default_Priority = { --21% haste, need 25% for cap
-		Head = { "Yagudo Crown", -- 5% haste
-			"Adhemar Bonnet", "Optical Hat", "Heroic Hairpin", "Empress Hairpin", "Garrison Sallet +1", "Fungus Hat",
-			"Cmp. Eye Circlet" },
-		Neck = { "Peacock Charm", "Spike Necklace", "Pile Chain" },
+	Tp_Default_Priority = {                    -- focus on haste (21% haste, need 25% for cap) and accuracy > attk > stats > defense stats
+		Head = {
+			{ Name = "Yagudo Crown",      Level = 75 }, -- 5% haste
+			{ Name = "Optical Hat",       Level = 70 }, -- 3% haste
+			{ Name = "Heroic Hairpin",    Level = 30 }, -- 2% haste, -2 PDT
+			{ Name = "Empress Hairpin",   Level = 24 }, -- 3 Dex, 3 Agi, 10 evasion
+			{ Name = "Fungus Hat",        Level = 14 }, -- 1% haste
+			{ Name = "Cmp. Eye Circlet",  Level = 9 }, -- 5% evasion
+			{ Name = "Protective Specs.", Level = 1 }, -- Rule of Cool
+		},
+		Neck = {
+			{ Name = "Peacock Charm",  Level = 33 }, -- 10 Acc, 10 RAcc
+			{ Name = "Spike Necklace", Level = 21 }, -- 3 Dex
+			{ Name = "Pile Chain",     Level = 3 }, -- 1 Acc
+		},
 		Ear1 = { "Brutal Earring", "Outlaw's Earring", "Pigeon Earring", "Tribal Earring" },
 		Ear2 = { "Suppanomimi", "Wilder. Earring +1", "Pigeon Earring", "Optical Earring" },
 
@@ -29,8 +39,8 @@ local sets = {
 			"Scorpion Harness", "Dino Jerkin", "Brigandine +1", "Garrison Tunica +1", "Leather Vest", "Mithran Separates" },
 		Hands = { "Adhemar Wristbands", -- 3% haste
 			"Battle Gloves", "Mithran Gauntlets" },
-		Ring1 = { "Rajas Ring", "Archer's Ring", "Balance Ring +1" },
-		Ring2 = { "Zilant Ring", "Ulthalam's Ring", "Archer's Ring", "Balance Ring +1" },
+		Ring1 = { "Rajas Ring", "Archer's Ring", "Balance Ring +1", "Bastokan Ring" },
+		Ring2 = { "Zilant Ring", "Ulthalam's Ring", "Archer's Ring", "Balance Ring +1", "San d'Orian Ring" },
 
 		Back = { "Nomad's Mantle", "Sniper's Shroud" },
 		Waist = { "Ninurta's Sash", -- 6% haste
@@ -59,7 +69,7 @@ local sets = {
 		Head = {
 			{ Name = "Adhemar Bonnet",  Level = 75 }, -- 6 Dex, 6 Agi, 3 Crit
 			{ Name = "Optical Hat",     Level = 70 }, -- 3 Dex, 3 Agi, 10 Acc
-			{ Name = "Empress Hairpin", Level = 24 }, -- 3 Dex, 3 Agi
+			{ Name = "Empress Hairpin", Level = 24 }, -- 3 Dex, 3 Agi, 10 evasion
 		},
 		Neck = {
 			{ Name = "Spike Necklace", Level = 21 }, -- 3 Dex
@@ -99,7 +109,7 @@ local sets = {
 			{ Name = "Lizard Belt",   Level = 17 }, -- 2 Dex
 		},
 		Legs = {
-			{ Name = "Adhemar Kecks",    Level = 75 }, -- 4 Dex, 10 Dagger
+			{ Name = "Adhemar Kecks",    Level = 75 }, -- 4 Dex, 4 Agi, 10 Dagger
 			{ Name = "Garrison Hose +1", Level = 20 }, -- 2 Dex, 2 Str
 		},
 		Feet = {
@@ -107,15 +117,15 @@ local sets = {
 			{ Name = "Leaping Boots",    Level = 7 }, -- 3 Dex, 3 Agi
 		},
 	},
-	AGI_Set_Priority = {                     -- Set focused on AGI for Trick Attack and AGI based WS ==> max Agi:
+	AGI_Set_Priority = {                     -- Set focused on AGI for Trick Attack and AGI based WS ==> max Agi: 42
 		Head = {
 			{ Name = "Dragon Cap",      Level = 73 }, -- 6 Dex, 4 Dagger
 			{ Name = "Optical Hat",     Level = 70 }, -- 3 Dex, 3 Agi, 10 Acc
-			{ Name = "Empress Hairpin", Level = 24 }, -- 3 Dex, 3 Agi
+			{ Name = "Empress Hairpin", Level = 24 }, -- 3 Dex, 3 Agi, 10 evasion
 		},
-		--		Neck = {
-		--			{ Name = "Spike Necklace", Level = 21 }, -- 3 Dex
-		--		},
+		Neck = {
+			{ Name = "Rabbit Charm", Level = 21 }, -- 2 Agi
+		},
 		Ear1 = {
 			{ Name = "Drone Earring", Level = 35 }, -- 3 Agi
 		},
@@ -128,7 +138,7 @@ local sets = {
 			{ Name = "Brigadine +1", Level = 45 }, -- 3 Dex, 3 Agi, 3 Str, 4 Attk
 		},
 		Hands = {
-			{ Name = "Rog. Armlets +1", Level = 47 }, -- Increase "Trick Attack" damage
+			--			{ Name = "Rog. Armlets +1", Level = 47 }, -- Increase "Trick Attack" damage
 		},
 		Ring1 = {
 			{ Name = "Sattva Ring",    Level = 30 }, -- 5 Agi
@@ -145,20 +155,22 @@ local sets = {
 			{ Name = "Sniper's Shroud", Level = 8 }, -- 1 Agi, 1 Str
 		},
 		Waist = {
-			{ Name = "Warwolf Belt",  Level = 71 }, -- 5 Dex
 			{ Name = "Ryl.Kgt. Belt", Level = 50 }, -- 2 Dex, 2 Agi, 2 Str
-			{ Name = "Lizard Belt",   Level = 17 }, -- 2 Dex
+			{ Name = "Leather Belt",  Level = 7 }, -- 1 Agi
 		},
 		Legs = {
-			{ Name = "Adhemar Kecks",    Level = 75 }, -- 4 Dex, 10 Dagger
-			{ Name = "Garrison Hose +1", Level = 20 }, -- 2 Dex, 2 Str
+			{ Name = "Adhemar Kecks",    Level = 75 }, -- 4 Dex, 4 Agi, 10 Dagger
+			{ Name = "Rogue's Culottes", Level = 56 }, -- 4 Agi
+			{ Name = "Dino Trousers",    Level = 48 }, -- 4 Agi, 5 Acc
+			{ Name = "Noct Brais",       Level = 30 }, -- 2 Agi, 2 Acc
 		},
 		Feet = {
 			{ Name = "Adsilio Boots +1", Level = 75 }, -- 5 Dex, 5 Agi, 3 Acc
+			{ Name = "Dino Ledelsens",   Level = 48 }, -- 4 Agi
 			{ Name = "Leaping Boots",    Level = 7 }, -- 3 Dex, 3 Agi
 		},
 	},
-	Ws_Default_Priority = {
+	Ws_Default_Priority = { -- focus more on +Skill, Attk and Str for better base dmg, it will be overwritten by the stats-sets for specific WS anyway
 		Head = { "Adhemar Bonnet", "Shade Tiara" },
 		Neck = { "Fotia Gorget", "Spike Necklace" },
 		Ear1 = { "Pigeon Earring" },
@@ -265,6 +277,7 @@ local sets = {
 	},
 	Steal = {
 		Head = "Rogue's Bonnet", -- +1steal
+		Neck = "Rabbit Charm",  -- +1steal
 		hands = "Rog. Armlets +1", -- +1steal
 		Ring2 = "Rogue's Ring", -- +3steal
 		Legs = "Assassin's Culottes", -- +5steal
