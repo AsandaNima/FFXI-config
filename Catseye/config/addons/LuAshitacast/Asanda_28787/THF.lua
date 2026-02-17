@@ -30,25 +30,74 @@ local sets = {
 		Neck = {
 			{ Name = "Peacock Charm",  Level = 33 }, -- 10 Acc, 10 RAcc
 			{ Name = "Spike Necklace", Level = 21 }, -- 3 Dex
+			{ Name = "Rabbit Charm",   Level = 7 }, -- +2 Dex, +2 Agi
 			{ Name = "Pile Chain",     Level = 3 }, -- 1 Acc
 		},
-		Ear1 = { "Brutal Earring", "Outlaw's Earring", "Pigeon Earring", "Tribal Earring" },
-		Ear2 = { "Suppanomimi", "Wilder. Earring +1", "Pigeon Earring", "Optical Earring" },
+		Ear1 = {
+			{ Name = "Brutal Earring",   Level = 75 }, -- 5DA
+			{ Name = "Outlaw's Earring", Level = 50 },
+			{ Name = "Pigeon Earring",   Level = 33 },
+			{ Name = "Tribal Earring",   Level = 20 }
+		},
+		Ear2 = {
+			{ Name = "Suppanomimi",        Level = 72 }, -- DW
+			{ Name = "Wilder. Earring +1", Level = 45 },
+			{ Name = "Pigeon Earring",     Level = 33 },
+			{ Name = "Optical Earring",    Level = 10 },
+		},
 
-		Body = { "Adhemar Jacket", -- 3% haste
-			"Scorpion Harness", "Dino Jerkin", "Brigandine +1", "Garrison Tunica +1", "Leather Vest", "Mithran Separates" },
-		Hands = { "Adhemar Wristbands", -- 3% haste
-			"Battle Gloves", "Mithran Gauntlets" },
-		Ring1 = { "Rajas Ring", "Archer's Ring", "Balance Ring +1", "Bastokan Ring" },
-		Ring2 = { "Zilant Ring", "Ulthalam's Ring", "Archer's Ring", "Balance Ring +1", "San d'Orian Ring" },
+		Body = {
+			--{ Name = "Adhemar Jacket",     Level = 75 }, -- 3% haste
+			--{ Name = "Scorpion Harness",   Level = 57 }, -- 10 acc, 10 Evasion
+			{ Name = "Rapparee Harness",   Level = 50 }, -- 4% haste
+			{ Name = "Dino Jerkin",        Level = 48 },
+			{ Name = "Brigandine +1",      Level = 45 },
+			{ Name = "Garrison Tunica +1", Level = 20 },
+			{ Name = "Leather Vest",       Level = 7 },
+			{ Name = "Mithran Separates",  Level = 1 },
+		},
+		Hands = {
+			"Adhemar Wristbands", -- 3% haste
+			"Battle Gloves",
+			"Mithran Gauntlets",
+		},
+		Ring1 = {
+			"Rajas Ring",
+			"Archer's Ring",
+			"Balance Ring +1",
+			"Bastokan Ring",
+		},
+		Ring2 = {
+			"Zilant Ring",
+			"Ulthalam's Ring",
+			"Archer's Ring",
+			"Balance Ring +1",
+			"San d'Orian Ring",
+		},
 
-		Back = { "Nomad's Mantle", "Sniper's Shroud" },
-		Waist = { "Ninurta's Sash", -- 6% haste
-			"Swift Belt", "Tilt Belt", "Lizard Belt", "Leather Belt" },
+		Back = {
+			"Nomad's Mantle",
+			"Sniper's Shroud",
+		},
+		Waist = {
+			"Ninurta's Sash", -- 6% haste
+			"Swift Belt",
+			"Tilt Belt",
+			"Lizard Belt",
+			"Leather Belt",
+		},
 		Legs = { "Adhemar Kecks", -- 4% haste
-			"Dino Trousers", "Garrison Hose +1", "Phl. Trousers", "Mithran Loincloth" },
+			"Dino Trousers",
+			"Garrison Hose +1",
+			"Phl. Trousers",
+			"Mithran Loincloth",
+		},
 		Feet = { "Rog. Poulaines +1", -- 1% haste
-			"Adhemar Gamashes", "Dino Ledelsens", "Leaping Boots", "Mithran Gaiters" },
+			"Adhemar Gamashes",
+			"Dino Ledelsens",
+			"Leaping Boots",
+			"Mithran Gaiters",
+		},
 	},
 	Precast = {
 		Head = "Yagudo Crown",  -- 5% haste
@@ -78,13 +127,13 @@ local sets = {
 			{ Name = "Outlaw's Earring", Level = 50 }, -- 2 Dex, 3 Attk
 		},
 		Ear2 = {
-			{ Name = "Minuet Earring", Level = 75 }, -- 1 Dex
+			{ Name = "Minuet Earring", Level = 61 }, -- 1 Dex
 		},
 
 		Body = {
 			{ Name = "Dino Jerkin",        Level = 48 }, -- 4 Dex, 8 Attk
 			{ Name = "Brigadine +1",       Level = 45 }, -- 3 Dex, 3 Agi, 3 Str, 4 Attk
-			{ Name = "Garrison Runica +1", Level = 20 },
+			{ Name = "Garrison Tunica +1", Level = 20 }, -- 2 Dex
 		},
 		Hands = {
 			{ Name = "Raptor Gloves", Level = 48 }, -- 4 Dex
@@ -124,7 +173,7 @@ local sets = {
 			{ Name = "Empress Hairpin", Level = 24 }, -- 3 Dex, 3 Agi, 10 evasion
 		},
 		Neck = {
-			{ Name = "Rabbit Charm", Level = 21 }, -- 2 Agi
+			{ Name = "Rabbit Charm", Level = 7 }, -- 2 Agi
 		},
 		Ear1 = {
 			{ Name = "Drone Earring", Level = 35 }, -- 3 Agi
@@ -170,110 +219,220 @@ local sets = {
 			{ Name = "Leaping Boots",    Level = 7 }, -- 3 Dex, 3 Agi
 		},
 	},
-	Ws_Default_Priority = { -- focus more on +Skill, Attk and Str for better base dmg, it will be overwritten by the stats-sets for specific WS anyway
-		Head = { "Adhemar Bonnet", "Shade Tiara" },
-		Neck = { "Fotia Gorget", "Spike Necklace" },
-		Ear1 = { "Pigeon Earring" },
-		Ear2 = { "Pigeon Earring" },
+	Ws_Default_Priority = {              -- focus more on +Skill, Attk and Str for better base dmg, it will be overwritten by the stats-sets for specific WS anyway
+		Head = {
+			{ Name = "Dragon Cap",  Level = 73 }, -- 4 Dagger skill
+			{ Name = "Dino Helm",   Level = 48 }, -- 4 Attack
+			{ Name = "Shade Tiara", Level = 25 }, -- +2 Str
+		},
+		Neck = {
+			{ Name = "Spike Necklace", Level = 21 }, -- 3 Str
+		},
+		Ear1 = {
+			{ Name = "Pigeon Earring", Level = 33 } -- 1 Str, 2 Attack
+		},
+		Ear2 = {
+			{ Name = "Pigeon Earring", Level = 33 } -- 1 Str, 2 Attack
+		},
 
-		Body = { "Adhemar Jacket", "Assault Jerkin", "Brigandine +1" },
-		Hands = { "Adhemar Wristbands", "Guerilla Gloves" },
-		Ring1 = { "Rajas Ring" },
-		Ring2 = { "Zilant Ring", "Ulthalam's Ring" },
+		Body = {
+			{ Name = "Assault Jerkin",   Level = 67 }, -- 18 Attack
+			{ Name = "Brigadine +1",     Level = 45 }, -- 3 Dex, 3 Agi, 3 Str, 4 Attk
+			{ Name = "Savage Separates", Level = 33 }, -- 1 Str
+		},
+		Hands = {
+			{ Name = "Adhemar Wristbands", Level = 75 }, -- 10 Attack
+			{ Name = "Shade Mittens",      Level = 25 }, -- 2 Str
+			{ Name = "Guerilla Gloves",    Level = 13 }, -- 2 Attack
+		},
+		Ring1 = {
+			{ Name = "Rajas Ring", Level = 30 }, -- 5 Dex, 5 Str
+		},
+		Ring2 = {
+			{ Name = "Ulthalam's Ring", Level = 50 }, -- 4 Attack
+		},
 
-		Back = { "Assassin's Cape", "Exile's Cloak" },
-		Waist = { "Warwolf Belt", "Virtuoso Belt" },
-		Legs = { "Adhemar Kecks", "Garrison Hose +1" },
-		Feet = { "Adhemar Gamashes", "Savage Gaiters" },
+		Back = {
+			{ Name = "Charger Mantle",   Level = 70 }, -- 20 Attack
+			{ Name = "Amemet Mantle +1", Level = 61 }, -- 2 Str, 15 Attack
+			{ Name = "Exile's Cloak",    Level = 50 }, -- 3 Str, 3 attack
+			{ Name = "Sniper's Shroud",  Level = 8 }, -- 1 Str
+		},
+		Waist = {
+			{ Name = "Warwolf Belt",  Level = 71 }, -- 5 Str
+			{ Name = "Virtuoso Belt", Level = 54 }, -- 4 Attack
+			{ Name = "Ryl.Kgt. Belt", Level = 50 }, -- 2 Str
+		},
+		Legs = {
+			{ Name = "Adhemar Kecks",    Level = 75 }, -- 10 Dagger
+			{ Name = "Garrison Hose +1", Level = 20 }, -- 2 Str
+			{ Name = "Phl. Trousers",    Level = 15 }, -- 1 Str
+		},
+		Feet = {
+			{ Name = "Adhemar Gamashes", Level = 75 }, -- 5 Str
+			{ Name = "Savage Gaiters",   Level = 29 }, -- 3 Str
+		},
 	},
-	Ws_Default_SA_Priority = {
-		Head = "Adhemar Bonnet",
-		Neck = "Fotia Gorget",
-		Ear2 = "Outlaw's Earring",
-
-		Body = "Dino Jerkin",
-		Hands = "Adhemar Wristbands",
-		Ring1 = "Rajas Ring",
-		Ring2 = "Zilant Ring",
-
-		Back = "Assassin's Cape",
-		Waist = "Warwolf Belt",
-		Legs = "Adhemar Kecks",
-		Feet = "Adhemar Gamashes",
-	},
-	Ws_Default_TA_Priority = {
-		hands = "Rog. Armlets +1",
-	},
-	Ws_Default_SATA_Priority = {},
-	Evis_Default = {},
-	Evis_Default_SA = {},
-	Evis_Default_TA = {},
-	Evis_Default_SATA = {},
-	Exent_Default = {        -- AGI > attak >rest
-		Head = "Dragon Cap", -- +6
-		Neck = "Fotia Gorget",
-		Ear1 = "Drone Earring", -- +3, can be upgraded by handits earring from TT, need 15 shakudo ingot
-		Ear2 = "Drone Earring", -- +3
-		body = "Asn. Vest +1", -- +5 , can be upgraded with bone harnes with augments, but needs wyrm bone...
-		-- Hands = "", -- dragon mittens or skadis seems the best
-		Ring1 = "Sattva Ring", -- +5
-		Ring2 = "Breeze Ring", -- +5
-		Back = "Assassin's Cape", -- +4
-		Waist = "Ryl.Kgt. Belt", -- +2
-		Legs = "Adhemar Kecks", -- +4
-		Feet = "Adsilio Boots +1", -- +5
-	},
-	Exent_Default_SA = {},
-	Exent_Default_TA = {
-		hands = "Rog. Armlets +1",
-	},
-	Exent_Default_SATA = {},
 	SATA_Priority = {
-		Head = { "Adhemar Bonnet", "Empress Hairpin" },
-		Neck = { "Spike Necklace" },
-		Ear1 = { "Drone Earring" },
-		Ear2 = { "Outlaw's Earring" },
-		Body = { "Brigandine +1", "Garrison Tunica +1" },
-		hands = { "Rog. Armlets +1", "Raptor Gloves", "Noct Gloves" },
-		Ring1 = { "Rajas Ring" },
-		Ring2 = { "Zilant Ring" },
-		Back = { "Assassin's Cape" },
-		Waist = { "Warwolf Belt", "Ryl.Kgt. Belt", "Mrc.Cpt. Belt" },
-		Legs = { "Adhemar Kecks", "Garrison Hose +1" },
-		Feet = { "Adhemar Gamashes" },
+		Head = {
+			{ Name = "Adhemar Bonnet",  Level = 75 }, -- 6 Dex, 6 Agi, 3 Crit
+			{ Name = "Dragon Cap",      Level = 73 }, -- 6 Dex, 4 Dagger
+			{ Name = "Optical Hat",     Level = 70 }, -- 3 Dex, 3 Agi, 10 Acc
+			{ Name = "Empress Hairpin", Level = 24 }, -- 3 Dex, 3 Agi, 10 evasion
+		},
+		Neck = {
+			{ Name = "Rabbit Charm", Level = 7 }, -- 2 Dex, 2 Agi
+		},
+		Ear1 = {
+			{ Name = "Drone Earring", Level = 35 }, -- 3 Agi
+		},
+		Ear2 = {
+			{ Name = "Drone Earring", Level = 35 }, -- 3 Agi
+		},
+
+		Body = {
+			{ Name = "Asn. Vest +1",       Level = 75 }, -- 5 Agi
+			{ Name = "Brigadine +1",       Level = 45 }, -- 3 Dex, 3 Agi, 3 Str, 4 Attk
+			{ Name = "Garrison Tunica +1", Level = 20 }, -- 2 Dex
+
+		},
+		hands = {
+			"Rog. Armlets +1", "Raptor Gloves", "Noct Gloves"
+		},
+		Ring1 = {
+			"Rajas Ring"
+		},
+		Ring2 = {
+			"Zilant Ring"
+		},
+		Back = {
+			"Assassin's Cape"
+		},
+		Waist = {
+			"Warwolf Belt", "Ryl.Kgt. Belt", "Mrc.Cpt. Belt"
+		},
+		Legs = {
+			"Adhemar Kecks", "Garrison Hose +1"
+		},
+		Feet = {
+			"Adhemar Gamashes"
+		},
 	},
 	SA_Priority = {
-		Head = { "Adhemar Bonnet", "Empress Hairpin" },
-		Neck = { "Spike Necklace" },
-		Ear2 = { "Outlaw's Earring" },
-		Body = { "Dino Jerkin", "Brigandine +1", "Garrison Tunica +1" },
-		Hands = { "Adhemar Wristbands", "Raptor Gloves", "Noct Gloves" },
-		Ring1 = { "Rajas Ring" },
-		Ring2 = { "Zilant Ring" },
-		Back = { "Assassin's Cape", "Sniper's Shroud" },
-		Waist = { "Warwolf Belt", "Ryl.Kgt. Belt", "Mrc.Cpt. Belt" },
-		Legs = { "Adhemar Kecks", "Garrison Hose +1" },
-		Feet = { "Adhemar Gamashes" },
+		Head = {
+			{ Name = "Adhemar Bonnet",  Level = 75 }, -- 6 Dex, 6 Agi, 3 Crit
+			{ Name = "Optical Hat",     Level = 70 }, -- 3 Dex, 3 Agi, 10 Acc
+			{ Name = "Empress Hairpin", Level = 24 }, -- 3 Dex, 3 Agi, 10 evasion
+		},
+		Neck = {
+			{ Name = "Spike Necklace", Level = 21 }, -- 3 Dex
+		},
+		Ear1 = {
+			{ Name = "Outlaw's Earring", Level = 50 }, -- 2 Dex, 3 Attk
+		},
+		Ear2 = {
+			{ Name = "Minuet Earring", Level = 75 }, -- 1 Dex
+		},
+
+		Body = {
+			{ Name = "Dino Jerkin",        Level = 48 }, -- 4 Dex, 8 Attk
+			{ Name = "Brigadine +1",       Level = 45 }, -- 3 Dex, 3 Agi, 3 Str, 4 Attk
+			{ Name = "Garrison Tunica +1", Level = 20 }, -- 2 Dex
+		},
+		Hands = {
+			{ Name = "Raptor Gloves", Level = 48 }, -- 4 Dex
+			{ Name = "Noct Gloves",   Level = 75 }, -- 2 Dex
+		},
+		Ring1 = {
+			{ Name = "Rajas Ring",      Level = 30 }, -- 5 Dex, 5 Str
+			{ Name = "Balance Ring +1", Level = 14 }, -- 2 Dex
+		},
+		Ring2 = {
+			{ Name = "Zilant Ring",     Level = 75 }, -- 6 Dex, 3 Acc
+			{ Name = "Balance Ring +1", Level = 14 }, -- 2 Dex
+		},
+
+		Back = {
+			{ Name = "Assassin's Cape", Level = 70 }, -- 4 Dex, 4 Agi
+			{ Name = "Ram Mantle",      Level = 36 }, -- 2 Dex, 2 Agi
+		},
+		Waist = {
+			{ Name = "Warwolf Belt",  Level = 71 }, -- 5 Dex
+			{ Name = "Ryl.Kgt. Belt", Level = 50 }, -- 2 Dex, 2 Agi, 2 Str
+			{ Name = "Lizard Belt",   Level = 17 }, -- 2 Dex
+		},
+		Legs = {
+			{ Name = "Adhemar Kecks",    Level = 75 }, -- 4 Dex, 4 Agi, 10 Dagger
+			{ Name = "Garrison Hose +1", Level = 20 }, -- 2 Dex, 2 Str
+		},
+		Feet = {
+			{ Name = "Adsilio Boots +1", Level = 75 }, -- 5 Dex, 5 Agi, 3 Acc
+			{ Name = "Leaping Boots",    Level = 7 }, -- 3 Dex, 3 Agi
+		},
 	},
 	TA_Priority = {
-		Head = { "Adhemar Bonnet", "Empress Hairpin" },
-		Ear1 = { "Drone Earring" },
-		Ear2 = { "Drone Earring" },
-		Body = { "Brigandine +1" },
-		hands = { "Rog. Armlets +1" },
-		Ring1 = { "Sattva Ring", "Reflex Ring" },
-		Ring2 = { "Breeze Ring", "Reflex Ring" },
-		Waist = { "Ryl.Kgt. Belt", "Mrc.Cpt. Belt" },
-		Legs = { "Dino Trousers", "Rogue's Culottes", "Noct Brais" },
-		Feet = { "Dino Ledelsens" },
+		Head = {
+			{ Name = "Dragon Cap",      Level = 73 }, -- 6 Dex, 4 Dagger
+			{ Name = "Optical Hat",     Level = 70 }, -- 3 Dex, 3 Agi, 10 Acc
+			{ Name = "Empress Hairpin", Level = 24 }, -- 3 Dex, 3 Agi, 10 evasion
+		},
+		Neck = {
+			{ Name = "Rabbit Charm", Level = 21 }, -- 2 Agi
+		},
+		Ear1 = {
+			{ Name = "Drone Earring", Level = 35 }, -- 3 Agi
+		},
+		Ear2 = {
+			{ Name = "Drone Earring", Level = 35 }, -- 3 Agi
+		},
 
+		Body = {
+			{ Name = "Asn. Vest +1", Level = 75 }, -- 5 Agi
+			{ Name = "Brigadine +1", Level = 45 }, -- 3 Dex, 3 Agi, 3 Str, 4 Attk
+		},
+		Hands = {
+			{ Name = "Rog. Armlets +1", Level = 47 }, -- Increase "Trick Attack" damage
+		},
+		Ring1 = {
+			{ Name = "Sattva Ring",    Level = 30 }, -- 5 Agi
+			{ Name = "Reflex Ring +1", Level = 14 }, -- 2 Agi
+		},
+		Ring2 = {
+			{ Name = "Breeze Ring",    Level = 75 }, -- 5 Agi
+			{ Name = "Reflex Ring +1", Level = 14 }, -- 2 Agi
+		},
+
+		Back = {
+			{ Name = "Assassin's Cape", Level = 70 }, -- 4 Dex, 4 Agi
+			{ Name = "Ram Mantle",      Level = 36 }, -- 2 Dex, 2 Agi
+			{ Name = "Sniper's Shroud", Level = 8 }, -- 1 Agi, 1 Str
+		},
+		Waist = {
+			{ Name = "Ryl.Kgt. Belt", Level = 50 }, -- 2 Dex, 2 Agi, 2 Str
+			{ Name = "Leather Belt",  Level = 7 }, -- 1 Agi
+		},
+		Legs = {
+			{ Name = "Adhemar Kecks",    Level = 75 }, -- 4 Dex, 4 Agi, 10 Dagger
+			{ Name = "Rogue's Culottes", Level = 56 }, -- 4 Agi
+			{ Name = "Dino Trousers",    Level = 48 }, -- 4 Agi, 5 Acc
+			{ Name = "Noct Brais",       Level = 30 }, -- 2 Agi, 2 Acc
+		},
+		Feet = {
+			{ Name = "Adsilio Boots +1", Level = 75 }, -- 5 Dex, 5 Agi, 3 Acc
+			{ Name = "Dino Ledelsens",   Level = 48 }, -- 4 Agi
+			{ Name = "Leaping Boots",    Level = 7 }, -- 3 Dex, 3 Agi
+		},
 	},
 	TH = {},
-	Flee = {
-		feet = "Rog. Poulaines +1"
+	Flee_Priority = {
+		Feet = {
+			{ Name = "Rog. Poulaines +1", Level = 74 },
+		},
 	},
 	Hide = {
-		body = "Rog. Vest +1",
+		Body = {
+			{ Name = "Rog. Vest +1", Level = 74 },
+		},
 	},
 	Steal = {
 		Head = "Rogue's Bonnet", -- +1steal
@@ -446,44 +605,27 @@ profile.HandleWeaponskill = function()
 		local ws = gData.GetAction()
 		local sa = gData.GetBuffCount("Sneak Attack")
 		local ta = gData.GetBuffCount("Trick Attack")
-
+		-- put on the default WS set
 		gFunc.EquipSet(sets.Ws_Default)
-		if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
-			gFunc.EquipSet("Ws_" .. gcdisplay.GetCycle("MeleeSet"))
+		-- check for WS specific stats-set
+		-- Weaponskill based on DEX
+		if string.match(ws.Name, "Wasp") or
+			string.match(ws.Name, "Viper") or
+			string.match(ws.Name, "Evisceration") or
+			string.match(ws.Name, "Mandalic")
+		then
+			gFunc.EquipSet(sets.DEX_Set)
+			-- Weaponskill based on AGI
+		elseif string.match(ws.Name, "Exenterator") then
+			gFunc.EquipSet(sets.AGI_Set)
 		end
+		-- depending on Sneak Attack or Trick Attack put the corresponding set on top
 		if (sa == 1) and (ta == 1) then
-			gFunc.EquipSet("Ws_" .. gcdisplay.GetCycle("MeleeSet") .. "_SATA")
+			gFunc.EquipSet(sets.SATA)
 		elseif sa == 1 then
-			gFunc.EquipSet("Ws_" .. gcdisplay.GetCycle("MeleeSet") .. "_SA")
+			gFunc.EquipSet(sets.SA)
 		elseif ta == 1 then
-			gFunc.EquipSet("Ws_" .. gcdisplay.GetCycle("MeleeSet") .. "_TA")
-		end
-
-		if string.match(ws.Name, "Evisceration") then
-			gFunc.EquipSet(sets.Evis_Default)
-			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
-				gFunc.EquipSet("Evis_" .. gcdisplay.GetCycle("MeleeSet"))
-			end
-			if (sa == 1) and (ta == 1) then
-				gFunc.EquipSet("Evis_" .. gcdisplay.GetCycle("MeleeSet") .. "_SATA")
-			elseif sa == 1 then
-				gFunc.EquipSet("Evis_" .. gcdisplay.GetCycle("MeleeSet") .. "_SA")
-			elseif ta == 1 then
-				gFunc.EquipSet("Evis_" .. gcdisplay.GetCycle("MeleeSet") .. "_TA")
-			end
-		end
-		if string.match(ws.Name, "Exenterator") then
-			gFunc.EquipSet(sets.Exent_Default)
-			if gcdisplay.GetCycle("MeleeSet") ~= "Default" then
-				gFunc.EquipSet("Exent_" .. gcdisplay.GetCycle("MeleeSet"))
-			end
-			if (sa == 1) and (ta == 1) then
-				gFunc.EquipSet("Exent_" .. gcdisplay.GetCycle("MeleeSet") .. "_SATA")
-			elseif sa == 1 then
-				gFunc.EquipSet("Exent_" .. gcdisplay.GetCycle("MeleeSet") .. "_SA")
-			elseif ta == 1 then
-				gFunc.EquipSet("Exent_" .. gcdisplay.GetCycle("MeleeSet") .. "_TA")
-			end
+			gFunc.EquipSet(sets.TA)
 		end
 	end
 end

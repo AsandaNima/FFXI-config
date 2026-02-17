@@ -60,7 +60,11 @@ local sets = {
 	Midshot_Priority = {
 		Head = { "Optical Hat" },
 		Neck = { "Peacock Charm" },
+		Ear1 = { "Drone Earring" },
+		Ear2 = { "Drone Earring" },
 
+
+		Hands = { "Seiryu's Kote" },
 		Ring1 = { "Marid Ring" },
 		Ring2 = { "Marid Ring" },
 
@@ -90,7 +94,7 @@ local sets = {
 	Savage_Hybrid = {},
 	Savage_Acc = {},
 
-	Shoha_Default = {      --str > attack > acc >
+	Shoha_Default = {        --str > attack > acc >
 		Head = "Myn. Kabuto +1", -- +5str
 		Neck = "Fotia Gorget",
 		Ear1 = "Brutal Earring", -- +5 DA
@@ -101,7 +105,7 @@ local sets = {
 		Ring1 = "Rajas Ring", -- +5str
 		Ring2 = "Flame Ring", -- +5str
 
-		Back = "Exile's Cloak", -- +4str
+		Back = "Amemet Mantle +1", -- +4str
 		Waist = "Warwolf Belt", -- +5str
 		legs = "Ryuo Hakama", -- +5str and WS acc. Better than Haidate?
 		Feet = "Savage Gaiters", -- +3str
@@ -116,10 +120,10 @@ local sets = {
 		Ear1 = "Drone Earring",
 		Ear2 = "Drone Earring",
 		Body = "Brigandine +1",
-		Hands = "Myn. Kote +1",
+		Hands = "Seiryu's Kote",
 		Ring1 = "Sattva Ring",
 		Ring2 = "Breeze Ring",
-		Back = "Ram Mantle",
+		Back = "Amemet Mantle +1",
 		Waist = "Sao. Koshi-Ate",
 		Legs = "Saotome Haidate",
 		Feet = "Ryuo Sune-Ate",

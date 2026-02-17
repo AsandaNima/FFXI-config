@@ -63,7 +63,8 @@ local sets = {
 			"Outlaw's Earring", "Pigeon Earring", "Tribal Earring" },
 
 		Body = { "Rawhide Vest", -- 3% haste
-			"Scorpion Harness", "Dino Jerkin", "Brigandine +1", "Garrison Tunica +1", "Leather Vest", "Mithran Separates" },
+			"Scorpion Harness", "Rapparee Harness", "Dino Jerkin", "Brigandine +1", "Garrison Tunica +1", "Leather Vest",
+			"Mithran Separates" },
 		Hands = { "Rawhide Gloves", -- 3% haste
 			"Battle Gloves", "Mithran Gauntlets" },
 		Ring1 = { "Rajas Ring", "Archer's Ring", "Bastokan Ring" },
