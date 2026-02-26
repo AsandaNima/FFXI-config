@@ -145,14 +145,14 @@ local sets = {
 		Legs = { "Savage Loincloth" },
 		Feet = { "Seer's Pumps" },
 	},
-	Nuke = {
+	Nuke_Priority = {
 		Main = { "Chatoyant Staff" },
 		Head = { "Gambler's Chapeau" },
 		Ear1 = { "Moldavite Earring" },
 		Body = { "Illusionist's Garb", "Seer's Tunic" },
 		Hands = { "Garrison Gloves +1" },
-		Ring1 = { "Windurstian Ring" },
-		Ring2 = { "Hermit's Ring" },
+		Ring1 = { "Tamas Ring", "Eremite's Ring", "Windurstian Ring" },
+		Ring2 = { "Eremite's Ring" },
 		Back = { "Black Cape +1", "Bronze Cape" },
 		Waist = { "Mrc.Cpt. Belt" },
 		Legs = { "Seer's Slacks" },

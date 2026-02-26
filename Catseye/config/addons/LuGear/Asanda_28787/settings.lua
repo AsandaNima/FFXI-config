@@ -1,0 +1,35 @@
+require('common');
+
+local settings = T{ };
+settings["GlobalConfig"] = T{ };
+settings["Sets"] = T{ };
+settings["Sets"]["THF"] = T{ };
+settings["Sets"]["THF"]["Testing"] = T{ };
+settings["Sets"]["THF"]["Testing"]["Slots"] = T{ };
+settings["Sets"]["THF"]["Testing"]["Slots"]["Neck"] = T{ };
+settings["Sets"]["THF"]["Testing"]["Slots"]["Neck"][1] = T{ };
+settings["Sets"]["THF"]["Testing"]["Slots"]["Ranged"] = T{ };
+settings["Sets"]["THF"]["Testing"]["Slots"]["Ranged"][1] = T{ };
+settings["Sets"]["THF"]["Testing"]["Slots"]["Main"] = T{ };
+settings["Sets"]["THF"]["Testing"]["Slots"]["Main"][1] = T{ };
+settings["Sets"]["THF"]["Testing"]["Slots"]["Sub"] = T{ };
+settings["Sets"]["THF"]["Testing"]["Slots"]["Sub"][1] = T{ };
+settings["Sets"]["THF"]["Testing"]["Slots"]["Sub"][2] = T{ };
+settings["Sets"]["THF"]["Testing"]["Slots"]["Head"] = T{ };
+settings["Sets"]["THF"]["Testing"]["Slots"]["Head"][1] = T{ };
+settings["GlobalConfig"]["LevelSyncSetByDefault"] = true;
+settings["Sets"]["THF"]["Testing"]["Slots"]["Neck"][1]["Name"] = "Peacock Charm";
+settings["Sets"]["THF"]["Testing"]["Slots"]["Neck"][1]["Augments"] = "";
+settings["Sets"]["THF"]["Testing"]["Slots"]["Ranged"][1]["Name"] = "Crossbow";
+settings["Sets"]["THF"]["Testing"]["Slots"]["Ranged"][1]["Augments"] = "DMG/Resist \"Death\":+3 AGI+3 ";
+settings["Sets"]["THF"]["Testing"]["Slots"]["Main"][1]["Name"] = "Bushwhacker +1";
+settings["Sets"]["THF"]["Testing"]["Slots"]["Main"][1]["Augments"] = "";
+settings["Sets"]["THF"]["Testing"]["Slots"]["Sub"][1]["Name"] = "Kraken Club";
+settings["Sets"]["THF"]["Testing"]["Slots"]["Sub"][1]["Augments"] = "";
+settings["Sets"]["THF"]["Testing"]["Slots"]["Sub"][2]["Name"] = "Hornetneedle";
+settings["Sets"]["THF"]["Testing"]["Slots"]["Sub"][2]["Augments"] = "DMG/Resist \"Death\":+4 Delay:-10 DEX+2 ";
+settings["Sets"]["THF"]["Testing"]["Slots"]["Head"][1]["Name"] = "Dino Helm";
+settings["Sets"]["THF"]["Testing"]["Slots"]["Head"][1]["Augments"] = "HP+15 AGI+4 CHR+4 Attack+4 ";
+settings["Sets"]["THF"]["Testing"]["LevelSyncSet"] = true;
+
+return settings;

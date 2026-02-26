@@ -15,7 +15,9 @@ local sets = {
 	},
 	Resting = {},
 	Idle_Regen_Priority = {
-		Body = { "Scorpion Harness" },
+		Body = {
+			{ Name = "Scorpion Harness", Level = 57 },
+		},
 	},
 	Idle_Refresh = {},
 	Town = {},
@@ -23,25 +25,86 @@ local sets = {
 	Dt_Priority = {},
 
 	Tp_Default_Priority = {
-		Head = { "Empress Hairpin", "Garrison Sallet +1", "Fungus Hat" },
-		Neck = { "Peacock Charm", "Spike Necklace", "Pile Chain" },
-		Ear1 = { "Brutal earring", "Outlaw's Earring", "Pigeon Earring", "Optical Earring" },
-		Ear2 = { "Wilder. Earring +1", "Pigeon Earring" },
+		Head = {
+			{ Name = "Yagudo Crown",     Level = 75 },
+			{ Name = "Optical Hat",      Level = 70 },
+			{ Name = "Heroic Hairpin",   Level = 30 },
+			{ Name = "Fungus Hat",       Level = 14 },
+			{ Name = "Cmp. Eye Circlet", Level = 9 },
+		},
+		Neck = {
+			{ Name = "Peacock Charm",  Level = 33 },
+			{ Name = "Spike Necklace", Level = 21 },
+			{ Name = "Pile Chain",     Level = 3 },
+		},
+		Ear1 = {
+			{ Name = "Brutal Earring",   Level = 75 }, -- 5DA
+			{ Name = "Outlaw's Earring", Level = 50 },
+			{ Name = "Pigeon Earring",   Level = 33 },
+			{ Name = "Tribal Earring",   Level = 20 }
+		},
+		Ear2 = {
+			{ Name = "Aesir Ear Pendant",  Level = 75 },
+			{ Name = "Wilder. Earring +1", Level = 45 },
+			{ Name = "Pigeon Earring",     Level = 33 },
+			{ Name = "Optical Earring",    Level = 10 },
+		},
 
-		Body = { "Scorpion Harness", "Shinobi Gi", "Garish Tunic", "Garrison Tunica +1", "Rambler's Cloak", "Mithran Separates" },
-		Hands = { "Shinobi Tekko +1", "Battle Gloves", "Mithran Gauntlets" },
-		Ring1 = { "Rajas Ring", "Archer's Ring", "Bastokan Ring" },
-		Ring2 = { "Ulthalam's Ring", "Archer's Ring", "San d'Orian Ring" },
+		Body = {
+			{ Name = "Scorpion Harness",   Level = 57 },
+			{ Name = "Shinobi Gi",         Level = 49 },
+			{ Name = "Soil Gi +1",         Level = 29 },
+			{ Name = "Garrison Tunica +1", Level = 20 },
+			{ Name = "Power Gi",           Level = 13 },
+			{ Name = "Blksmith. Smock",    Level = 9 },
+			{ Name = "Rambler's Cloak",    Level = 1 },
+		},
+		Hands = {
+			{ Name = "Shinobi Tekko +1",  Level = 49 },
+			{ Name = "Ochiudo's Kote",    Level = 34 },
+			{ Name = "Battle Gloves",     Level = 14 },
+			{ Name = "Mithran Gauntlets", Level = 1 },
+		},
+		Ring1 = {
+			{ Name = "Rajas Ring",      Level = 30 }, -- 5 Dex, 5 Str
+			{ Name = "Balance Ring +1", Level = 14 }, -- 2 Dex
+			{ Name = "Bastokan Ring",   Level = 1 },
+		},
+		Ring2 = {
+			{ Name = "Zilant Ring",      Level = 75 }, -- 6 Dex, 3 Acc
+			{ Name = "Ulthalam's Ring",  Level = 50 },
+			{ Name = "Archer's Ring",    Level = 30 },
+			{ Name = "Balance Ring +1",  Level = 14 }, -- 2 Dex
+			{ Name = "San d'Orian Ring", Level = 1 },
+		},
 
-		Back = { "Bruiser's Cloak", "Traveler's Mantle" },
-		Waist = { "Ninurta's Sash", "Brown Belt", "Purple Belt", "Lizard Belt", "Leather Belt" },
-		Legs = { "Shinobi Hakama", "Garish Slacks", "Garrison Hose +1", "Mithran Loincloth" },
-		Feet = { "Fuma Kyahan", "Savage Gaiters", "Garish Pumps", "Garrison Boots +1", "Mithran Gaiters" },
+		Back = {
+			{ Name = "Bruiser's Cloak", Level = 30 },
+			{ Name = "Nomad's Mantle",  Level = 24 },
+		},
+		Waist = {
+			{ Name = "Ninurta's Sash", Level = 75 },
+			{ Name = "Brown Belt",     Level = 40 },
+			{ Name = "Purple Belt",    Level = 18 },
+			{ Name = "White Belt",     Level = 1 },
+
+		},
+		Legs = {
+			{ Name = "White Slacks",      Level = 50 },
+			{ Name = "Garrison Hose +1",  Level = 20 },
+			{ Name = "Mithran Loincloth", Level = 1 },
+		},
+		Feet = {
+			{ Name = "Fuma Sune-Ate",     Level = 72 },
+			{ Name = "Fuma Kyahan",       Level = 39 },
+			{ Name = "Savage Gaiters",    Level = 29 },
+			{ Name = "Shade Leggings",    Level = 25 },
+			{ Name = "Garrison Boots +1", Level = 20 },
+			{ Name = "Mithran Gaiters",   Level = 1 },
+		},
 	},
 	Tp_Hybrid_Priority = {},
-	Tp_Acc_Priority = {
-		Waist = { "Ninurta's Sash", "Virtuoso Belt", "Purple Belt", "Lizard Belt", "Leather Belt" },
-	},
+	Tp_Acc_Priority = {},
 
 	Precast = {
 		Feet = "Fuma Kyahan",
@@ -51,19 +114,64 @@ local sets = {
 	Midshot = {},
 
 	Ws_Default_Priority = {
-		Head = { "Empress Hairpin" },
-		Neck = { "Fotia Gorget", "Spike Necklace" },
-		Ear1 = "Ethereal Earring", -- +5attk
-		Ear2 = "Aesir Ear Pendant", -- +7attk
+		Head = {
+			{ Name = "Shinobi Hachigane", Level = 49 },
+			{ Name = "Shade Tiara",       Level = 25 },
+			{ Name = "Empress Hairpin",   Level = 24 },
+		},
+		Neck = {
+			{ Name = "Fotia Gorget",   Level = 72 },
+			{ Name = "Spike Necklace", Level = 21 }, -- 3 Str
+		},
 
-		Body = { "Garrison Tunica +1" },
-		Hands = { "Ochiudo's Kote" },
-		Ring1 = "Rajas Ring", -- +5dex +5str +5tp +5subtle
+		Ear1 = {
+			{ Name = "Ethereal EArring", Level = 72 },
+			{ Name = "Pigeon Earring",   Level = 33 } -- 1 Str, 2 Attack
+		},
+		Ear2 = {
+			{ Name = "Aesir Ear Pendant", Level = 75 },
+			{ Name = "Pigeon Earring",    Level = 33 } -- 1 Str, 2 Attack
+		},
 
-		Back = { "Amemet Mantle +1", "Exile's Cloak" },
-		Waist = { "Warwolf Belt", "Virtuoso Belt", "Lizard belt" },
-		Legs = { "Garrison Hose +1" },
-		Feet = { "Savage Gaiters", "Garish Pumps" },
+		Body = {
+			{ Name = "Brigadine +1",     Level = 45 }, -- 3 Dex, 3 Agi, 3 Str, 4 Attk
+			{ Name = "Savage Separates", Level = 33 }, -- 1 Str
+			{ Name = "Power Gi",         Level = 13 },
+		},
+		Hands = {
+			{ Name = "Ochiudo's Kote", Level = 34 },
+			{ Name = "Soil Tekko +1",  Level = 29 },
+			{ Name = "Shade Mittens",  Level = 25 }, -- 2 Str
+			{ Name = "Cotton Tekko",   Level = 18 },
+		},
+		Ring1 = {
+			{ Name = "Rajas Ring",      Level = 30 }, -- 5 Dex, 5 Str
+			{ Name = "Courage Ring +1", Level = 14 },
+		},
+		Ring2 = {
+			{ Name = "Flame Ring",      Level = 74 },
+			{ Name = "Ulthalam's Ring", Level = 50 }, -- 4 Attack
+			{ Name = "Courage Ring +1", Level = 14 },
+		},
+
+		Back = {
+			{ Name = "Charger Mantle",   Level = 70 }, -- 20 Attack
+			{ Name = "Amemet Mantle +1", Level = 61 }, -- 2 Str, 15 Attack
+			{ Name = "Bruiser's Cloak",  Level = 30 },
+		},
+		Waist = {
+			{ Name = "Warwolf Belt", Level = 71 }, -- 5 Str
+			{ Name = "Brown Belt",   Level = 40 },
+			{ Name = "Purple Belt",  Level = 18 },
+			{ Name = "White Belt",   Level = 1 },
+		},
+		Legs = {
+			{ Name = "Jujitsu Sitabaki", Level = 37 },
+			{ Name = "Garrison Hose +1", Level = 20 }, -- 2 Str
+		},
+		Feet = {
+			{ Name = "Savage Gaiters", Level = 29 }, -- 3 Str
+		},
 	},
 	Ws_Hybrid = {},
 	Ws_Acc = {},

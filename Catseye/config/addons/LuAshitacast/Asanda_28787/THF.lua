@@ -7,17 +7,18 @@ local Settings = {
 
 local sets = {
 	Idle = {
-		Ear1 = { "Pigeon Earring" },
-		Ear2 = { "Pigeon Earring" },
 	},
 	Resting = {},
 	Idle_Regen_Priority = {
-		Body = { "Rog. Vest +1", "Scorpion Harness" },
+		Body = {
+			{ Name = "Rog. Vest +1",     Level = 74 }, -- +2 Regen
+			{ Name = "Scorpion Harness", Level = 57 }, -- +1 Regen
+		},
 	},
 	Idle_Refresh = {},
 	Town = {},
 	Dt = {},
-	Tp_Default_Priority = {                    -- focus on haste (21% haste, need 25% for cap) and accuracy > attk > stats > defense stats
+	Tp_Default_Priority = {                    -- focus on haste (25% haste, need 25% for cap) and accuracy > attk > stats > defense stats
 		Head = {
 			{ Name = "Yagudo Crown",      Level = 75 }, -- 5% haste
 			{ Name = "Optical Hat",       Level = 70 }, -- 3% haste
@@ -62,16 +63,16 @@ local sets = {
 			"Mithran Gauntlets",
 		},
 		Ring1 = {
-			"Rajas Ring",
+			{ Name = "Rajas Ring",      Level = 30 }, -- 5 Dex, 5 Str
 			"Archer's Ring",
-			"Balance Ring +1",
+			{ Name = "Balance Ring +1", Level = 14 }, -- 2 Dex
 			"Bastokan Ring",
 		},
 		Ring2 = {
-			"Zilant Ring",
+			{ Name = "Zilant Ring",     Level = 75 }, -- 6 Dex, 3 Acc
 			"Ulthalam's Ring",
 			"Archer's Ring",
-			"Balance Ring +1",
+			{ Name = "Balance Ring +1", Level = 14 }, -- 2 Dex
 			"San d'Orian Ring",
 		},
 
@@ -92,19 +93,33 @@ local sets = {
 			"Phl. Trousers",
 			"Mithran Loincloth",
 		},
-		Feet = { "Rog. Poulaines +1", -- 1% haste
+		Feet = {
+			{ Name = "Rog. Poulaines +1", Level = 74 }, -- 3% haste, 3 DA
 			"Adhemar Gamashes",
 			"Dino Ledelsens",
 			"Leaping Boots",
 			"Mithran Gaiters",
 		},
 	},
-	Precast = {
-		Head = "Yagudo Crown",  -- 5% haste
-		Body = "Adhemar Jacket", -- 3% haste
-		Hands = "Adhemar Wristbands", -- 3% haste
-		Waist = "Ninurta's Sash", -- 6% haste
-		Legs = "Adhemar Kecks", -- 4% haste
+	Precast_Priority = {
+		Head = {
+			{ Name = "Yagudo Crown", Level = 75 }, -- 5% haste
+		},
+		Body = {
+			{ Name = "Rapparee Harness", Level = 50 }, --4% haste
+		},
+		Hands = {
+			{ Name = "Adhemar Wristbands", Level = 75 }, -- 3% haste
+		},
+		Waist = {
+			{ Name = "Ninurta's Sash", Level = 75 }, -- 6% haste
+		},
+		Legs = {
+			{ Name = "Adhemar Kecks", Level = 75 }, -- 4% haste
+		},
+		Feet = {
+			{ Name = "Rog. Poulaines +1", Level = 74 }, -- 3% haste, 3 DA
+		},
 	},
 	Preshot_Priority = {
 		Head = { "Optical Hat", "Adhemar Bonnet" },
@@ -121,6 +136,7 @@ local sets = {
 			{ Name = "Empress Hairpin", Level = 24 }, -- 3 Dex, 3 Agi, 10 evasion
 		},
 		Neck = {
+			--{ Name = "Fotia Gorget",   Level = 72 },
 			{ Name = "Spike Necklace", Level = 21 }, -- 3 Dex
 		},
 		Ear1 = {
@@ -173,13 +189,16 @@ local sets = {
 			{ Name = "Empress Hairpin", Level = 24 }, -- 3 Dex, 3 Agi, 10 evasion
 		},
 		Neck = {
+			--{ Name = "Fotia Gorget", Level = 72 },
 			{ Name = "Rabbit Charm", Level = 7 }, -- 2 Agi
 		},
 		Ear1 = {
 			{ Name = "Drone Earring", Level = 35 }, -- 3 Agi
 		},
 		Ear2 = {
-			{ Name = "Drone Earring", Level = 35 }, -- 3 Agi
+			{ Name = "Bandit's Earring", Level = 60 }, -- 3 Agi > Need to upgrade to 4 Agi
+			{ Name = "Drone Earring",    Level = 35 }, -- 3 Agi
+
 		},
 
 		Body = {
@@ -226,6 +245,7 @@ local sets = {
 			{ Name = "Shade Tiara", Level = 25 }, -- +2 Str
 		},
 		Neck = {
+			{ Name = "Fotia Gorget",   Level = 72 },
 			{ Name = "Spike Necklace", Level = 21 }, -- 3 Str
 		},
 		Ear1 = {
@@ -429,7 +449,7 @@ local sets = {
 			{ Name = "Rog. Poulaines +1", Level = 74 },
 		},
 	},
-	Hide = {
+	Hide_Priority = {
 		Body = {
 			{ Name = "Rog. Vest +1", Level = 74 },
 		},
